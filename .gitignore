@@ -1,0 +1,7 @@
+# ------------------------------------
+# BRGD Top Level Folder gitignore
+# ------------------------------------
+
+# This .gitignore file should be placed at the root of your Github repository directory
+
+**/.DS_Store
