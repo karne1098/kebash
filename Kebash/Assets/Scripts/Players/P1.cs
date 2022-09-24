@@ -7,16 +7,19 @@ public class P1 : MonoBehaviour
   private Rigidbody _rigidbody;
 
   private float _stamina = 100f;
-  private float _minStamina = 10f; // Minimum stamina needed to charge
-  private float _staminaRate = 20f; // Stamina consumed per second
+  private float _minStaminaToStart = 50f; // Minimum stamina needed to start charging
+  private float _minChargeCost     =  5f; // Minimum stamina cost associated with one charge
+  private float _staminaCostRate   = 50f; // Stamina consumed per unit time
+  private float _minChargeDuration =  0f; // This must be set at start
+  private float _staminaRegenRate  =  5f; // Stamina regained per unit time [currently unused]
   private bool  _isCharging   = false;
-  private bool  _isCooledDown = true;
 
   [SerializeField] private float _speed = 5f;
   [SerializeField] private float _chargeSpeed = 6f;
-  [SerializeField] private float _chargeCooldown = 1.0f;
 
   // ================== Accessors
+
+  public float Stamina { get { return _stamina; } }
 
   // ================== Methods
 
@@ -31,6 +34,7 @@ public class P1 : MonoBehaviour
   void Awake()
   {
     _rigidbody = transform.GetComponent<Rigidbody>();
+    _minChargeDuration = _minChargeCost / _staminaCostRate;
   }
 
   void Start() {}
@@ -43,8 +47,7 @@ public class P1 : MonoBehaviour
     // Start charge if requested
     if (InputManager.Instance.Charge
         && InputManager.Instance.Movement.magnitude > 0
-        && _isCooledDown
-        && _stamina > _minStamina)
+        && _stamina > _minStaminaToStart)
     {
       StartCoroutine(charge(InputManager.Instance.Movement));
       return;
@@ -52,28 +55,29 @@ public class P1 : MonoBehaviour
     
     // Update velocity
     setPlanarVelocity(InputManager.Instance.Movement * _speed);
+
+    Debug.Log(_stamina);
   }
 
   private IEnumerator charge(Vector3 chargeDirection)
   {
+    // Start charge
     _isCharging = true;
-
     setPlanarVelocity(chargeDirection * _chargeSpeed * _speed);
 
+    // Enforce minimum charge
+    yield return new WaitForSeconds(_minChargeDuration);
+    _stamina -= _minChargeCost;
+
+    // Continue charging as desired
     while (_stamina > 0 && InputManager.Instance.Charge)
     {
       yield return null;
-      _stamina -= Time.deltaTime * _staminaRate;
-      Debug.Log(_stamina);
+      _stamina -= Time.deltaTime * _staminaCostRate;
     }
 
+    // Stop charge
     _isCharging = false;
-    
-    _isCooledDown = false;
-
-    yield return new WaitForSeconds(_chargeCooldown);
-
-    _isCooledDown = true;
   }
 }
 
