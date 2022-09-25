@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7703677706034480449}
   - component: {fileID: 7703677706034480448}
   m_Layer: 0
-  m_Name: P1InputManager
+  m_Name: InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7703677706034480449}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: OnMovementInput
+        m_MethodName: OnP1Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7703677706034480449}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: onChargeInput
+        m_MethodName: onP1Charge
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -132,8 +132,24 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 72d6ca43-5dac-4ea8-8502-b345f114513e
     m_ActionName: Player1/Charge[/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7703677706034480449}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnP1Turn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d4a2f6c-7169-47d6-b60c-7d52e5f86238
+    m_ActionName: Player/Turn[/Keyboard/upArrow,/Keyboard/leftArrow,/Keyboard/downArrow,/Keyboard/rightArrow]
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
