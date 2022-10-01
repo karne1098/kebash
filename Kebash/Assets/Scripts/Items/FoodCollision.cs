@@ -19,8 +19,8 @@ public class FoodCollision : MonoBehaviour
     if (other.gameObject.layer == Utils.DamagerLayer){
             //Debug.Log(other.gameObject.GetComponent<Movement>().IsCharging);
             if(other.transform.parent.gameObject.GetComponent<Movement>().IsCharging){
+                other.transform.parent.gameObject.GetComponent<Movement>().StartCoroutine("addFood");
                 this.gameObject.SetActive(false);
-                Debug.Log("FOOD RECEIVED.");
             }
     }
   }

@@ -44,6 +44,9 @@ public class Movement : MonoBehaviour
 
   public bool IsCharging {get {return _isCharging;}}
 
+  public Stack<string> setKabobStack { get { return _stack; } }
+  public Stack<string> getKabobStack { set { _stack = value; } }
+
   // ================== Methods
 
   void Start()
@@ -179,6 +182,11 @@ public class Movement : MonoBehaviour
     // Allow regen after some time
     yield return new WaitForSeconds(_regenDelay);
     _canRegen = true;
+  }
+
+  private IEnumerator addFood(){
+    Debug.Log("Add meat.");
+    yield return new WaitForSeconds(0.01f); //dk what else to run lol
   }
 
   private IEnumerator invulnerable()

@@ -31,6 +31,7 @@ public class FoodSpawn : MonoBehaviour
             float xRange = Random.Range(-x, x);
             float z = (zSpawn * 0.5f) - 0.5f;
             float zRange = Random.Range(-z, z);
+            
 
             yield return new WaitForSeconds(timeRange);
             Instantiate(foodPrefab, new Vector3(xRange, 15, zRange), Quaternion.identity);
