@@ -26,7 +26,7 @@ public class FoodSpawn : MonoBehaviour
     {
         while(true)
         {
-            float timeRange = Random.Range(3f, 10f);
+            float timeRange = Random.Range(minTimeSpawn, maxTimeSpawn);
             float x = (xSpawn * 0.5f) - 0.5f; //not spawning RIGHT on the edge and accounting for field originating at 0,0
             float xRange = Random.Range(-x, x);
             float z = (zSpawn * 0.5f) - 0.5f;

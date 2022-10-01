@@ -42,6 +42,8 @@ public class Movement : MonoBehaviour
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
+  public bool IsCharging {get {return _isCharging;}}
+
   // ================== Methods
 
   void Start()

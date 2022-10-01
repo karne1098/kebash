@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodFall : MonoBehaviour
 {
-    public float fallSpeed = 0.5f; //how fast it falls
+    public float fallSpeed = 0.01f; //how fast it falls
     public float timeout = 10f; //how long before it disappears
     // Start is called before the first frame update
 
