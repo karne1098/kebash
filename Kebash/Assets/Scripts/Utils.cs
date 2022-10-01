@@ -17,4 +17,5 @@ static class Utils
   public static int PlayerLayer  = LayerMask.NameToLayer("Player");
   public static int ChargerLayer = LayerMask.NameToLayer("Charger");
   public static int DamagerLayer = LayerMask.NameToLayer("Damager");
+  public static int FallTriggerLayer = LayerMask.NameToLayer("FallTrigger");
 }
