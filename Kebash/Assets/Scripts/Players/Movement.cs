@@ -74,7 +74,9 @@ public class Movement : MonoBehaviour
   {
     if (_isCharging) return;
 
-    if (_inputData.Charge && _stamina > _minStaminaToStart)
+   if (transform.position.y < -0.5 || transform.position.y > 1) return;
+
+   if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
       StopCoroutine("charge");
       StartCoroutine("charge");
@@ -206,4 +208,5 @@ public class Movement : MonoBehaviour
     }
     Debug.Log("==================");
   }
+    
 }
