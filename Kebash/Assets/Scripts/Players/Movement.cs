@@ -51,6 +51,9 @@ public class Movement : MonoBehaviour
 
   public bool IsCharging {get {return _isCharging;}}
 
+  public Stack<string> setKabobStack { get { return _stack; } }
+  public Stack<string> getKabobStack { set { _stack = value; } }
+
   // ================== Methods
 
   void Start()
@@ -205,6 +208,12 @@ public class Movement : MonoBehaviour
     yield return new WaitForSeconds(_regenDelay);
     _canRegen = true;
   }
+  
+  private IEnumerator addFood()
+  {
+    Debug.Log("Player " + _playerNumber + " added food.");
+    yield return new WaitForSeconds(0.01f); // idk what else to run lol
+  }
 
   private void startInvulnerability(float time)
   {
@@ -212,7 +221,7 @@ public class Movement : MonoBehaviour
     _currentInvInstance = invulnerable(time);
     StartCoroutine(_currentInvInstance);
   }
-  
+
   private IEnumerator invulnerable(float time)
   {
     _isInvulnerable = true;
