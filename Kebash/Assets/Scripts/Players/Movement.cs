@@ -50,6 +50,8 @@ public class Movement : MonoBehaviour
   private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
 
   //Food Stuff
+  [SerializeField] private Transform  _sliceSpawn;
+  [SerializeField] private GameObject _foodSlicePrefab;
   [SerializeField] private GameObject _foodObject1;
   [SerializeField] private GameObject _foodObject2;
   [SerializeField] private GameObject _foodObject3;
@@ -73,8 +75,8 @@ public class Movement : MonoBehaviour
     _inputData = GetComponent<PlayerInputScript>().InputData;
     _rigidbody = GetComponent<Rigidbody>();
 
-    _foodObject1.SetActive(true);
-    _stack.Push("demofood");
+    _foodObject1.SetActive(false);
+    //_stack.Push("demofood");
     _foodObject2.SetActive(false);
     _foodObject3.SetActive(false);
 
@@ -236,6 +238,10 @@ public class Movement : MonoBehaviour
     printStack(); 
     if(_stack.Count == 0){
       _stack.Push("generic food");
+      
+      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _slice.position.y, _slice.position.z + (stack.Count * 0.3))
+
+      var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
       _foodObject1.SetActive(true);
     } 
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
