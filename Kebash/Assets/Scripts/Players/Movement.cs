@@ -11,7 +11,6 @@ public class Movement : MonoBehaviour
   private Rigidbody       _rigidbody;
 
   // Health
-  private Stack<string> _stack = new Stack<string>();
   private bool  _isInvulnerable = false;
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
@@ -63,8 +62,7 @@ public class Movement : MonoBehaviour
 
   public bool IsCharging {get {return _isCharging;}}
 
-  public Stack<string> getKabobStack { get { return _stack; } }
-  public Stack<string> setKabobStack { set { _stack = value; } }
+  public Stack<string> KabobStack { get; private set; } = new Stack<string>();
 
   // ================== Methods
 
@@ -239,7 +237,7 @@ public class Movement : MonoBehaviour
     if(_stack.Count == 0){
       _stack.Push("generic food");
       
-      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _slice.position.y, _slice.position.z + (stack.Count * 0.3))
+      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _slice.position.y, _slice.position.z + (_stack.Count * 0.3));
 
       var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
       _foodObject1.SetActive(true);
