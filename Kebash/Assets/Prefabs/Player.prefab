@@ -486,7 +486,7 @@ MonoBehaviour:
   _foodObject1: {fileID: 3712156601266906571}
   _foodObject2: {fileID: 3077525412931376745}
   _foodObject3: {fileID: 5799866640863776762}
-  FoodBulletPrefab: {fileID: 0}
+  FoodBulletPrefab: {fileID: 6817019447756913882, guid: 29325cf553da944149a361b6322cb215, type: 3}
 --- !u!1 &8901939130055088272
 GameObject:
   m_ObjectHideFlags: 0

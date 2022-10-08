@@ -69,7 +69,8 @@ public class Movement : MonoBehaviour
     _inputData = InputManager.Instance.P[_playerNumber];
     _rigidbody = transform.GetComponent<Rigidbody>();
 
-    _foodObject1.SetActive(false);
+    _foodObject1.SetActive(true);
+    _stack.Push("demofood");
     _foodObject2.SetActive(false);
     _foodObject3.SetActive(false);
 
@@ -97,8 +98,9 @@ public class Movement : MonoBehaviour
 
     if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
+      Debug.Log("We tried to shoot.");
       StopCoroutine("shootFood");
-      StopCoroutine("shootFood");
+      StartCoroutine("shootFood");
       //StopCoroutine("charge");
       //StartCoroutine("charge");
       return;
@@ -241,7 +243,7 @@ public class Movement : MonoBehaviour
       //spawn food
       var foodCopy = (GameObject)Instantiate(FoodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
       //add velocity to food
-      _foodObject1.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+      foodCopy.GetComponent<Rigidbody>().velocity = foodCopy.transform.forward * 30;
       //go off into forever
     }
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
