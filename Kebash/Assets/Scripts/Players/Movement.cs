@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
 
   public bool IsCharging {get {return _isCharging;}}
 
-  public Stack<string> KabobStack { get; private set; } = new Stack<string>();
+  public Stack<string> KebabStack { get; private set; } = new Stack<string>();
 
   // ================== Methods
 
@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
     _rigidbody = GetComponent<Rigidbody>();
 
     _foodObject1.SetActive(false);
-    //_stack.Push("demofood");
+    //KebabStack.Push("demofood");
     _foodObject2.SetActive(false);
     _foodObject3.SetActive(false);
 
@@ -234,10 +234,10 @@ public class Movement : MonoBehaviour
   {
     Debug.Log("Player " + _playerNumber + " added food.");
     printStack(); 
-    if(_stack.Count == 0){
-      _stack.Push("generic food");
+    if(KebabStack.Count == 0){
+      KebabStack.Push("generic food");
       
-      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _slice.position.y, _slice.position.z + (_stack.Count * 0.3));
+      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _sliceSpawn.position.y, _sliceSpawn.position.z + (KebabStack.Count * 0.3f));
 
       var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
       _foodObject1.SetActive(true);
@@ -248,13 +248,13 @@ public class Movement : MonoBehaviour
   private IEnumerator shootFood()
   {
     // Can't shoot if no food
-    if (_stack.Count == 0) yield break;
+    if (KebabStack.Count == 0) yield break;
 
     Debug.Log("Player " + _playerNumber + " fired a shot!");
     _isOnShootCoolDown = true;
 
     // Remove from stack
-    _stack.Pop();
+    KebabStack.Pop();
     _foodObject1.SetActive(false);
 
     // Spawn food
@@ -306,7 +306,7 @@ public class Movement : MonoBehaviour
 
   private void printStack()
   {
-    foreach (string s in _stack)
+    foreach (string s in KebabStack)
     {
       Debug.Log(s);
     }
