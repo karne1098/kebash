@@ -16,6 +16,14 @@ public class Movement : MonoBehaviour
   private IEnumerator _currentInvInstance;
   private int   _debugCount = 0;
 
+  // Food Stuff
+  private int _maxFood = 3;
+  private float _foodBulletSpeed = 20;
+  [SerializeField] private Transform  _sliceSpawn;
+  [SerializeField] private GameObject _foodSlicePrefab;
+  [SerializeField] private List<GameObject> _foodSlices;
+  [SerializeField] private GameObject _foodBulletPrefab;
+
   // Moving and turning
   private Vector3 _idealMove;
   private Vector3 _idealTurn;
@@ -48,14 +56,6 @@ public class Movement : MonoBehaviour
   private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
   private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
 
-  //Food Stuff
-  [SerializeField] private Transform  _sliceSpawn;
-  [SerializeField] private GameObject _foodSlicePrefab;
-  [SerializeField] private GameObject _foodObject1;
-  [SerializeField] private GameObject _foodObject2;
-  [SerializeField] private GameObject _foodObject3;
-  [SerializeField] private GameObject _foodBulletPrefab;
-
   // TODO Delete me
   
   // ================== Accessors
@@ -74,11 +74,6 @@ public class Movement : MonoBehaviour
 
     _inputData = GetComponent<PlayerInputScript>().InputData;
     _rigidbody = GetComponent<Rigidbody>();
-
-    _foodObject1.SetActive(false);
-    //KebabStack.Push("demofood");
-    _foodObject2.SetActive(false);
-    _foodObject3.SetActive(false);
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -137,6 +132,19 @@ public class Movement : MonoBehaviour
       startInvulnerability(_hitInvDuration);
       return;
     }
+  }
+
+  public bool AddFood()
+  {
+    // Can't add food if full
+    if (KebabStack.Count == _maxFood) return false;
+
+    Debug.Log("Player " + _playerNumber + " added food."); 
+
+    _foodSlices[KebabStack.Count].SetActive(true);
+    KebabStack.Push("GenericFood");
+
+    return true;
   }
 
   // ================== Helpers
@@ -231,21 +239,6 @@ public class Movement : MonoBehaviour
     yield return new WaitForSeconds(_regenDelay);
     _canRegen = true;
   }
-  
-  private IEnumerator addFood()
-  {
-    Debug.Log("Player " + _playerNumber + " added food.");
-    printStack(); 
-    if(KebabStack.Count == 0){
-      KebabStack.Push("generic food");
-      
-      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _sliceSpawn.position.y, _sliceSpawn.position.z + (KebabStack.Count * 0.3f));
-
-      var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
-      _foodObject1.SetActive(true);
-    } 
-    yield return new WaitForSeconds(0.2f); // idk what else to run lol
-  }
 
   private IEnumerator shootFood()
   {
@@ -256,14 +249,13 @@ public class Movement : MonoBehaviour
     _isOnShootCoolDown = true;
 
     // Remove from stack
-    KebabStack.Pop();
-    _foodObject1.SetActive(false);
+    KebabStack.Pop(); //popping first does the "- 1" for us
+    _foodSlices[KebabStack.Count].SetActive(false);
 
-    // Spawn food
-    GameObject foodCopy = Instantiate(_foodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
-
-    // Add velocity to food
-    foodCopy.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+    // Spawn foodBullet and give it velocity
+    Transform tip = _foodSlices[_maxFood - 1].transform; // TODO: spawn at a better place
+    GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // TODO: maybe object pool
+    foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;  // TODO: this whole thing should be handled by the bullet
 
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
@@ -313,6 +305,5 @@ public class Movement : MonoBehaviour
       Debug.Log(s);
     }
     Debug.Log("==================");
-  }
-    
+  }   
 }

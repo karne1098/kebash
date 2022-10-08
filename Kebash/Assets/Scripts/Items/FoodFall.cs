@@ -10,18 +10,18 @@ public class FoodFall : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Timeout());
+      StartCoroutine(Timeout());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y > 1) {
-            transform.Translate(0, -fallSpeed, 0);
-        }
+      if(transform.position.y > 1) {
+          transform.Translate(0, -fallSpeed, 0);
+      }
     }
-    IEnumerator Timeout(){
-        yield return new WaitForSeconds(timeout);
-        Destroy(this.gameObject);
+    IEnumerator Timeout() {
+      yield return new WaitForSeconds(timeout);
+      Destroy(this.gameObject);
     }
 }

@@ -9,8 +9,8 @@ public class FoodSpawn : MonoBehaviour
     public GameObject foodPrefab;
     // for easy editing of variables
     //upper and lower bound for how long before food will appear
-    private float minTimeSpawn = 3f;
-    private float maxTimeSpawn = 10f;
+    private float minTimeSpawn = 2f;
+    private float maxTimeSpawn = 5f;
     //if we can attach this to the size of the field we can make it automatic, for now, we manually change this
     //basically, boundaries for where the food will spawn. 
     private float zSpawn = 17.5f;

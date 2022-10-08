@@ -56,13 +56,13 @@ GameObject:
   - component: {fileID: 8419075226738099158}
   - component: {fileID: 414295265643995609}
   - component: {fileID: 2036310943901406446}
-  m_Layer: 0
-  m_Name: FoodObject2
+  m_Layer: 6
+  m_Name: FoodSlice2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8419075226738099158
 Transform:
   m_ObjectHideFlags: 0
@@ -137,13 +137,13 @@ GameObject:
   - component: {fileID: 8046605612413055674}
   - component: {fileID: 7298950314106022204}
   - component: {fileID: 1500840204005978292}
-  m_Layer: 0
-  m_Name: FoodObject1
+  m_Layer: 6
+  m_Name: FoodSlice1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8046605612413055674
 Transform:
   m_ObjectHideFlags: 0
@@ -218,13 +218,13 @@ GameObject:
   - component: {fileID: 4816933523888610826}
   - component: {fileID: 8418915093050802900}
   - component: {fileID: 8131661655982660206}
-  m_Layer: 0
-  m_Name: FoodObject3
+  m_Layer: 6
+  m_Name: FoodSlice3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4816933523888610826
 Transform:
   m_ObjectHideFlags: 0
@@ -486,12 +486,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerNumber: 1
   _damagerObject: {fileID: 1094726904226577355}
-  _sliceSpawn: {fileID: 0}
-  _foodSlicePrefab: {fileID: 0}
-  _foodObject1: {fileID: 3712156601266906571}
-  _foodObject2: {fileID: 3077525412931376745}
-  _foodObject3: {fileID: 5799866640863776762}
-  _foodBulletPrefab: {fileID: 0}
+  _sliceSpawn: {fileID: 8789149712362270394}
+  _foodSlicePrefab: {fileID: 6817019447756913882, guid: c876127a87bf74da9bac36bd302131c2, type: 3}
+  _foodSlices:
+  - {fileID: 3712156601266906571}
+  - {fileID: 3077525412931376745}
+  - {fileID: 5799866640863776762}
+  _foodBulletPrefab: {fileID: 6817019447756913882, guid: 29325cf553da944149a361b6322cb215, type: 3}
 --- !u!114 &7426877618512967869
 MonoBehaviour:
   m_ObjectHideFlags: 0
