@@ -46,7 +46,10 @@ public class Movement : MonoBehaviour
   private float   _fallInvDuration = 2;                        // How long the player is invulnerable after teleporting back up
 
   //Food Stuff
-  public GameObject FoodItem;
+  public GameObject _foodObject1;
+  public GameObject _foodObject2;
+  public GameObject _foodObject3;
+  public GameObject FoodBulletPrefab;
 
   // ================== Accessors
 
@@ -65,6 +68,10 @@ public class Movement : MonoBehaviour
 
     _inputData = InputManager.Instance.P[_playerNumber];
     _rigidbody = transform.GetComponent<Rigidbody>();
+
+    _foodObject1.SetActive(false);
+    _foodObject2.SetActive(false);
+    _foodObject3.SetActive(false);
 
     //_stack.Push("A");
     //_stack.Push("B");
@@ -219,8 +226,8 @@ public class Movement : MonoBehaviour
   {
     Debug.Log("Player " + _playerNumber + " added food.");
     printStack(); 
-    if(stk.empty){
-      stk.push("generic food");
+    if(_stack.Count == 0){
+      _stack.Push("generic food");
       _foodObject1.SetActive(true);
     } 
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
@@ -228,9 +235,14 @@ public class Movement : MonoBehaviour
 
   private IEnumerator shootFood(){
     Debug.Log("Player " + _playerNumber + " shot food.");
-    if(!stk.empty){
-      stk.pop();
+    if(!(_stack.Count == 0)){
+      _stack.Pop();
       _foodObject1.SetActive(false);
+      //spawn food
+      var foodCopy = (GameObject)Instantiate(FoodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
+      //add velocity to food
+      _foodObject1.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+      //go off into forever
     }
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
   }
