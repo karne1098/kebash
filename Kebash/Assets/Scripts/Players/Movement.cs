@@ -13,7 +13,8 @@ public class Movement : MonoBehaviour
   // Health
   private Stack<string> _stack = new Stack<string>();
   private bool  _isInvulnerable = false;
-  private float _invulnerableDuration = 1f;
+  private float _hitInvDuration = 1f;
+  private IEnumerator _currentInvInstance;
   private int   _debugCount = 0;
 
   // Moving and turning
@@ -38,14 +39,26 @@ public class Movement : MonoBehaviour
   private bool  _canRegen   = true;
   private float _chargeSpeed = 12f;
 
+  // Falling
+  private bool    _isNotOnGround = false;
+  private float   _fallRespawnWaitDuration = 3;                 // Delay after falling before teleporting back to top
+  private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
+  private float   _fallInvDuration = 2;                        // How long the player is invulnerable after teleporting back up
+
+  //Food Stuff
+  public GameObject _foodObject1;
+  public GameObject _foodObject2;
+  public GameObject _foodObject3;
+  public GameObject FoodBulletPrefab;
+
   // ================== Accessors
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
   public bool IsCharging {get {return _isCharging;}}
 
-  public Stack<string> setKabobStack { get { return _stack; } }
-  public Stack<string> getKabobStack { set { _stack = value; } }
+  public Stack<string> getKabobStack { get { return _stack; } }
+  public Stack<string> setKabobStack { set { _stack = value; } }
 
   // ================== Methods
 
@@ -56,9 +69,13 @@ public class Movement : MonoBehaviour
     _inputData = InputManager.Instance.P[_playerNumber];
     _rigidbody = transform.GetComponent<Rigidbody>();
 
-    _stack.Push("A");
-    _stack.Push("B");
-    _stack.Push("C");
+    _foodObject1.SetActive(false);
+    _foodObject2.SetActive(false);
+    _foodObject3.SetActive(false);
+
+    //_stack.Push("A");
+    //_stack.Push("B");
+    //_stack.Push("C");
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -74,12 +91,16 @@ public class Movement : MonoBehaviour
   {
     if (_isCharging) return;
 
-   if (transform.position.y < -0.5 || transform.position.y > 1) return;
+    groundedCheck();
+    if (_isNotOnGround) return;
 
-   if (_inputData.Charge && _stamina > _minStaminaToStart)
+
+    if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
-      StopCoroutine("charge");
-      StartCoroutine("charge");
+      StopCoroutine("shootFood");
+      StopCoroutine("shootFood");
+      //StopCoroutine("charge");
+      //StartCoroutine("charge");
       return;
     }
 
@@ -90,16 +111,31 @@ public class Movement : MonoBehaviour
 
   void OnTriggerEnter(Collider other)
   {
-    if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable)
+    // Fell through fall trigger collider
+    if (other.gameObject.layer == Utils.FallTriggerLayer)
+    {
+      Debug.Log("Player " + _playerNumber + " has fallen!");
+      StartCoroutine("waitToTeleport");
+      return;
+    }
+
+    // Got hit by other player's damager collider
+    if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && !_isNotOnGround)
     {
       Debug.Log("Player " + _playerNumber + " hit (debug count: " + _debugCount++ + ")!");
-      StopCoroutine("invulnerable");
-      StartCoroutine("invulnerable");
+
+      startInvulnerability(_hitInvDuration);
+      return;
     }
   }
 
   // ================== Helpers
   
+  private void groundedCheck()
+  {
+    _isNotOnGround = (_rigidbody.position.y < -0.5 || _rigidbody.position.y > 1);
+  }
+
   private void move()
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
@@ -185,19 +221,66 @@ public class Movement : MonoBehaviour
     yield return new WaitForSeconds(_regenDelay);
     _canRegen = true;
   }
-
-  private IEnumerator addFood(){
-    Debug.Log("Add meat.");
-    yield return new WaitForSeconds(0.01f); //dk what else to run lol
+  
+  private IEnumerator addFood()
+  {
+    Debug.Log("Player " + _playerNumber + " added food.");
+    printStack(); 
+    if(_stack.Count == 0){
+      _stack.Push("generic food");
+      _foodObject1.SetActive(true);
+    } 
+    yield return new WaitForSeconds(0.2f); // idk what else to run lol
   }
 
-  private IEnumerator invulnerable()
+  private IEnumerator shootFood(){
+    Debug.Log("Player " + _playerNumber + " shot food.");
+    if(!(_stack.Count == 0)){
+      _stack.Pop();
+      _foodObject1.SetActive(false);
+      //spawn food
+      var foodCopy = (GameObject)Instantiate(FoodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
+      //add velocity to food
+      _foodObject1.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+      //go off into forever
+    }
+    yield return new WaitForSeconds(0.2f); // idk what else to run lol
+  }
+
+  private void startInvulnerability(float time)
+  {
+    if (_currentInvInstance != null) StopCoroutine(_currentInvInstance);
+    _currentInvInstance = invulnerable(time);
+    StartCoroutine(_currentInvInstance);
+  }
+
+  private IEnumerator invulnerable(float time)
   {
     _isInvulnerable = true;
+    Debug.Log("Player " + _playerNumber + " is invulnerable!");
 
-    yield return new WaitForSeconds(_invulnerableDuration);
+    yield return new WaitForSeconds(time);
 
     _isInvulnerable = false;
+    Debug.Log("Player " + _playerNumber + " is no longer invulnerable!");
+  }
+
+  private IEnumerator waitToTeleport()
+  {
+    yield return new WaitForSeconds(_fallRespawnWaitDuration);
+
+    // Start falling from the sky
+    _rigidbody.position = _fallRespawnPosition; 
+    _rigidbody.velocity = Vector3.zero;
+
+    // Take one unit of damage
+    // Todo
+
+    // Restore stamina
+    _stamina = _maxStamina;
+
+    // Start invulnerability
+    startInvulnerability(_fallInvDuration);
   }
 
   private void printStack()
