@@ -197,6 +197,7 @@ public class Movement : MonoBehaviour
     {
       _stamina += Time.deltaTime * _staminaRegenRate;
       _stamina = Mathf.Min(_stamina, _maxStamina);
+
     }
   }
 

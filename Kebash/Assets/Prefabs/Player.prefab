@@ -833,6 +833,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6725034500257964573, guid: 917f01e078cec264b825aaeae181541f, type: 3}
+      propertyPath: m_Alpha
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7329268210010895842, guid: 917f01e078cec264b825aaeae181541f, type: 3}
       propertyPath: _player
       value: 
