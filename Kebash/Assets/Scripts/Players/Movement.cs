@@ -56,6 +56,8 @@ public class Movement : MonoBehaviour
   [SerializeField] private GameObject _foodObject3;
   [SerializeField] private GameObject _foodBulletPrefab;
 
+  // TODO Delete me
+  
   // ================== Accessors
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
