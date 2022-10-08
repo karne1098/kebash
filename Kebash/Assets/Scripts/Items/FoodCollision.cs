@@ -15,7 +15,6 @@ public class FoodCollision : MonoBehaviour
 
       void OnTriggerEnter(Collider other)
   { 
-    Debug.Log("Bonk.");
     if (other.gameObject.layer == Utils.DamagerLayer){
             //Debug.Log(other.gameObject.GetComponent<Movement>().IsCharging);
             if(other.transform.parent.gameObject.GetComponent<Movement>().IsCharging){

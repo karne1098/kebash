@@ -43,7 +43,10 @@ public class Movement : MonoBehaviour
   private bool    _isNotOnGround = false;
   private float   _fallRespawnWaitDuration = 3;                 // Delay after falling before teleporting back to top
   private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
-  private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
+  private float   _fallInvDuration = 2;                        // How long the player is invulnerable after teleporting back up
+
+  //Food Stuff
+  public GameObject FoodItem;
 
   // ================== Accessors
 
@@ -63,9 +66,9 @@ public class Movement : MonoBehaviour
     _inputData = InputManager.Instance.P[_playerNumber];
     _rigidbody = transform.GetComponent<Rigidbody>();
 
-    _stack.Push("A");
-    _stack.Push("B");
-    _stack.Push("C");
+    //_stack.Push("A");
+    //_stack.Push("B");
+    //_stack.Push("C");
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -84,10 +87,13 @@ public class Movement : MonoBehaviour
     groundedCheck();
     if (_isNotOnGround) return;
 
+
     if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
-      StopCoroutine("charge");
-      StartCoroutine("charge");
+      StopCoroutine("shootFood");
+      StopCoroutine("shootFood");
+      //StopCoroutine("charge");
+      //StartCoroutine("charge");
       return;
     }
 
@@ -212,17 +218,23 @@ public class Movement : MonoBehaviour
   private IEnumerator addFood()
   {
     Debug.Log("Player " + _playerNumber + " added food.");
+    printStack(); 
+    if(stk.empty){
+      stk.push("generic food");
+      _foodObject1.SetActive(true);
+    } 
     yield return new WaitForSeconds(0.01f); // idk what else to run lol
   }
 
-<<<<<<< HEAD
-  private IEnumerator addFood(){
-    Debug.Log("Add meat.");
-    yield return new WaitForSeconds(0.01f); //dk what else to run lol
+  private IEnumerator shootFood(){
+    Debug.Log("Player " + _playerNumber + " shot food.");
+    if(!stk.empty){
+      stk.pop();
+      _foodObject1.SetActive(false);
+    }
+    yield return new WaitForSeconds(0.01f); // idk what else to run lol
   }
 
-  private IEnumerator invulnerable()
-=======
   private void startInvulnerability(float time)
   {
     if (_currentInvInstance != null) StopCoroutine(_currentInvInstance);
@@ -231,7 +243,6 @@ public class Movement : MonoBehaviour
   }
 
   private IEnumerator invulnerable(float time)
->>>>>>> fc3c8b4377a462391dcba4442f41c8c4e5489be6
   {
     _isInvulnerable = true;
     Debug.Log("Player " + _playerNumber + " is invulnerable!");
