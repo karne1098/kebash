@@ -3,48 +3,48 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerInputData {
-  public Vector2 Move   { get; internal set; }
-  public Vector2 Turn   { get; internal set; }
-  public bool    Charge { get; internal set; }
-}
+// public class PlayerInputData {
+//   public Vector2 Move   { get; internal set; }
+//   public Vector2 Turn   { get; internal set; }
+//   public bool    Charge { get; internal set; }
+// }
 
-[DisallowMultipleComponent]
+// [DisallowMultipleComponent]
 public class InputManager : MonoBehaviour
 {
-  public static InputManager Instance;
+  // public static InputManager Instance;
 
-  // ================== Accessors
+  // // ================== Accessors
   
-  public Dictionary<int, PlayerInputData> P { get; } = new Dictionary<int, PlayerInputData>();
+  // public Dictionary<int, PlayerInputData> P { get; } = new Dictionary<int, PlayerInputData>();
 
-  // ================== Methods
+  // // ================== Methods
 
-  void Awake()
-  { 
-    Instance = this;
+  // void Awake()
+  // { 
+  //   Instance = this;
 
-    P.Add(1, new PlayerInputData());
-    P.Add(2, new PlayerInputData());
-  }
+  //   P.Add(1, new PlayerInputData());
+  //   P.Add(2, new PlayerInputData());
+  // }
 
-  // Player 1
+  // // Player 1
 
-  public void OnP1Move(InputAction.CallbackContext context)
-  {
-    P[1].Move = context.ReadValue<Vector2>();
-  }
+  // public void OnP1Move(InputAction.CallbackContext context)
+  // {
+  //   P[1].Move = context.ReadValue<Vector2>();
+  // }
 
-  public void OnP1Turn(InputAction.CallbackContext context)
-  {
-    P[1].Turn = context.ReadValue<Vector2>();
-  }
+  // public void OnP1Turn(InputAction.CallbackContext context)
+  // {
+  //   P[1].Turn = context.ReadValue<Vector2>();
+  // }
 
-	public void onP1Charge(InputAction.CallbackContext context)
-  {
-    if (context.started)       { P[1].Charge = true; }
-    else if (context.canceled) { P[1].Charge = false; }
-  }
+	// public void onP1Charge(InputAction.CallbackContext context)
+  // {
+  //   if (context.started)       { P[1].Charge = true; }
+  //   else if (context.canceled) { P[1].Charge = false; }
+  // }
 
   // Player 2
 

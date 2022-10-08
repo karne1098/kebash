@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
   [SerializeField] private GameObject _damagerObject;
   
   private PlayerInputData _inputData;
-  private Rigidbody _rigidbody;
+  private Rigidbody       _rigidbody;
 
   // Health
   private Stack<string> _stack = new Stack<string>();
@@ -35,21 +35,25 @@ public class Movement : MonoBehaviour
   private float _staminaCostRate   = 100f;
   private float _staminaRegenRate  = 20f;
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
-  private bool  _isCharging = false;
-  private bool  _canRegen   = true;
+  private bool  _isCharging  = false;
+  private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
+
+  // Shooting
+  private float _shootCoolDown = 1f;
+  private bool  _isOnShootCoolDown = false;
 
   // Falling
   private bool    _isNotOnGround = false;
   private float   _fallRespawnWaitDuration = 3;                 // Delay after falling before teleporting back to top
   private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
-  private float   _fallInvDuration = 2;                        // How long the player is invulnerable after teleporting back up
+  private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
 
   //Food Stuff
-  public GameObject _foodObject1;
-  public GameObject _foodObject2;
-  public GameObject _foodObject3;
-  public GameObject FoodBulletPrefab;
+  [SerializeField] private GameObject _foodObject1;
+  [SerializeField] private GameObject _foodObject2;
+  [SerializeField] private GameObject _foodObject3;
+  [SerializeField] private GameObject _foodBulletPrefab;
 
   // ================== Accessors
 
@@ -66,17 +70,13 @@ public class Movement : MonoBehaviour
   {
     _damagerObject.SetActive(false);
 
-    _inputData = InputManager.Instance.P[_playerNumber];
-    _rigidbody = transform.GetComponent<Rigidbody>();
+    _inputData = GetComponent<PlayerInputScript>().InputData;
+    _rigidbody = GetComponent<Rigidbody>();
 
     _foodObject1.SetActive(true);
     _stack.Push("demofood");
     _foodObject2.SetActive(false);
     _foodObject3.SetActive(false);
-
-    //_stack.Push("A");
-    //_stack.Push("B");
-    //_stack.Push("C");
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -90,19 +90,25 @@ public class Movement : MonoBehaviour
 
   void FixedUpdate()
   {
-    if (_isCharging) return;
+    // Prevent player control in certain situations
+    updateIsNotOnGround();
+    if (_isCharging || _isNotOnGround) return;
 
-    groundedCheck();
-    if (_isNotOnGround) return;
-
-
-    if (_inputData.Charge && _stamina > _minStaminaToStart)
+    // Attempt to shoot
+    if (_inputData.Shoot && !_isOnShootCoolDown)
     {
-      Debug.Log("We tried to shoot.");
+      Debug.Log("Attempting to shoot.");
       StopCoroutine("shootFood");
       StartCoroutine("shootFood");
-      //StopCoroutine("charge");
-      //StartCoroutine("charge");
+      return;
+    }
+
+    // Attempt to charge
+    if (_inputData.Charge && _stamina > _minStaminaToStart)
+    {
+      Debug.Log("Attempting to charge.");
+      StopCoroutine("charge");
+      StartCoroutine("charge");
       return;
     }
 
@@ -133,9 +139,9 @@ public class Movement : MonoBehaviour
 
   // ================== Helpers
   
-  private void groundedCheck()
+  private void updateIsNotOnGround()
   {
-    _isNotOnGround = (_rigidbody.position.y < -0.5 || _rigidbody.position.y > 1);
+    _isNotOnGround = _rigidbody.position.y < -0.5 || _rigidbody.position.y > 1;
   }
 
   private void move()
@@ -235,18 +241,27 @@ public class Movement : MonoBehaviour
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
   }
 
-  private IEnumerator shootFood(){
-    Debug.Log("Player " + _playerNumber + " shot food.");
-    if(!(_stack.Count == 0)){
-      _stack.Pop();
-      _foodObject1.SetActive(false);
-      //spawn food
-      var foodCopy = (GameObject)Instantiate(FoodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
-      //add velocity to food
-      foodCopy.GetComponent<Rigidbody>().velocity = foodCopy.transform.forward * 30;
-      //go off into forever
-    }
-    yield return new WaitForSeconds(0.2f); // idk what else to run lol
+  private IEnumerator shootFood()
+  {
+    // Can't shoot if no food
+    if (_stack.Count == 0) yield break;
+
+    Debug.Log("Player " + _playerNumber + " fired a shot!");
+    _isOnShootCoolDown = true;
+
+    // Remove from stack
+    _stack.Pop();
+    _foodObject1.SetActive(false);
+
+    // Spawn food
+    GameObject foodCopy = Instantiate(_foodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
+
+    // Add velocity to food
+    foodCopy.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+
+    // Wait for cooldown
+    yield return new WaitForSeconds(_shootCoolDown);
+    _isOnShootCoolDown = false;
   }
 
   private void startInvulnerability(float time)

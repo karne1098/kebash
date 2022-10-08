@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Turn",
+                    "type": "PassThrough",
+                    "id": "9d4a2f6c-7169-47d6-b60c-7d52e5f86238",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Charge",
                     "type": "Button",
                     "id": "72d6ca43-5dac-4ea8-8502-b345f114513e",
@@ -22,10 +30,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Turn",
-                    "type": "PassThrough",
-                    "id": "9d4a2f6c-7169-47d6-b60c-7d52e5f86238",
-                    "expectedControlType": "Vector2",
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "382cd0a4-1474-45a3-acfa-e39f67c9679a",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -109,28 +117,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "e484facf-940c-4b69-8a8c-9990e1d79293",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Keyboard",
-                    "action": "Charge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cdc8034c-3e2a-4cc1-b35a-116c87d8302c",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Charge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Arrow Keys",
                     "id": "51383e28-82af-403f-89ee-f971c8743147",
                     "path": "Dpad",
@@ -193,6 +179,50 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08ec88db-8ae1-4b96-9456-e2b6dac23bfd",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdc8034c-3e2a-4cc1-b35a-116c87d8302c",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e484facf-940c-4b69-8a8c-9990e1d79293",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Keyboard",
+                    "action": "Charge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "456624fa-a065-4406-8fdf-dd512693b2c8",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Charge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
