@@ -54,8 +54,8 @@ public class Movement : MonoBehaviour
 
   public bool IsCharging {get {return _isCharging;}}
 
-  public Stack<string> setKabobStack { get { return _stack; } }
-  public Stack<string> getKabobStack { set { _stack = value; } }
+  public Stack<string> getKabobStack { get { return _stack; } }
+  public Stack<string> setKabobStack { set { _stack = value; } }
 
   // ================== Methods
 
@@ -223,7 +223,7 @@ public class Movement : MonoBehaviour
       stk.push("generic food");
       _foodObject1.SetActive(true);
     } 
-    yield return new WaitForSeconds(0.01f); // idk what else to run lol
+    yield return new WaitForSeconds(0.2f); // idk what else to run lol
   }
 
   private IEnumerator shootFood(){
@@ -232,7 +232,7 @@ public class Movement : MonoBehaviour
       stk.pop();
       _foodObject1.SetActive(false);
     }
-    yield return new WaitForSeconds(0.01f); // idk what else to run lol
+    yield return new WaitForSeconds(0.2f); // idk what else to run lol
   }
 
   private void startInvulnerability(float time)
