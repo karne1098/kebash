@@ -11,7 +11,6 @@ public class Movement : MonoBehaviour
   private Rigidbody       _rigidbody;
 
   // Health
-  private Stack<string> _stack = new Stack<string>();
   private bool  _isInvulnerable = false;
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
@@ -50,19 +49,22 @@ public class Movement : MonoBehaviour
   private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
 
   //Food Stuff
+  [SerializeField] private Transform  _sliceSpawn;
+  [SerializeField] private GameObject _foodSlicePrefab;
   [SerializeField] private GameObject _foodObject1;
   [SerializeField] private GameObject _foodObject2;
   [SerializeField] private GameObject _foodObject3;
   [SerializeField] private GameObject _foodBulletPrefab;
 
+  // TODO Delete me
+  
   // ================== Accessors
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
   public bool IsCharging {get {return _isCharging;}}
 
-  public Stack<string> getKabobStack { get { return _stack; } }
-  public Stack<string> setKabobStack { set { _stack = value; } }
+  public Stack<string> KebabStack { get; private set; } = new Stack<string>();
 
   // ================== Methods
 
@@ -73,8 +75,8 @@ public class Movement : MonoBehaviour
     _inputData = GetComponent<PlayerInputScript>().InputData;
     _rigidbody = GetComponent<Rigidbody>();
 
-    _foodObject1.SetActive(true);
-    _stack.Push("demofood");
+    _foodObject1.SetActive(false);
+    //KebabStack.Push("demofood");
     _foodObject2.SetActive(false);
     _foodObject3.SetActive(false);
 
@@ -234,8 +236,12 @@ public class Movement : MonoBehaviour
   {
     Debug.Log("Player " + _playerNumber + " added food.");
     printStack(); 
-    if(_stack.Count == 0){
-      _stack.Push("generic food");
+    if(KebabStack.Count == 0){
+      KebabStack.Push("generic food");
+      
+      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _sliceSpawn.position.y, _sliceSpawn.position.z + (KebabStack.Count * 0.3f));
+
+      var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
       _foodObject1.SetActive(true);
     } 
     yield return new WaitForSeconds(0.2f); // idk what else to run lol
@@ -244,13 +250,13 @@ public class Movement : MonoBehaviour
   private IEnumerator shootFood()
   {
     // Can't shoot if no food
-    if (_stack.Count == 0) yield break;
+    if (KebabStack.Count == 0) yield break;
 
     Debug.Log("Player " + _playerNumber + " fired a shot!");
     _isOnShootCoolDown = true;
 
     // Remove from stack
-    _stack.Pop();
+    KebabStack.Pop();
     _foodObject1.SetActive(false);
 
     // Spawn food
@@ -302,7 +308,7 @@ public class Movement : MonoBehaviour
 
   private void printStack()
   {
-    foreach (string s in _stack)
+    foreach (string s in KebabStack)
     {
       Debug.Log(s);
     }
