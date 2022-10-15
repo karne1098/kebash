@@ -31,10 +31,15 @@ public class FoodSpawn : MonoBehaviour
             float xRange = Random.Range(-x, x);
             float z = (zSpawn * 0.5f) - 0.5f;
             float zRange = Random.Range(-z, z);
-            
-
+            int xcount = Random.Range(1, 3);
+            PooledObjectIndex count = (PooledObjectIndex)xcount;
+            //other.transform.parent.gameObject.GetComponent<Movement>()
+            GameObject g = this.transform.gameObject.GetComponent<FoodPooler>().GetPooledObject(count);
+            g.transform.position = new Vector3(xRange, 15, zRange);
+            g.SetActive(true);
+            //Instantiate(foodPrefab, new Vector3(xRange, 15, zRange), Quaternion.identity);
+            //in case it dont work
             yield return new WaitForSeconds(timeRange);
-            Instantiate(foodPrefab, new Vector3(xRange, 15, zRange), Quaternion.identity);
         }
     }
 }
