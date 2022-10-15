@@ -52,20 +52,17 @@ public class FoodPooler : MonoBehaviour
   }
 
   // Note: it's the caller's responsibility to activate the GameObject
-  public GameObject GetPooledObject(PooledObjectIndex foodindex)
+  public GameObject GetPooledObject(PooledObjectIndex foodIndex)
   {
-    int index = (int)foodindex;
+    int index = (int)foodIndex;
 
     // Return if invalid index
-    if (index >= _pooledObjects.Count) return null;
+    if (index < 0 || index >= _pooledObjects.Count) return null;
 
-    // Check for existing instance
+    // Check for existing instance, and if it's not yet in use, return it
     for (int i = 0; i < _pooledObjects[index].Count; ++i)
     {
-      if (!_pooledObjects[index][i].activeInHierarchy)
-      {
-        return _pooledObjects[index][i];
-      }
+      if (!_pooledObjects[index][i].activeInHierarchy) return _pooledObjects[index][i];
     }
 
     // Otherwise, make a new one
