@@ -5,3 +5,4 @@
 # This .gitignore file should be placed at the root of your Github repository directory
 
 **/.DS_Store
+Kebash/Assets/Prefabs/FoodTypeBullet/FoodBullet 1.prefab.meta

@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &138359779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 138359780}
+  - component: {fileID: 138359781}
+  - component: {fileID: 138359782}
+  m_Layer: 0
+  m_Name: FoodManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &138359780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138359779}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7703677705268590127}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138359781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138359779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7608424879d25e244a9f3e7069763cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodPrefab: {fileID: 6723736742880330824, guid: fbba3e1e1c421524388a823973b30489, type: 3}
+--- !u!114 &138359782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138359779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdae31c83117c644aba39cc0d497353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemsToPool:
+  - objectToPool: {fileID: 0}
+    initialAmount: 0
+  - objectToPool: {fileID: 5668247638708286773, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
+    initialAmount: 4
+  - objectToPool: {fileID: 6840405092708570064, guid: e5207403b78d95344b7de714159083bf, type: 3}
+    initialAmount: 4
+  - objectToPool: {fileID: 1791067281726271845, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
+    initialAmount: 4
 --- !u!1 &827085536
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7703677706034480454}
+  - {fileID: 138359780}
   - {fileID: 4799847498144578126}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -326,5 +393,5 @@ Transform:
   - {fileID: 1384270322}
   - {fileID: 827085541}
   m_Father: {fileID: 7703677705268590127}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

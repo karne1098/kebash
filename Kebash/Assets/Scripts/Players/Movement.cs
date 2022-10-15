@@ -141,6 +141,7 @@ public class Movement : MonoBehaviour
     }
   }
 
+  // keeping this for now so it doesn't fuck over everyone else's code
   public bool AddFood()
   {
     // Can't add food if full
@@ -151,6 +152,18 @@ public class Movement : MonoBehaviour
     _foodSlices[KebabStack.Count].SetActive(true);
     KebabStack.Push("GenericFood");
 
+    return true;
+  }
+
+  public bool AddFood(PooledObjectIndex num)
+  {
+    // Can't add food if full
+    if (KebabStack.Count == _maxFood) return false;
+    Debug.Log("Player " + _playerNumber + " added food. " + (int) num); 
+    Debug.Log(_foodSlices[KebabStack.Count].transform.childCount);
+    Transform a = _foodSlices[KebabStack.Count].transform.GetChild((int) num);
+    a.gameObject.SetActive(true);
+    KebabStack.Push("TODO");
     return true;
   }
 
@@ -258,8 +271,11 @@ public class Movement : MonoBehaviour
 
     // Remove from stack
     KebabStack.Pop(); //popping first does the "- 1" for us
-    _foodSlices[KebabStack.Count].SetActive(false);
-
+    //this is of course, inefficient to a terrible degree.
+    for(int i = 0; i < _foodSlices[KebabStack.Count].transform.childCount; i++){
+      Transform a = _foodSlices[KebabStack.Count].transform.GetChild(i);
+      a.gameObject.SetActive(false);
+    }
     // Spawn foodBullet and give it velocity
     Transform tip = _foodSlices[_maxFood - 1].transform; // TODO: spawn at a better place
     GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // TODO: maybe object pool
