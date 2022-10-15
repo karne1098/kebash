@@ -264,8 +264,11 @@ public class Movement : MonoBehaviour
 
     // Remove from stack
     KebabStack.Pop(); //popping first does the "- 1" for us
-    _foodSlices[KebabStack.Count].SetActive(false);
-
+    //this is of course, inefficient to a terrible degree.
+    for(int i = 0; i < _foodSlices[KebabStack.Count].transform.childCount; i++){
+      Transform a = _foodSlices[KebabStack.Count].transform.GetChild(i);
+      a.gameObject.SetActive(false);
+    }
     // Spawn foodBullet and give it velocity
     Transform tip = _foodSlices[_maxFood - 1].transform; // TODO: spawn at a better place
     GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // TODO: maybe object pool
