@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 951850826387806688, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
+      propertyPath: _name
+      value: Onion
+      objectReference: {fileID: 0}
     - target: {fileID: 1791067281726271845, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
       propertyPath: m_Name
       value: OnionFood

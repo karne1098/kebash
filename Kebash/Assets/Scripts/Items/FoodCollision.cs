@@ -23,7 +23,7 @@ public class FoodCollision : MonoBehaviour
 
       if (other.transform.parent.gameObject.GetComponent<Movement>().IsCharging)
       {
-        bool foodWasTaken = other.transform.parent.gameObject.GetComponent<Movement>().AddFood();
+        bool foodWasTaken = other.transform.parent.gameObject.GetComponent<Movement>().AddFood(this.gameObject.GetComponent<FoodData>().Num);
         if (foodWasTaken) this.gameObject.SetActive(false);
       }
     }

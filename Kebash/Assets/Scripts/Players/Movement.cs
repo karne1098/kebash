@@ -134,6 +134,7 @@ public class Movement : MonoBehaviour
     }
   }
 
+  // keeping this for now so it doesn't fuck over everyone else's code
   public bool AddFood()
   {
     // Can't add food if full
@@ -144,6 +145,18 @@ public class Movement : MonoBehaviour
     _foodSlices[KebabStack.Count].SetActive(true);
     KebabStack.Push("GenericFood");
 
+    return true;
+  }
+
+  public bool AddFood(PooledObjectIndex num)
+  {
+    // Can't add food if full
+    if (KebabStack.Count == _maxFood) return false;
+    Debug.Log("Player " + _playerNumber + " added food. " + (int) num); 
+    Debug.Log(_foodSlices[KebabStack.Count].transform.childCount);
+    Transform a = _foodSlices[KebabStack.Count].transform.GetChild((int) num);
+    a.gameObject.SetActive(true);
+    KebabStack.Push("TODO");
     return true;
   }
 

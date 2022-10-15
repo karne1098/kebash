@@ -22,6 +22,6 @@ public class FoodFall : MonoBehaviour
     }
     IEnumerator Timeout() {
       yield return new WaitForSeconds(timeout);
-      Destroy(this.gameObject);
+      this.gameObject.SetActive(false);
     }
 }

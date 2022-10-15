@@ -43,8 +43,8 @@ public class FoodSpawn : MonoBehaviour
       // Spawn the food object
       GameObject foodObject = FoodPooler.Instance.GetPooledObject(foodIndex);
       foodObject.transform.position = spawnLocation;
-      g.SetActive(true);
-
+      foodObject.SetActive(true);
+      foodObject.GetComponent<FoodData>().Num = foodIndex;
       // Wait to spawn next food item
       float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
       yield return new WaitForSeconds(timeToNextSpawn);

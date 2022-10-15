@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2646101938332443216, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
+      propertyPath: _name
+      value: Tomato
+      objectReference: {fileID: 0}
     - target: {fileID: 610205482218480895, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -38,12 +38,12 @@ public class StaminaBar : MonoBehaviour
 
     if (_movement.StaminaFraction == 1f)
     {
-       Debug.Log("Stamina Full");
+       //Debug.Log("Stamina Full");
       _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, (fadeRate + beforeFade - (Time.fixedTime - timeSinceFull))/fadeRate);
       
     }
     else{
-      Debug.Log("nvm");
+      //Debug.Log("nvm");
        _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, 1f);
       timeSinceFull = Time.fixedTime;
     }
