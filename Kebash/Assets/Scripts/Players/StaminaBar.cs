@@ -25,6 +25,8 @@ public class StaminaBar : MonoBehaviour
     _fill = transform.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Image>();
     _movement = _player.GetComponent<Movement>();
 
+    Vector3 screenPos = Camera.main.WorldToScreenPoint(_player.transform.position);
+    _sliderParentTransform.position = screenPos;
   }
 
   void FixedUpdate()

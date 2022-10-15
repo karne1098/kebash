@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-  [SerializeField] private int _playerNumber = 1;
   [SerializeField] private GameObject _damagerObject;
-  
+
+  private int _playerNumber;
   private PlayerInputData _inputData;
   private Rigidbody       _rigidbody;
+
+  // Joining
+  [SerializeField] private GameObject _playerJoin;
 
   // Health
   private bool  _isInvulnerable = false;
@@ -53,7 +56,8 @@ public class Movement : MonoBehaviour
   // Falling
   private bool    _isNotOnGround = false;
   private float   _fallRespawnWaitDuration = 3;                 // Delay after falling before teleporting back to top
-  private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
+  // private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0);
+  // This will affect how much time you should be invulnerable
   private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
 
   // TODO Delete me
@@ -70,10 +74,13 @@ public class Movement : MonoBehaviour
 
   void Start()
   {
+    _playerNumber = PlayerJoin.Instance.CurrentPlayerCount;
     _damagerObject.SetActive(false);
 
     _inputData = GetComponent<PlayerInputScript>().InputData;
     _rigidbody = GetComponent<Rigidbody>();
+    transform.position =
+      PlayerJoin.Instance.GetPlayerPosition();
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -120,7 +127,7 @@ public class Movement : MonoBehaviour
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
       Debug.Log("Player " + _playerNumber + " has fallen!");
-      StartCoroutine("waitToTeleport");
+      StartCoroutine(waitToTeleport(PlayerJoin.Instance.GetPlayerPosition(), true));
       return;
     }
 
@@ -281,12 +288,12 @@ public class Movement : MonoBehaviour
     Debug.Log("Player " + _playerNumber + " is no longer invulnerable!");
   }
 
-  private IEnumerator waitToTeleport()
+  private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
 
     // Start falling from the sky
-    _rigidbody.position = _fallRespawnPosition; 
+    _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
 
     // Take one unit of damage
