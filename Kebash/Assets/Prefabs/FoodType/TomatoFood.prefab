@@ -7,9 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2646101938332443216, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
+      propertyPath: _name
+      value: Tomato
+      objectReference: {fileID: 0}
+    - target: {fileID: 610205482218480895, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a422afe5774ef044af513623ec6b2ea, type: 2}
+    - target: {fileID: 5224638918590266314, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
+      propertyPath: m_Name
+      value: food mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 5668247638708286773, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
       propertyPath: m_Name
-      value: MeatFood
+      value: TomatoFood
       objectReference: {fileID: 0}
     - target: {fileID: 8908034855891641382, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
       propertyPath: m_RootOrder

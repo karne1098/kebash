@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 951850826387806688, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
+      propertyPath: _name
+      value: Onion
+      objectReference: {fileID: 0}
     - target: {fileID: 1791067281726271845, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
       propertyPath: m_Name
-      value: LettuceFood
+      value: OnionFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230172885207089050, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
+      propertyPath: m_Name
+      value: food mesh
       objectReference: {fileID: 0}
     - target: {fileID: 3309368951821115510, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
       propertyPath: m_RootOrder
@@ -55,5 +63,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6774941753705881775, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25f1ea74455625d46a2400c217890b36, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}

@@ -6,21 +6,26 @@ using UnityEngine.InputSystem;
 
 public class FoodCollision : MonoBehaviour
 {
-    private Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+  private Rigidbody _rigidbody;
 
-      void OnTriggerEnter(Collider other)
+  // ================== Methods
+
+  void Start()
+  {
+    _rigidbody = GetComponent<Rigidbody>();
+  }
+
+  void OnTriggerEnter(Collider other)
   { 
-    if (other.gameObject.layer == Utils.DamagerLayer){
-            //Debug.Log(other.gameObject.GetComponent<Movement>().IsCharging);
-            if(other.transform.parent.gameObject.GetComponent<Movement>().IsCharging){
-                other.transform.parent.gameObject.GetComponent<Movement>().StartCoroutine("addFood");
-                this.gameObject.SetActive(false);
-            }
+    // Collided with incoming damager
+    if (other.gameObject.layer == Utils.DamagerLayer) {
+      // TODO: damager can be charging player, or food projectile. Must disambiguate.
+
+      if (other.transform.parent.gameObject.GetComponent<Movement>().IsCharging)
+      {
+        bool foodWasTaken = other.transform.parent.gameObject.GetComponent<Movement>().AddFood(this.gameObject.GetComponent<FoodData>().Num);
+        if (foodWasTaken) this.gameObject.SetActive(false);
+      }
     }
   }
 

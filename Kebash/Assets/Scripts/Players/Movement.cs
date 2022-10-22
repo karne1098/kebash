@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-  [SerializeField] private int _playerNumber = 1;
   [SerializeField] private GameObject _damagerObject;
-  
+
+  private int _playerNumber;
   private PlayerInputData _inputData;
   private Rigidbody       _rigidbody;
+
+  // Joining
+  [SerializeField] private GameObject _playerJoin;
 
   // Health
   private bool  _isInvulnerable = false;
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
   private int   _debugCount = 0;
+
+  // Food Stuff
+  private int _maxFood = 3;
+  private float _foodBulletSpeed = 20;
+  [SerializeField] private Transform  _sliceSpawn;
+  [SerializeField] private GameObject _foodSlicePrefab;
+  [SerializeField] private List<GameObject> _foodSlices;
+  [SerializeField] private GameObject _foodBulletPrefab;
 
   // Moving and turning
   private Vector3 _idealMove;
@@ -45,16 +56,9 @@ public class Movement : MonoBehaviour
   // Falling
   private bool    _isNotOnGround = false;
   private float   _fallRespawnWaitDuration = 3;                 // Delay after falling before teleporting back to top
-  private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0); // This will affect how much time you should be invulnerable
+  // private Vector3 _fallRespawnPosition = new Vector3(0, 20, 0);
+  // This will affect how much time you should be invulnerable
   private float   _fallInvDuration = 2;                         // How long the player is invulnerable after teleporting back up
-
-  //Food Stuff
-  [SerializeField] private Transform  _sliceSpawn;
-  [SerializeField] private GameObject _foodSlicePrefab;
-  [SerializeField] private GameObject _foodObject1;
-  [SerializeField] private GameObject _foodObject2;
-  [SerializeField] private GameObject _foodObject3;
-  [SerializeField] private GameObject _foodBulletPrefab;
 
   // TODO Delete me
   
@@ -70,15 +74,13 @@ public class Movement : MonoBehaviour
 
   void Start()
   {
+    _playerNumber = PlayerJoin.Instance.CurrentPlayerCount;
     _damagerObject.SetActive(false);
 
     _inputData = GetComponent<PlayerInputScript>().InputData;
     _rigidbody = GetComponent<Rigidbody>();
-
-    _foodObject1.SetActive(false);
-    //KebabStack.Push("demofood");
-    _foodObject2.SetActive(false);
-    _foodObject3.SetActive(false);
+    transform.position =
+      PlayerJoin.Instance.GetPlayerPosition();
 
     _idealMove = Vector3.zero;
     Vector3 initialTurn = Vector3.forward; // Todo: define an initial value facing the centroid of players
@@ -125,7 +127,7 @@ public class Movement : MonoBehaviour
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
       Debug.Log("Player " + _playerNumber + " has fallen!");
-      StartCoroutine("waitToTeleport");
+      StartCoroutine(waitToTeleport(PlayerJoin.Instance.GetPlayerPosition(), true));
       return;
     }
 
@@ -137,6 +139,32 @@ public class Movement : MonoBehaviour
       startInvulnerability(_hitInvDuration);
       return;
     }
+  }
+
+  // keeping this for now so it doesn't fuck over everyone else's code
+  public bool AddFood()
+  {
+    // Can't add food if full
+    if (KebabStack.Count == _maxFood) return false;
+
+    Debug.Log("Player " + _playerNumber + " added food."); 
+
+    _foodSlices[KebabStack.Count].SetActive(true);
+    KebabStack.Push("GenericFood");
+
+    return true;
+  }
+
+  public bool AddFood(PooledObjectIndex num)
+  {
+    // Can't add food if full
+    if (KebabStack.Count == _maxFood) return false;
+    Debug.Log("Player " + _playerNumber + " added food. " + (int) num); 
+    Debug.Log(_foodSlices[KebabStack.Count].transform.childCount);
+    Transform a = _foodSlices[KebabStack.Count].transform.GetChild((int) num);
+    a.gameObject.SetActive(true);
+    KebabStack.Push("TODO");
+    return true;
   }
 
   // ================== Helpers
@@ -189,6 +217,7 @@ public class Movement : MonoBehaviour
     {
       _stamina += Time.deltaTime * _staminaRegenRate;
       _stamina = Mathf.Min(_stamina, _maxStamina);
+
     }
   }
 
@@ -231,21 +260,6 @@ public class Movement : MonoBehaviour
     yield return new WaitForSeconds(_regenDelay);
     _canRegen = true;
   }
-  
-  private IEnumerator addFood()
-  {
-    Debug.Log("Player " + _playerNumber + " added food.");
-    printStack(); 
-    if(KebabStack.Count == 0){
-      KebabStack.Push("generic food");
-      
-      Vector3 spawnOffset = new Vector3(_sliceSpawn.position.x, _sliceSpawn.position.y, _sliceSpawn.position.z + (KebabStack.Count * 0.3f));
-
-      var slice = (GameObject)Instantiate(_foodSlicePrefab, spawnOffset, _sliceSpawn.rotation);
-      _foodObject1.SetActive(true);
-    } 
-    yield return new WaitForSeconds(0.2f); // idk what else to run lol
-  }
 
   private IEnumerator shootFood()
   {
@@ -256,14 +270,16 @@ public class Movement : MonoBehaviour
     _isOnShootCoolDown = true;
 
     // Remove from stack
-    KebabStack.Pop();
-    _foodObject1.SetActive(false);
-
-    // Spawn food
-    GameObject foodCopy = Instantiate(_foodBulletPrefab, _foodObject1.transform.position, _foodObject1.transform.rotation);
-
-    // Add velocity to food
-    foodCopy.GetComponent<Rigidbody>().velocity = _foodObject1.transform.forward * 50;
+    KebabStack.Pop(); //popping first does the "- 1" for us
+    //this is of course, inefficient to a terrible degree.
+    for(int i = 0; i < _foodSlices[KebabStack.Count].transform.childCount; i++){
+      Transform a = _foodSlices[KebabStack.Count].transform.GetChild(i);
+      a.gameObject.SetActive(false);
+    }
+    // Spawn foodBullet and give it velocity
+    Transform tip = _foodSlices[_maxFood - 1].transform; // TODO: spawn at a better place
+    GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // TODO: maybe object pool
+    foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;  // TODO: this whole thing should be handled by the bullet
 
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
@@ -288,12 +304,12 @@ public class Movement : MonoBehaviour
     Debug.Log("Player " + _playerNumber + " is no longer invulnerable!");
   }
 
-  private IEnumerator waitToTeleport()
+  private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
 
     // Start falling from the sky
-    _rigidbody.position = _fallRespawnPosition; 
+    _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
 
     // Take one unit of damage
@@ -313,6 +329,5 @@ public class Movement : MonoBehaviour
       Debug.Log(s);
     }
     Debug.Log("==================");
-  }
-    
+  }   
 }
