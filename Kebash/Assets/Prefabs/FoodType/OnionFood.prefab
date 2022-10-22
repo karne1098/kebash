@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2230172885207089050, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
       propertyPath: m_Name
-      value: Onion
+      value: food mesh
       objectReference: {fileID: 0}
     - target: {fileID: 3309368951821115510, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
       propertyPath: m_RootOrder

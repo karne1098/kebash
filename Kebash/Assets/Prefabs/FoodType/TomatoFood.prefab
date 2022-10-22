@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7a422afe5774ef044af513623ec6b2ea, type: 2}
     - target: {fileID: 5224638918590266314, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
       propertyPath: m_Name
-      value: Tomato
+      value: food mesh
       objectReference: {fileID: 0}
     - target: {fileID: 5668247638708286773, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
       propertyPath: m_Name
