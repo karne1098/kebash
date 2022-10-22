@@ -244,6 +244,7 @@ MonoBehaviour:
   _damagerObject: {fileID: 1094726904226577355}
   _rigidbody: {fileID: 8901939130028159516}
   _animator: {fileID: 0}
+  _staminaBar: {fileID: 2178828403912214777}
   _foodSliceTransforms:
   - {fileID: 4524539712887402724}
   - {fileID: 5933011373358462210}
@@ -914,3 +915,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 922072168341688135, guid: 917f01e078cec264b825aaeae181541f, type: 3}
   m_PrefabInstance: {fileID: 8901939130019822875}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2178828403912214777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7329268210010895842, guid: 917f01e078cec264b825aaeae181541f, type: 3}
+  m_PrefabInstance: {fileID: 8901939130019822875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d59e3ff6809b7d48ba9a0f83e637f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

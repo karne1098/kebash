@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
   [SerializeField] private GameObject _damagerObject;
   [SerializeField] private Rigidbody  _rigidbody;
   [SerializeField] private Animator   _animator;
+  [SerializeField] private StaminaBar _staminaBar;
 
   // Health
   private bool  _isInvulnerable = false;
@@ -44,13 +45,6 @@ public class Movement : MonoBehaviour
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
-  private Transform _sliderBarTransform;
-  public Image _staminaFill;
-  private bool _shaking = false;
-  private float _shakeDuration = 0.25f;
-  private float _shakeAmount = 5;
-  
-  
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -84,8 +78,6 @@ public class Movement : MonoBehaviour
 
     // Initialize some private stuff
     _stamina = _maxStamina;
-    _sliderBarTransform = transform.GetChild(2);
-    _staminaFill = transform.GetChild(2).transform.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Image>();
     _minChargeDuration = _minChargeCost / _staminaCostRate;
 
     // Initialize rotation
@@ -119,19 +111,8 @@ public class Movement : MonoBehaviour
 
     else if(_inputData.Charge && _stamina <= _minStaminaToStart)
     {
+      _staminaBar.shake();
       Debug.Log("Not enough stamina to charge");
-      StopCoroutine("shakeStamina");
-      StartCoroutine("shakeStamina");
-      return;
-    }
-
-    if (_shaking)
-    {
-      Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * _shakeAmount;
-      newPos.y = _sliderBarTransform.position.y;
-      newPos.z = _sliderBarTransform.position.z;
-      _sliderBarTransform.position = newPos;
-      _staminaFill.color = Color.red;
     }
 
 
@@ -297,23 +278,6 @@ public class Movement : MonoBehaviour
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
-  }
-
-  private IEnumerator shakeStamina()
-  {
-    //Start shaking
-    Vector3 originalPos = _sliderBarTransform.position;
-    Color originalColor = _staminaFill.color;
-    if(_shaking == false){
-      _shaking = true;
-    }
-
-    yield return new WaitForSeconds(_shakeDuration);
-
-    //Stop shaking
-    _shaking = false;
-    _sliderBarTransform.position = originalPos;
-    _staminaFill.color = originalColor;
   }
 
   private void startInvulnerability(float time)
