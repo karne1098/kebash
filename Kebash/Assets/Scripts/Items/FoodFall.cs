@@ -14,7 +14,6 @@ public class FoodFall : MonoBehaviour
 
     Transform foodTransform;
     bool bobCheck = false;
-    float startingY = 1f;
     float bobMin = 0.5f;
     float bobMax = 1.5f;
     float bobSpeed = 3f;

@@ -108,17 +108,20 @@ public class Movement : MonoBehaviour
       StartCoroutine("charge");
       return;
     }
-
-    else if(_inputData.Charge && _stamina <= _minStaminaToStart)
+    
+    if (_inputData.Charge && _stamina <= _minStaminaToStart)
     {
       _staminaBar.shake();
       Debug.Log("Not enough stamina to charge");
     }
 
-
     move();
     turn();
     regenStamina();
+
+    // Fixme
+    float forwardFloat = Vector3.Dot(_idealMove, _currentTurn);
+    _animator.SetFloat("InputY", forwardFloat);
   }
 
   void OnTriggerEnter(Collider other)
