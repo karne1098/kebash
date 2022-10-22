@@ -21,11 +21,19 @@ public class MultiplayerManager : MonoBehaviour
     return new Vector3(Random.Range(-10, 10), 20, Random.Range(-5, 5));
   }
 
-  public void OnPlayerJoined() {
+  public void OnPlayerJoined(PlayerInput playerInput) {
     CurrentPlayerCount++;
     Debug.Log("Player " + CurrentPlayerCount + " joined!");
-
-    // Todo: set player number, set player transform position and rotation
+    
+    GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
+    foreach (GameObject obj in objects) {
+      PlayerInput input = obj.GetComponent<PlayerInput>();
+      if (input == playerInput) {
+        Movement movement = obj.GetComponent<Movement>();
+        movement.PlayerNumber = CurrentPlayerCount;
+        movement.RespawnPosition = GetPlayerPosition();
+      }
+    }
   }
   
   public void OnPlayerLeft() {

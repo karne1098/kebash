@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
   public int  PlayerNumber { get; set; }         = -1;
+  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 20, 0);
   public bool IsCharging   { get; private set; } = false;
   public bool IsOnGround   { get; private set; } = false;
   public Stack<string> KebabStack   { get; private set; } = new Stack<string>();
@@ -118,7 +119,7 @@ public class Movement : MonoBehaviour
     {
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 
-      StartCoroutine(waitToTeleport(MultiplayerManager.Instance.GetPlayerPosition(), true));
+      StartCoroutine(waitToTeleport(RespawnPosition, true));
       return;
     }
 
