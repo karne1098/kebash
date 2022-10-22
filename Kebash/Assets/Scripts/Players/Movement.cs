@@ -43,6 +43,10 @@ public class Movement : MonoBehaviour
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
+  private Transform _sliderBarTransform;
+  private bool _shaking = false;
+  private float _shakeDuration = 0.25f;
+  
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -75,6 +79,7 @@ public class Movement : MonoBehaviour
 
     // Initialize some private stuff
     _stamina = _maxStamina;
+    _sliderBarTransform = transform.GetChild(2);
     _minChargeDuration = _minChargeCost / _staminaCostRate;
 
     // Initialize rotation
@@ -105,6 +110,23 @@ public class Movement : MonoBehaviour
       StartCoroutine("charge");
       return;
     }
+
+    else if(_inputData.Charge && _stamina <= _minStaminaToStart)
+    {
+      Debug.Log("Not enough stamina to charge");
+      StopCoroutine("shakeStamina");
+      StartCoroutine("shakeStamina");
+      return;
+    }
+
+    if (_shaking)
+    {
+      Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * 3;
+      newPos.y = _sliderBarTransform.position.y;
+      newPos.z = _sliderBarTransform.position.z;
+      _sliderBarTransform.position = newPos;
+    }
+
 
     move();
     turn();
@@ -268,6 +290,22 @@ public class Movement : MonoBehaviour
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
+  }
+
+  private IEnumerator shakeStamina()
+  {
+    //Start shaking
+    Vector3 originalPos = _sliderBarTransform.position;
+
+    if(_shaking == false){
+      _shaking = true;
+    }
+
+    yield return new WaitForSeconds(_shakeDuration);
+
+    //Stop shaking
+    _shaking = false;
+    _sliderBarTransform.position = originalPos;
   }
 
   private void startInvulnerability(float time)
