@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -44,8 +45,11 @@ public class Movement : MonoBehaviour
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
   private Transform _sliderBarTransform;
+  public Image _staminaFill;
   private bool _shaking = false;
   private float _shakeDuration = 0.25f;
+  private float _shakeAmount = 5;
+  
   
 
   // Shooting
@@ -80,6 +84,7 @@ public class Movement : MonoBehaviour
     // Initialize some private stuff
     _stamina = _maxStamina;
     _sliderBarTransform = transform.GetChild(2);
+    _staminaFill = transform.GetChild(2).transform.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Image>();
     _minChargeDuration = _minChargeCost / _staminaCostRate;
 
     // Initialize rotation
@@ -121,10 +126,11 @@ public class Movement : MonoBehaviour
 
     if (_shaking)
     {
-      Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * 3;
+      Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * _shakeAmount;
       newPos.y = _sliderBarTransform.position.y;
       newPos.z = _sliderBarTransform.position.z;
       _sliderBarTransform.position = newPos;
+      _staminaFill.color = Color.red;
     }
 
 
@@ -296,7 +302,7 @@ public class Movement : MonoBehaviour
   {
     //Start shaking
     Vector3 originalPos = _sliderBarTransform.position;
-
+    Color originalColor = _staminaFill.color;
     if(_shaking == false){
       _shaking = true;
     }
@@ -306,6 +312,7 @@ public class Movement : MonoBehaviour
     //Stop shaking
     _shaking = false;
     _sliderBarTransform.position = originalPos;
+    _staminaFill.color = originalColor;
   }
 
   private void startInvulnerability(float time)
