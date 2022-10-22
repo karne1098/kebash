@@ -17,6 +17,10 @@ public class StaminaBar : MonoBehaviour
   private float fadeRate = 0.3f;
   private float beforeFade = 1f;
 
+  private bool _shaking = false;
+  private float _shakeDuration = 0.25f;
+  private float _shakeAmount = 5;
+
   void Start()
   {
     _sliderParentTransform = transform.GetChild(0);
@@ -46,5 +50,67 @@ public class StaminaBar : MonoBehaviour
       _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, 1f);
       timeSinceFull = Time.fixedTime;
     }
+
+    if (_shaking){
+      Vector3 newPos = _sliderParentTransform.position + Random.insideUnitSphere * _shakeAmount;
+      newPos.y = _sliderParentTransform.position.y;
+      newPos.z = _sliderParentTransform.position.z;
+      _sliderParentTransform.position = newPos;
+      Debug.Log("Shaking!");
+    }
+  }
+
+  public void shake()
+  {
+    if (_shaking == false){
+      StopCoroutine("shakeStamina");
+      StartCoroutine("shakeStamina");
+    }
+  }
+
+  private IEnumerator shakeStamina(){
+    Color originalColor = _fill.color;
+
+    if (_shaking == false)
+    {
+      _shaking = true;
+    }
+
+     yield return new WaitForSeconds(_shakeDuration);
+
+    //Stop shaking
+    _shaking = false;
+    _sliderParentTransform.position = Camera.main.WorldToScreenPoint(_player.transform.position);
+    _fill.color = originalColor;
   }
 }
+
+
+/*
+if (_shaking)
+    {
+      Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * _shakeAmount;
+      newPos.y = _sliderBarTransform.position.y;
+      newPos.z = _sliderBarTransform.position.z;
+      _sliderBarTransform.position = newPos;
+      _staminaFill.color = Color.red;
+
+
+
+        private IEnumerator shakeStamina()
+  {
+    //Start shaking
+    Vector3 originalPos = _sliderBarTransform.position;
+    Color originalColor = _staminaFill.color;
+    if(_shaking == false){
+      _shaking = true;
+    }
+
+    yield return new WaitForSeconds(_shakeDuration);
+
+    //Stop shaking
+    _shaking = false;
+    _sliderBarTransform.position = originalPos;
+    _staminaFill.color = originalColor;
+  }
+    }*/
