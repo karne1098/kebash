@@ -20,10 +20,12 @@ public class FoodCollision : MonoBehaviour
     // Collided with incoming damager
     if (other.gameObject.layer == Utils.DamagerLayer) {
       // TODO: damager can be charging player, or food projectile. Must disambiguate.
-
       if (other.transform.parent.gameObject.GetComponent<Movement>().IsCharging)
       {
-        bool foodWasTaken = other.transform.parent.gameObject.GetComponent<Movement>().AddFood(this.gameObject.GetComponent<FoodData>().Num);
+        bool foodWasTaken = 
+          other.transform.parent.gameObject.GetComponent<Movement>()
+          .AddFood(this.gameObject.GetComponent<FoodData>().Num);
+          
         if (foodWasTaken) this.gameObject.SetActive(false);
       }
     }
