@@ -52,6 +52,8 @@ public class FoodFall : MonoBehaviour
 
             foodTransform.position = new Vector3(foodTransform.position.x, bobY, foodTransform.position.z);
 
+            foodTransform.Rotate(0f, 1f, 0f, Space.Self);
+
         }
         
     }
