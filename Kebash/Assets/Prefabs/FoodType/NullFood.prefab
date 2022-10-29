@@ -269,13 +269,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7528216763935266139}
     m_Modifications:
+    - target: {fileID: 4901981482784515451, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6877924948031469957, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
       propertyPath: m_Name
       value: kebabStab
       objectReference: {fileID: 0}
     - target: {fileID: 6877924948031469957, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7786552425213815669, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
       propertyPath: m_RootOrder
