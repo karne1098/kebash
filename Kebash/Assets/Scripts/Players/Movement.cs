@@ -46,6 +46,7 @@ public class Movement : MonoBehaviour
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
+    private ParticleSystem _stabEffect;
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -55,6 +56,8 @@ public class Movement : MonoBehaviour
   private float _fallRespawnWaitDuration = 3; // Delay after falling before teleporting back to top
   private float _fallInvDuration = 2;         // How long the player is invulnerable after teleporting back up
   
+
+
   // ================== Accessors
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
@@ -86,7 +89,10 @@ public class Movement : MonoBehaviour
     _idealTurn   = initialTurn;
     _currentTurn = initialTurn;
     _rigidbody.rotation = Quaternion.LookRotation(initialTurn);
-  }
+
+    // get effect
+    _stabEffect = transform.Find("kebabStab").gameObject.GetComponent<ParticleSystem>();
+    }
 
   void FixedUpdate()
   {
@@ -332,4 +338,9 @@ public class Movement : MonoBehaviour
     // Start invulnerability
     startInvulnerability(_fallInvDuration);
   }
+
+    public void PlayStab()
+    {
+        _stabEffect.Play();
+    }
 }

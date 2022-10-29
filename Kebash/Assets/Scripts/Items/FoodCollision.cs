@@ -26,6 +26,7 @@ public class FoodCollision : MonoBehaviour
         bool foodWasTaken = 
           other.transform.parent.gameObject.GetComponent<Movement>()
           .AddFood(this.gameObject.GetComponent<FoodData>().Num);
+                other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
 
                 if (foodWasTaken) {
 
