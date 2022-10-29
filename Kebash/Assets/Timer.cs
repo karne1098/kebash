@@ -6,8 +6,14 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 10; //90 seconds
+    public float timeValue = 10; 
     public TextMeshProUGUI timeTextTMP;
+    public GameObject gameOverTextObject;
+
+    void Start() 
+    {
+        gameOverTextObject.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,8 +25,9 @@ public class Timer : MonoBehaviour
         else //no time left
         {
             timeValue = 0; //locks to 0
+            gameOverTextObject.SetActive(true);
+            Time.timeScale = 0; //pauses game
         }     
-
         DisplayTime(timeValue);
     }
 
