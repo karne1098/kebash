@@ -47,6 +47,7 @@ public class Movement : MonoBehaviour
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
     private ParticleSystem _stabEffect;
+    private ParticleSystem _dashEffect;
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -90,8 +91,10 @@ public class Movement : MonoBehaviour
     _currentTurn = initialTurn;
     _rigidbody.rotation = Quaternion.LookRotation(initialTurn);
 
-    // get effect
+    // get effects
     _stabEffect = transform.Find("kebabStab").gameObject.GetComponent<ParticleSystem>();
+    //NEED TO CHANGE TO DASH PARTICLE
+    _dashEffect = transform.Find("kebabStab").gameObject.GetComponent<ParticleSystem>();
     }
 
   void FixedUpdate()
@@ -256,6 +259,7 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(true);
     _canRegen = false;
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
+    _dashEffect.Play();
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -272,6 +276,7 @@ public class Movement : MonoBehaviour
     IsCharging = false;
     gameObject.layer = Utils.PlayerLayer;
     _damagerObject.SetActive(false);
+        _dashEffect.Stop();
 
     // Allow regen after some time
     yield return new WaitForSeconds(_regenDelay);
