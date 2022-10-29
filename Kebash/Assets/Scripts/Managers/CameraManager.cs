@@ -26,6 +26,8 @@ public class CameraManager : MonoBehaviour
         Vector3 averagePos = new Vector3(0f, 0f, 0f);
         int count = 0;
         bool loopFlag = true;
+        float averageX = 0f;
+        float averageZ = 0f;
 
         while (loopFlag)
         {
@@ -33,9 +35,52 @@ public class CameraManager : MonoBehaviour
             {
                 loopFlag = false;
             } else
-            {
-                Debug.Log(averagePos);
-                averagePos = averagePos + _players[count].transform.position;
+            { 
+                if (_players[count].transform.position.z > 0f)
+                {
+                    if (_players[count].transform.position.z > 13.75f)
+                    {
+                        averageZ = 13.75f;
+                    }
+                    else
+                    {
+                        averageZ = _players[count].transform.position.z;
+                    }
+                } else
+                {
+                    if (_players[count].transform.position.z < -13.75f)
+                    {
+                        averageZ = -13.75f;
+                    }
+                    else
+                    {
+                        averageZ = _players[count].transform.position.z;
+                    }
+                }
+
+                if (_players[count].transform.position.x > 0f)
+                {
+                    if (_players[count].transform.position.x > 8.75f)
+                    {
+                        averageX = 8.75f;
+                    }
+                    else
+                    {
+                        averageX = _players[count].transform.position.x;
+                    }
+                }
+                else
+                {
+                    if (_players[count].transform.position.x < -8.75f)
+                    {
+                        averageX = -8.75f;
+                    }
+                    else
+                    {
+                        averageX = _players[count].transform.position.x;
+                    }
+                }
+                averagePos = new Vector3(averagePos.x + averageX, averagePos.y + _players[count].transform.position.y, averagePos.z + averageZ);
             }
             count = count + 1;
         }
