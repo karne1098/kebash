@@ -19,6 +19,8 @@ public class FoodFall : MonoBehaviour
     float bobSpeed = 3f;
     float bobY;
 
+    Vector3 startPos;
+
     void Start()
     {
         dropEffect = transform.Find("food drop").gameObject.GetComponent<ParticleSystem>();
@@ -27,6 +29,14 @@ public class FoodFall : MonoBehaviour
         foodTransform = transform.Find("food mesh").gameObject.GetComponent<Transform>();
 
         StartCoroutine(Timeout());
+
+        startPos = transform.position;
+    }
+
+    void OnEnable()
+    {
+        bobCheck = false;
+        dropCheck = false;
     }
 
     // Update is called once per frame
@@ -38,7 +48,6 @@ public class FoodFall : MonoBehaviour
       else if(dropCheck == false)
         {
             bobCheck = true;
-
             dropCheck = true;
             dropEffect.Play();
             sparkleEffect.Play();
@@ -57,7 +66,8 @@ public class FoodFall : MonoBehaviour
         
     }
     IEnumerator Timeout() {
-      yield return new WaitForSeconds(timeout);
-      this.gameObject.SetActive(false);
+        yield return new WaitForSeconds(timeout);
+        this.gameObject.SetActive(false);
+        transform.position = startPos;
     }
 }
