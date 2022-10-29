@@ -12,12 +12,14 @@ public class Movement : MonoBehaviour
   [SerializeField] private Rigidbody  _rigidbody;
   [SerializeField] private Animator   _animator;
   [SerializeField] private StaminaBar _staminaBar;
+  [SerializeField] private ParticleSystem _stabParticles;
+  [SerializeField] private ParticleSystem _dashParticles;
 
   // Health
   private bool  _isInvulnerable = false;
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
-  private int   _debugCount = 0;
+  private int _debugCount = 0;
   private int _timesDied = 0;
 
   // Food Stuff
@@ -27,9 +29,10 @@ public class Movement : MonoBehaviour
   [SerializeField] private GameObject _foodBulletPrefab;
 
   // Moving and turning
-  private Vector3 _idealMove = Vector3.zero;
-  private Vector3 _idealTurn = Vector3.zero;
-  private Vector3 _currentTurn;
+  private Vector3 _idealMove   = Vector3.zero;
+  private Vector3 _idealTurn   = Vector3.zero;
+  private Vector3 _currentMove = Vector3.zero;
+  private Vector3 _currentTurn = Vector3.zero;
   private float _moveSpeed             = 4f;
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
@@ -46,8 +49,6 @@ public class Movement : MonoBehaviour
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
-    private ParticleSystem _stabEffect;
-    private ParticleSystem _dashEffect;
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -74,6 +75,7 @@ public class Movement : MonoBehaviour
   void Start()
   {
     // Player number, position, rotation handled by MultiplayerManager on spawn
+    _rigidbody.rotation = Quaternion.LookRotation(Vector3.forward); // FIXME: this should be handled elsewhere
 
     // Basic player data
     _inputData = GetComponent<PlayerInputScript>().InputData;
@@ -84,18 +86,9 @@ public class Movement : MonoBehaviour
     // Initialize some private stuff
     _stamina = _maxStamina;
     _minChargeDuration = _minChargeCost / _staminaCostRate;
-
-    // Initialize rotation
-    Vector3 initialTurn = Vector3.forward; // Perhaps we should define an initial value facing the centroid of players
-    _idealTurn   = initialTurn;
-    _currentTurn = initialTurn;
-    _rigidbody.rotation = Quaternion.LookRotation(initialTurn);
-
-    // get effects
-    _stabEffect = transform.Find("kebabStab").gameObject.GetComponent<ParticleSystem>();
-    //NEED TO CHANGE TO DASH PARTICLE
-    _dashEffect = transform.Find("kebabStab").gameObject.GetComponent<ParticleSystem>();
-    }
+    _currentMove = _rigidbody.velocity;
+    _currentTurn = _rigidbody.rotation * Vector3.forward;
+  }
 
   void FixedUpdate()
   {
@@ -130,8 +123,10 @@ public class Movement : MonoBehaviour
     regenStamina();
 
     // Fixme
-    float forwardFloat = Vector3.Dot(_idealMove, _currentTurn);
+    float forwardFloat = Vector3.Dot(_currentMove, _currentTurn);
     _animator.SetFloat("InputY", forwardFloat);
+    float rightFloat   = Vector3.Dot(_currentMove, Quaternion.AngleAxis(-90, Vector3.up) * _currentTurn);
+    _animator.SetFloat("InputX", rightFloat);
   }
 
   void OnTriggerEnter(Collider other)
@@ -198,28 +193,30 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-    Vector3 newVelocity = Vector3.Lerp(
+    _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
       getAngleDependentSpeed() * _idealMove,
       _moveLerpRate);
 
-    newVelocity.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
-    
-    _rigidbody.velocity = newVelocity;
+    _currentMove.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
+    _rigidbody.velocity = _currentMove;
   }
 
   private void turn()
   {
     if (_inputData.Turn.magnitude > 0)
     {
+      // Turn with specific input
       _idealTurn = Utils.V2ToV3(_inputData.Turn);
     }
     else if (_idealMove.magnitude > 0) 
     {
+      // Turn with movement
       _idealTurn = _idealMove;
     }
     else
     {
+      // No inputs
       return;
     }
     
@@ -259,7 +256,8 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(true);
     _canRegen = false;
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
-    _dashEffect.Play();
+    _dashParticles.Play();
+    _animator.SetBool("Charging", true);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -276,7 +274,8 @@ public class Movement : MonoBehaviour
     IsCharging = false;
     gameObject.layer = Utils.PlayerLayer;
     _damagerObject.SetActive(false);
-        _dashEffect.Stop();
+    _dashParticles.Stop();
+    _animator.SetBool("Charging", false);
 
     // Allow regen after some time
     yield return new WaitForSeconds(_regenDelay);
@@ -365,8 +364,8 @@ public class Movement : MonoBehaviour
     startInvulnerability(_fallInvDuration);
   }
 
-    public void PlayStab()
-    {
-        _stabEffect.Play();
-    }
+  public void PlayStab()
+  {
+    _stabParticles.Play();
+  }
 }

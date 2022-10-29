@@ -1,39 +1,14 @@
 fileFormatVersion: 2
-guid: f1c4fde2ff8304fbdbfba51317fe4711
+guid: b867a61c2dba343c9a4b3bbc08b1339d
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 8725718770609971080
-    second: Run Strait
-  - first:
-      74: 2842868819287375878
-    second: Armature|ChargeDash
-  - first:
-      74: -2246502780319343731
-    second: Armature|Dash
-  - first:
-      74: 6881873686158965456
-    second: Armature|Falling
-  - first:
-      74: -5718518337219091510
-    second: Armature|IdleAni
-  - first:
-      74: -6155767638056460908
-    second: Armature|Run Strait
-  - first:
-      74: 7680859935072716632
-    second: Armature|StopDash
-  - first:
-      74: 6510611469727554508
-    second: Armature|Strafe.R
-  - first:
-      74: 9113458219614054187
-    second: Armature|Walk Back
-  - first:
-      74: 6077487876549733945
-    second: Armature|Walk Back.001
-  externalObjects: {}
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 1 - backyard
+    second: {fileID: 2800000, guid: 5e403c3f001a647cca0794a943113c60, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

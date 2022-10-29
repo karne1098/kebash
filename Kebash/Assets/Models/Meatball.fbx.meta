@@ -1,8 +1,20 @@
 fileFormatVersion: 2
-guid: 00c9f9e4f081a4f1197c96646ae35b09
+guid: 2e45299d3dd864abcbbdb6c96a3bcffe
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
+  - first:
+      74: 8725718770609971080
+    second: Run Strait
+  - first:
+      74: 2842868819287375878
+    second: Armature|ChargeDash
+  - first:
+      74: -2246502780319343731
+    second: Armature|Dash
+  - first:
+      74: 6881873686158965456
+    second: Armature|Falling
   - first:
       74: -5718518337219091510
     second: Armature|IdleAni
@@ -10,9 +22,39 @@ ModelImporter:
       74: -6155767638056460908
     second: Armature|Run Strait
   - first:
-      74: 1160097916992000971
-    second: Armature|Turning Right
-  externalObjects: {}
+      74: 7680859935072716632
+    second: Armature|StopDash
+  - first:
+      74: 6510611469727554508
+    second: Armature|Strafe.R
+  - first:
+      74: 9113458219614054187
+    second: Armature|Walk Back
+  - first:
+      74: 6077487876549733945
+    second: Armature|Walk Back.001
+  - first:
+      74: 4637740871188546057
+    second: Armature|Walk Back.002
+  - first:
+      74: -1979657953581630507
+    second: Armature|Walk Back.003
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fork
+    second: {fileID: 2100000, guid: f1010fefff7b64464841cb00fe1dd1ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: meatball onion
+    second: {fileID: 2100000, guid: 79cc0305296fa40718cd4b23ea24d5ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: meatball sauce
+    second: {fileID: 2100000, guid: 6ca4bcee96f3d4c5da5762b5f0906b19, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,6 +83,64 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
+      name: Armature|Dash
+      takeName: Armature|Dash
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Falling
+      takeName: Armature|Falling
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 28
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Armature|IdleAni
       takeName: Armature|IdleAni
       internalID: 0
@@ -53,7 +153,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -82,7 +182,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -99,8 +199,37 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Turning Right
-      takeName: Armature|Turning Right
+      name: Armature|StopDash
+      takeName: Armature|StopDash
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Strafe.R
+      takeName: Armature|Strafe.R
       internalID: 0
       firstFrame: 0
       lastFrame: 28
@@ -111,7 +240,36 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Walk Back
+      takeName: Armature|Walk Back
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 28
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -182,7 +340,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: Bone
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
