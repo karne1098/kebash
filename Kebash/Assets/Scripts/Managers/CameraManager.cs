@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _player1;
-    [SerializeField] private GameObject _player2;
-
+    private GameObject[] _players =  new GameObject[4];
     private float _zOffset;
     private Transform _target;
+    private int playerCount = 0;
 
     void Awake()
     {
@@ -24,13 +23,41 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 averagePlayerPosition = 
-            (_player1.transform.position + _player2.transform.position) / 2;
+        Vector3 averagePos = new Vector3(0f, 0f, 0f);
+        int count = 0;
+        bool loopFlag = true;
 
+        while (loopFlag)
+        {
+            if (count == playerCount)
+            {
+                loopFlag = false;
+            } else
+            {
+                Debug.Log(averagePos);
+                averagePos = averagePos + _players[count].transform.position;
+            }
+            count = count + 1;
+        }
+
+        if (playerCount != 0)
+        {
+            averagePos = new Vector3(averagePos.x / (float)playerCount, averagePos.y / (float)playerCount, averagePos.z / (float)playerCount);
+        }
+        
         _target.position =  new Vector3(
-            averagePlayerPosition.x / 2, 
+            (averagePos.x / 2), 
             _target.position.y, 
-            averagePlayerPosition.z / 2 + _zOffset);
+            (averagePos.z / 2) + _zOffset);
+
+        Camera.main.transform.position = _target.position;
+        
+    }
+
+    public void AddPlayer(GameObject newPlayer)
+    {
+        _players[playerCount] = newPlayer;
+        playerCount = playerCount + 1;
     }
 
 }

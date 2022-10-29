@@ -8,6 +8,8 @@ public class MultiplayerManager : MonoBehaviour
 {
   public static MultiplayerManager Instance;
 
+    public CameraManager _cameraManager;
+
   public int CurrentPlayerCount { get; internal set; } = 0;
 
   // ================== Methods
@@ -30,6 +32,8 @@ public class MultiplayerManager : MonoBehaviour
     Vector3 position = GetPlayerPosition();
     movement.RespawnPosition       = position;
     playerInput.transform.position = position;
+
+        _cameraManager.AddPlayer(playerInput.gameObject);
   }
   
   public void OnPlayerLeft() {
