@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
   private int   _debugCount = 0;
+  private int _timesDied = 0;
 
   // Food Stuff
   private int _maxFood = 3;
@@ -135,11 +136,24 @@ public class Movement : MonoBehaviour
       return;
     }
 
-    // Got hit by other player's damager collider
+    // Got hit by other player's damager collider OR got hit by food
     if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && IsOnGround)
     {
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
-
+      if(!(KebabStack.Count == 0)) {
+        KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+        // Disable all children
+        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+          Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
+          a.gameObject.SetActive(false);
+        }
+        Debug.Log("Player " + PlayerNumber + "Has been hit and has this much health: " + KebabStack.Count);
+      }
+      else{
+        Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
+        StartCoroutine(waitToTeleport(RespawnPosition, true));
+        _timesDied += 1;
+      }
       startInvulnerability(_hitInvDuration);
       return;
     }
