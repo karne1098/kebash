@@ -12,12 +12,15 @@ public class Movement : MonoBehaviour
   [SerializeField] private Rigidbody  _rigidbody;
   [SerializeField] private Animator   _animator;
   [SerializeField] private StaminaBar _staminaBar;
+  [SerializeField] private ParticleSystem _stabParticles;
+  [SerializeField] private ParticleSystem _dashParticles;
 
   // Health
   private bool  _isInvulnerable = false;
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
-  private int   _debugCount = 0;
+  private int _debugCount = 0;
+  private int _timesDied = 0;
 
   // Food Stuff
   private int _maxFood = 3;
@@ -26,9 +29,10 @@ public class Movement : MonoBehaviour
   [SerializeField] private GameObject _foodBulletPrefab;
 
   // Moving and turning
-  private Vector3 _idealMove = Vector3.zero;
-  private Vector3 _idealTurn = Vector3.zero;
-  private Vector3 _currentTurn;
+  private Vector3 _idealMove   = Vector3.zero;
+  private Vector3 _idealTurn   = Vector3.zero;
+  private Vector3 _currentMove = Vector3.zero;
+  private Vector3 _currentTurn = Vector3.zero;
   private float _moveSpeed             = 4f;
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
@@ -54,12 +58,14 @@ public class Movement : MonoBehaviour
   private float _fallRespawnWaitDuration = 3; // Delay after falling before teleporting back to top
   private float _fallInvDuration = 2;         // How long the player is invulnerable after teleporting back up
   
+
+
   // ================== Accessors
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
   public int  PlayerNumber { get; set; }         = -1;
-  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 20, 0);
+  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 100, 0);
   public bool IsCharging   { get; private set; } = false;
   public bool IsOnGround   { get; private set; } = false;
   public Stack<string> KebabStack   { get; private set; } = new Stack<string>();
@@ -69,6 +75,7 @@ public class Movement : MonoBehaviour
   void Start()
   {
     // Player number, position, rotation handled by MultiplayerManager on spawn
+    _rigidbody.rotation = Quaternion.LookRotation(Vector3.forward); // FIXME: this should be handled elsewhere
 
     // Basic player data
     _inputData = GetComponent<PlayerInputScript>().InputData;
@@ -79,12 +86,8 @@ public class Movement : MonoBehaviour
     // Initialize some private stuff
     _stamina = _maxStamina;
     _minChargeDuration = _minChargeCost / _staminaCostRate;
-
-    // Initialize rotation
-    Vector3 initialTurn = Vector3.forward; // Perhaps we should define an initial value facing the centroid of players
-    _idealTurn   = initialTurn;
-    _currentTurn = initialTurn;
-    _rigidbody.rotation = Quaternion.LookRotation(initialTurn);
+    _currentMove = _rigidbody.velocity;
+    _currentTurn = _rigidbody.rotation * Vector3.forward;
   }
 
   void FixedUpdate()
@@ -120,8 +123,10 @@ public class Movement : MonoBehaviour
     regenStamina();
 
     // Fixme
-    float forwardFloat = Vector3.Dot(_idealMove, _currentTurn);
+    float forwardFloat = Vector3.Dot(_currentMove, _currentTurn);
     _animator.SetFloat("InputY", forwardFloat);
+    float rightFloat   = Vector3.Dot(_currentMove, Quaternion.AngleAxis(-90, Vector3.up) * _currentTurn);
+    _animator.SetFloat("InputX", rightFloat);
   }
 
   void OnTriggerEnter(Collider other)
@@ -135,11 +140,24 @@ public class Movement : MonoBehaviour
       return;
     }
 
-    // Got hit by other player's damager collider
+    // Got hit by other player's damager collider OR got hit by food
     if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && IsOnGround)
     {
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
-
+      if(!(KebabStack.Count == 0)) {
+        KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+        // Disable all children
+        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+          Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
+          a.gameObject.SetActive(false);
+        }
+        Debug.Log("Player " + PlayerNumber + "Has been hit and has this much health: " + KebabStack.Count);
+      }
+      else{
+        Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
+        StartCoroutine(deathTeleport(RespawnPosition, true));
+        _timesDied += 1;
+      }
       startInvulnerability(_hitInvDuration);
       return;
     }
@@ -175,28 +193,30 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-    Vector3 newVelocity = Vector3.Lerp(
+    _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
       getAngleDependentSpeed() * _idealMove,
       _moveLerpRate);
 
-    newVelocity.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
-    
-    _rigidbody.velocity = newVelocity;
+    _currentMove.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
+    _rigidbody.velocity = _currentMove;
   }
 
   private void turn()
   {
     if (_inputData.Turn.magnitude > 0)
     {
+      // Turn with specific input
       _idealTurn = Utils.V2ToV3(_inputData.Turn);
     }
     else if (_idealMove.magnitude > 0) 
     {
+      // Turn with movement
       _idealTurn = _idealMove;
     }
     else
     {
+      // No inputs
       return;
     }
     
@@ -236,6 +256,8 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(true);
     _canRegen = false;
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
+    _dashParticles.Play();
+    _animator.SetBool("Charging", true);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -252,6 +274,8 @@ public class Movement : MonoBehaviour
     IsCharging = false;
     gameObject.layer = Utils.PlayerLayer;
     _damagerObject.SetActive(false);
+    _dashParticles.Stop();
+    _animator.SetBool("Charging", false);
 
     // Allow regen after some time
     yield return new WaitForSeconds(_regenDelay);
@@ -304,18 +328,44 @@ public class Movement : MonoBehaviour
   private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
-
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
-
     // Take one unit of damage
-    // Todo
+    if(!(KebabStack.Count == 0)) {
+        KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+        // Disable all children
+        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+          Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
+          a.gameObject.SetActive(false);
+        }
+        Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
+    }
+    // Restore stamina
+    _stamina = _maxStamina;
+
+    // Start invulnerability
+    startInvulnerability(_fallInvDuration);
+  }
+
+    private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
+  {
+    // Start falling from the sky
+    for(int i = 0; i < 3; i++){
+      _rigidbody.position = respawnPosition; 
+      _rigidbody.velocity = Vector3.zero;
+      yield return new WaitForSeconds(0.2f);
+    }
 
     // Restore stamina
     _stamina = _maxStamina;
 
     // Start invulnerability
     startInvulnerability(_fallInvDuration);
+  }
+
+  public void PlayStab()
+  {
+    _stabParticles.Play();
   }
 }
