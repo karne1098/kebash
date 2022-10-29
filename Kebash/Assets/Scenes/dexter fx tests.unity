@@ -523,6 +523,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: kebabStab
       objectReference: {fileID: 0}
+    - target: {fileID: 6877924948031469957, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7786552425213815669, guid: 3dea248b6394f2142a289c5d18f64cc7, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -587,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1830226615
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -683,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1839343621
 BoxCollider:
   m_ObjectHideFlags: 0
