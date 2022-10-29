@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
   public int  PlayerNumber { get; set; }         = -1;
-  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 20, 0);
+  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 100, 0);
   public bool IsCharging   { get; private set; } = false;
   public bool IsOnGround   { get; private set; } = false;
   public Stack<string> KebabStack   { get; private set; } = new Stack<string>();
@@ -160,7 +160,7 @@ public class Movement : MonoBehaviour
       }
       else{
         Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
-        StartCoroutine(waitToTeleport(RespawnPosition, true));
+        StartCoroutine(deathTeleport(RespawnPosition, true));
         _timesDied += 1;
       }
       startInvulnerability(_hitInvDuration);
@@ -329,13 +329,34 @@ public class Movement : MonoBehaviour
   private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
-
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
-
     // Take one unit of damage
-    // Todo
+    if(!(KebabStack.Count == 0)) {
+        KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+        // Disable all children
+        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+          Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
+          a.gameObject.SetActive(false);
+        }
+        Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
+    }
+    // Restore stamina
+    _stamina = _maxStamina;
+
+    // Start invulnerability
+    startInvulnerability(_fallInvDuration);
+  }
+
+    private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
+  {
+    // Start falling from the sky
+    for(int i = 0; i < 3; i++){
+      _rigidbody.position = respawnPosition; 
+      _rigidbody.velocity = Vector3.zero;
+      yield return new WaitForSeconds(0.2f);
+    }
 
     // Restore stamina
     _stamina = _maxStamina;
