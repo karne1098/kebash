@@ -314,8 +314,10 @@ public class Movement : MonoBehaviour
 
     // Spawn foodBullet and give it velocity
     Transform tip = _foodSliceTransforms.Last();                                        // (low priority) TODO: spawn at a better place
-    GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
-    foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;     // (mid priority) TODO: this should be handled by the bullet
+    GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation);
+    
+        // (low priority) TODO: maybe object pool
+    //foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;     // (mid priority) TODO: this should be handled by the bullet
 
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
