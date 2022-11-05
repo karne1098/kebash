@@ -45,4 +45,8 @@ public class Timer : MonoBehaviour
 
         timeTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    void OnGameStart() {
+        Debug.Log("Timer received Game Start message");
+    }
 }

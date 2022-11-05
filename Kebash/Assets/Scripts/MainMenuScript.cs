@@ -6,10 +6,11 @@ using UnityEngine.EventSystems;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField] private GameObject toHide;
     public void PlayGame()
     {
         Debug.Log("Loading Main scene!");
-        SceneManager.LoadSceneAsync("Scenes/Main");
+        toHide.SetActive(false);
     }
 
     public void QuitGame() {
