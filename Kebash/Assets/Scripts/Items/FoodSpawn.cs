@@ -7,6 +7,8 @@ public class FoodSpawn : MonoBehaviour
 {
 	public static FoodSpawn Instance;
 
+  private bool gameStarted = false;
+
   // Upper and lower bound for how long between food spawns (TODO: tweak)
   private float _maxTimeSpawn = 5f;
   private float _minTimeSpawn = 2f;
@@ -29,26 +31,35 @@ public class FoodSpawn : MonoBehaviour
   {
     while(true)
     {
-      // Select a random food item
-      PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 7);
+      if (gameStarted) {
+        // Select a random food item
+        PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 7);
 
-      // Decide on a spawn location
-      float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0
-      float z = (_zSpawn * 0.5f) - 0.5f;
-      Vector3 spawnLocation = new Vector3(
-        Random.Range(-x, x), 
-        15, 
-        Random.Range(-z, z));
+        // Decide on a spawn location
+        float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0
+        float z = (_zSpawn * 0.5f) - 0.5f;
+        Vector3 spawnLocation = new Vector3(
+          Random.Range(-x, x), 
+          15, 
+          Random.Range(-z, z));
 
-      // Spawn the food object
-      GameObject foodObject = FoodPooler.Instance.GetPooledObject(foodIndex);
-      foodObject.transform.position = spawnLocation;
-      foodObject.SetActive(true);
-      foodObject.GetComponent<FoodData>().Num = foodIndex;
-      // Wait to spawn next food item
-      float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
-      yield return new WaitForSeconds(timeToNextSpawn);
+        // Spawn the food object
+        GameObject foodObject = FoodPooler.Instance.GetPooledObject(foodIndex);
+        foodObject.transform.position = spawnLocation;
+        foodObject.SetActive(true);
+        foodObject.GetComponent<FoodData>().Num = foodIndex;
+        // Wait to spawn next food item
+        float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
+        yield return new WaitForSeconds(timeToNextSpawn);
+      } else {
+        yield return new WaitForSeconds(1);
+      }
     }
+  }
+
+  void OnGameStart() {
+    gameStarted = true;
+    Debug.Log(gameStarted);
   }
 }
 

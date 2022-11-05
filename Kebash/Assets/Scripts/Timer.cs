@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public float timeValue = 60; 
     public TextMeshProUGUI timeTextTMP;
     public GameObject gameOverTextObject;
+    private bool gameStarted = false;
 
     void Start() 
     {
@@ -18,16 +19,18 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeValue > 0) 
-        {
-            timeValue -= Time.deltaTime;
+        if (gameStarted) {
+            if(timeValue > 0) 
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else //no time left
+            {
+                timeValue = 0; //locks to 0
+                gameOverTextObject.SetActive(true);
+                Time.timeScale = 0; //pauses game
+            }     
         }
-        else //no time left
-        {
-            timeValue = 0; //locks to 0
-            gameOverTextObject.SetActive(true);
-            Time.timeScale = 0; //pauses game
-        }     
         DisplayTime(timeValue);
     }
 
@@ -47,6 +50,6 @@ public class Timer : MonoBehaviour
     }
 
     void OnGameStart() {
-        Debug.Log("Timer received Game Start message");
+        gameStarted = true;
     }
 }
