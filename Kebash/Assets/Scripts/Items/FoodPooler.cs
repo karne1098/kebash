@@ -8,6 +8,9 @@ public enum PooledObjectIndex : int
   Lamb = 1,
   Onion = 2, 
   Tomato = 3,
+  Mushroom = 4,
+  Pepper = 5,
+  Eggplant = 6,
 }
 
 [System.Serializable]

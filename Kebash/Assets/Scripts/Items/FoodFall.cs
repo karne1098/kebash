@@ -11,8 +11,8 @@ public class FoodFall : MonoBehaviour
   private bool _dropCheck = false;
   [SerializeField] private ParticleSystem _dropEffect;
   [SerializeField] private ParticleSystem _sparkleEffect;
-
-  private Transform _foodTransform;
+  [SerializeField] private Transform _foodTransform;
+  
   private bool _bobCheck = false;
   private float _bobMin = 0.5f;
   private float _bobMax = 1.0f;
@@ -23,9 +23,6 @@ public class FoodFall : MonoBehaviour
 
   void Start()
   {
-    _dropEffect    = transform.Find("food drop").gameObject.GetComponent<ParticleSystem>();
-    _sparkleEffect = transform.Find("pickup sparkle").gameObject.GetComponent<ParticleSystem>();
-    _foodTransform = transform.Find("food mesh").gameObject.GetComponent<Transform>();
 
     StartCoroutine(Timeout());
 

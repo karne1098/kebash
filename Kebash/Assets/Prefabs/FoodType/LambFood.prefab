@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fd63c8cdabb06468a44997a41cfbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Lamb
 --- !u!1001 &1433881650142949757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,6 +23,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1ef4e90e6b0c9bb4f919a863fd742bbc, type: 2}
+    - target: {fileID: 6586389839790754487, guid: fbba3e1e1c421524388a823973b30489, type: 3}
+      propertyPath: m_Name
+      value: old food mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 6723736742880330824, guid: fbba3e1e1c421524388a823973b30489, type: 3}
       propertyPath: m_Name
       value: LambFood
