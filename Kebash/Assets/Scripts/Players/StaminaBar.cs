@@ -20,6 +20,7 @@ public class StaminaBar : MonoBehaviour
   private bool _shaking = false;
   private float _shakeDuration = 0.25f;
   private float _shakeAmount = 5;
+  private float _fillOpacity = 0;
 
   void Start()
   {
@@ -43,12 +44,21 @@ public class StaminaBar : MonoBehaviour
 
     if (_movement.StaminaFraction == 1f)
     {
-      _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, (fadeRate + beforeFade - (Time.fixedTime - timeSinceFull))/fadeRate);
+      _fillOpacity = (fadeRate + beforeFade - (Time.fixedTime - timeSinceFull))/fadeRate;
     }
     else
     {
-      _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, 1f);
+      _fillOpacity = 1f;
       timeSinceFull = Time.fixedTime;
+    }
+
+    if (_movement.StaminaFraction <= 0.2f)
+    {
+      _fill.color = new Color(1f, 83f/255, 83f/255, _fillOpacity);
+    }
+    else
+    {
+      _fill.color = new Color(46f/85, 1f, 46f/85, _fillOpacity);
     }
 
     if (_shaking){
