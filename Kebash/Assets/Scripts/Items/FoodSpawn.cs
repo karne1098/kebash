@@ -30,7 +30,7 @@ public class FoodSpawn : MonoBehaviour
     while(true)
     {
       // Select a random food item
-      PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 4);
+      PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 7);
 
       // Decide on a spawn location
       float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0

@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
   [SerializeField] private StaminaBar _staminaBar;
   [SerializeField] private ParticleSystem _stabParticles;
   [SerializeField] private ParticleSystem _dashParticles;
- 
+  [SerializeField] private ParticleSystem _walkParticles;
 
   // Health
   private bool  _isInvulnerable = false;
@@ -38,6 +38,7 @@ public class Movement : MonoBehaviour
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
   private float _strafeSpeedMultiplier = 1f;
+    private bool _moveCheck = false;
 
   // Charging
   private float _stamina;
@@ -108,7 +109,6 @@ public class Movement : MonoBehaviour
     // Attempt to charge
     if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
-      AudioManager.Instance.Play("tacoBell");
       StopCoroutine("charge");
       StartCoroutine("charge");
       return;
@@ -195,13 +195,26 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-    _currentMove = Vector3.Lerp(
+        if ((_moveCheck && (_idealMove == Vector3.zero)) || (_rigidbody.position.y != 0.525f))
+        {
+            _moveCheck = false;
+            _walkParticles.Stop();
+        }
+        else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
+        {
+            _moveCheck = true;
+            _walkParticles.Play();
+        }
+
+        _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
       getAngleDependentSpeed() * _idealMove,
       _moveLerpRate);
 
     _currentMove.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
     _rigidbody.velocity = _currentMove;
+
+
   }
 
   private void turn()

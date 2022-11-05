@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 10; 
+    public float timeValue = 60; 
     public TextMeshProUGUI timeTextTMP;
     public GameObject gameOverTextObject;
 
