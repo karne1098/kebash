@@ -275,6 +275,12 @@ MonoBehaviour:
   - {fileID: 180961286798283418}
   - {fileID: 6259093672161434445}
   _foodBulletPrefab: {fileID: 6817019447756913882, guid: 29325cf553da944149a361b6322cb215, type: 3}
+  _lambPrefab: {fileID: 6817019447756913882, guid: a2872766c1952ac41b651f4ac6bf3f01, type: 3}
+  _onionPrefab: {fileID: 6817019447756913882, guid: 33ffbb798291c3f43a7db5c3e44bb015, type: 3}
+  _tomatoPrefab: {fileID: 6817019447756913882, guid: 6bbdab334caeaae47ab7fad803e50993, type: 3}
+  _mushroomPrefab: {fileID: 6817019447756913882, guid: b97876b6dd8ae3f4ba38228a4a2b541c, type: 3}
+  _pepperPrefab: {fileID: 6817019447756913882, guid: 12d5de642a1e51b4bb18880fba091164, type: 3}
+  _eggplantPrefab: {fileID: 6817019447756913882, guid: 10a6f8d64fc896c4bb4d9e69276d0b2a, type: 3}
 --- !u!114 &7426877618512967869
 MonoBehaviour:
   m_ObjectHideFlags: 0
