@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
   [SerializeField] private StaminaBar _staminaBar;
   [SerializeField] private ParticleSystem _stabParticles;
   [SerializeField] private ParticleSystem _dashParticles;
+  [SerializeField] private ParticleSystem _walkParticles;
 
   // Health
   private bool  _isInvulnerable = false;
@@ -37,6 +38,7 @@ public class Movement : MonoBehaviour
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
   private float _strafeSpeedMultiplier = 1f;
+    private bool _moveCheck = false;
 
   // Charging
   private float _stamina;
@@ -193,13 +195,27 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-    _currentMove = Vector3.Lerp(
+        if (_moveCheck && (_idealMove == Vector3.zero))
+        {
+            _moveCheck = false;
+            _walkParticles.Stop();
+        }
+        else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
+        {
+            Debug.Log("_movecheck becomes true");
+            _moveCheck = true;
+            _walkParticles.Play();
+        }
+
+        _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
       getAngleDependentSpeed() * _idealMove,
       _moveLerpRate);
 
     _currentMove.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
     _rigidbody.velocity = _currentMove;
+
+
   }
 
   private void turn()
