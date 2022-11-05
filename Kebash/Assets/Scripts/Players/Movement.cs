@@ -195,14 +195,13 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-        if (_moveCheck && (_idealMove == Vector3.zero))
+        if ((_moveCheck && (_idealMove == Vector3.zero)) || (_rigidbody.position.y != 0.525f))
         {
             _moveCheck = false;
             _walkParticles.Stop();
         }
         else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
         {
-            Debug.Log("_movecheck becomes true");
             _moveCheck = true;
             _walkParticles.Play();
         }
