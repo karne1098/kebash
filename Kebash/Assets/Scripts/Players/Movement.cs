@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
   [SerializeField] private StaminaBar _staminaBar;
   [SerializeField] private ParticleSystem _stabParticles;
   [SerializeField] private ParticleSystem _dashParticles;
+ 
 
   // Health
   private bool  _isInvulnerable = false;
@@ -107,6 +108,7 @@ public class Movement : MonoBehaviour
     // Attempt to charge
     if (_inputData.Charge && _stamina > _minStaminaToStart)
     {
+      AudioManager.Instance.Play("tacoBell");
       StopCoroutine("charge");
       StartCoroutine("charge");
       return;
