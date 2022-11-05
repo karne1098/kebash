@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class GameStartEndManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  void BroadcastGameStart() {
+    BroadcastMessage("OnGameStart", SendMessageOptions.DontRequireReceiver);
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  void BroadcastGameEnd() {
+    BroadcastMessage("OnGameEnd", SendMessageOptions.DontRequireReceiver);
+  }
 }
