@@ -28,6 +28,13 @@ public class Movement : MonoBehaviour
   private float _foodBulletSpeed = 20;
   [SerializeField] private List<Transform> _foodSliceTransforms;
   [SerializeField] private GameObject _foodBulletPrefab;
+  //All Food Prefabs
+  [SerializeField] private GameObject _lambPrefab;
+  [SerializeField] private GameObject _onionPrefab;
+  [SerializeField] private GameObject _tomatoPrefab;
+  [SerializeField] private GameObject _mushroomPrefab;
+  [SerializeField] private GameObject _pepperPrefab;
+  [SerializeField] private GameObject _eggplantPrefab;
 
   // Moving and turning
   private Vector3 _idealMove   = Vector3.zero;
@@ -70,7 +77,7 @@ public class Movement : MonoBehaviour
   public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 100, 0);
   public bool IsCharging   { get; private set; } = false;
   public bool IsOnGround   { get; private set; } = false;
-  public Stack<string> KebabStack   { get; private set; } = new Stack<string>();
+  public Stack<PooledObjectIndex> KebabStack   { get; private set; } = new Stack<PooledObjectIndex>();
 
   // ================== Methods
 
@@ -178,7 +185,7 @@ public class Movement : MonoBehaviour
     sliceGameObject.gameObject.SetActive(true);
 
     // Add to stack
-    KebabStack.Push("TODO");
+    KebabStack.Push(index);
 
     return true;
   }
@@ -304,7 +311,7 @@ public class Movement : MonoBehaviour
 
     _isOnShootCoolDown = true;
 
-    KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+    PooledObjectIndex num = KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
     // Disable all children
     for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
@@ -313,10 +320,27 @@ public class Movement : MonoBehaviour
     }
 
     // Spawn foodBullet and give it velocity
-    Transform tip = _foodSliceTransforms.Last();                                        // (low priority) TODO: spawn at a better place
+    //DEPRECATED
+    Transform tip = _foodSliceTransforms.Last();    //todo: change location
+    /*                  
     GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
     foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;     // (mid priority) TODO: this should be handled by the bullet
-
+    */
+    //Spawn foodBullet and call its new script
+    //WIP
+    GameObject bulletType = _foodBulletPrefab;
+    switch (num)
+    {
+      case 1: bulletType = _lambPrefab;
+      case 2: bulletType = _onionPrefab;
+      case 3: bulletType = _tomatoPrefab;
+      case 4: bulletType = _mushroomPrefab;
+      case 5: bulletType = _pepperPrefab;
+      case 6: bulletType = _eggplantPrefab;
+      default: bulletType = _foodBulletPrefab;
+    }
+    GameObject foodBullet = Instantiate(bulletType, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
+    
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
