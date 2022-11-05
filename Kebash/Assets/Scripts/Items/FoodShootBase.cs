@@ -17,7 +17,6 @@ public class FoodShootBase : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     public void StartShot(Transform tip)
     {
         _bulletBody.velocity = tip.forward * _bulletSpeed;

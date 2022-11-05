@@ -329,21 +329,20 @@ public class Movement : MonoBehaviour
     //Spawn foodBullet and call its new script
     //WIP
     GameObject bulletType = _foodBulletPrefab;
-    int nnum = (int) num;
-    switch (nnum)
+    switch (num)
     {
-      case 1:{ bulletType = _lambPrefab; break;}
-      case 2: { bulletType = _onionPrefab; break;}
-      case 3: { bulletType = _tomatoPrefab; break;}
-      case 4: { bulletType = _mushroomPrefab; break;}
-      case 5: { bulletType = _pepperPrefab; break;}
-      case 6: { bulletType = _eggplantPrefab; break;}
-      default: { break;}
+      case 1: bulletType = _lambPrefab;
+      case 2: bulletType = _onionPrefab;
+      case 3: bulletType = _tomatoPrefab;
+      case 4: bulletType = _mushroomPrefab;
+      case 5: bulletType = _pepperPrefab;
+      case 6: bulletType = _eggplantPrefab;
+      default: bulletType = _foodBulletPrefab;
     }
     GameObject foodBullet = Instantiate(bulletType, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
-    
-    // Wait for cooldown
-    yield return new WaitForSeconds(_shootCoolDown);
+        foodBullet.GetComponent<FoodShootBase>().StartShot(tip);
+        // Wait for cooldown
+        yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
   }
 
