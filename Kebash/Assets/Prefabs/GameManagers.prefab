@@ -299,7 +299,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72218ddcaae8d674ab3b6554a36a90c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: intro
+    clip: {fileID: 8300000, guid: 08914faa8c27f4fee9ecc06760d5d555, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: countdown
+    clip: {fileID: 8300000, guid: ec8933ee067ad470ca2ee783c2772781, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: bgMusic
+    clip: {fileID: 8300000, guid: 1e506739eb2aa654a925f707c73db01b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: gameMusic
+    clip: {fileID: 8300000, guid: 6e37cc49971254f01b26a88f07008228, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: tacoBell
+    clip: {fileID: 8300000, guid: 3fdc128ca94c34f4c9f0f904aef38d8a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: vineBoom
+    clip: {fileID: 8300000, guid: b43b9692607977b40943e797b6d40faf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &2017143065817831575
 GameObject:
   m_ObjectHideFlags: 0
