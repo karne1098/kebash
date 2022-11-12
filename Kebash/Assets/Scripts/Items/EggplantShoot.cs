@@ -12,9 +12,12 @@ public class EggplantShoot : MonoBehaviour
     Vector3 _backwardForce;
     Vector3 _currentForce;
 
+    float startY;
+
     // Start is called before the first frame update
     void Start()
     {
+        startY = baseShot.GetTransform().position.y;
         _forwardForce = baseShot.GetTransform().forward;
         _currentForce = new Vector3(_forwardForce.x, 0f, _forwardForce.z);
         _backwardForce = new Vector3(_forwardForce.x * -1f, 0f, _forwardForce.z * -1f);
@@ -26,5 +29,6 @@ public class EggplantShoot : MonoBehaviour
     {
         _currentForce = _currentForce + _backwardForce;
         eggplantBody.AddForce(_currentForce);
+        eggplantBody.position = new Vector3(eggplantBody.position.x, startY, eggplantBody.position.z);
     }
 }
