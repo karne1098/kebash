@@ -37,4 +37,10 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
 
     }
+
+    public void Stop (string name)
+    {
+        Sound s = soundDict[name];
+        s.source.Stop();
+    }
 }

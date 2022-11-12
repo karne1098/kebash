@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStarted) {
+        if (GameStateManager.Instance.getState() == GameState.gamePlay) {
             if(timeValue > 0) 
             {
                 timeValue -= Time.deltaTime;
@@ -28,10 +28,11 @@ public class Timer : MonoBehaviour
             {
                 timeValue = 0; //locks to 0
                 gameOverTextObject.SetActive(true);
-                Time.timeScale = 0; //pauses game
+                GameStateManager.Instance.UpdateGameState(GameState.gameOver);
             }     
         }
         DisplayTime(timeValue);
+        
     }
 
     void DisplayTime(float timeToDisplay)
@@ -49,7 +50,5 @@ public class Timer : MonoBehaviour
         timeTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void OnGameStart() {
-        gameStarted = true;
-    }
+    
 }

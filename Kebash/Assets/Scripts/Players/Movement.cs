@@ -80,7 +80,6 @@ public class Movement : MonoBehaviour
   public Stack<PooledObjectIndex> KebabStack   { get; private set; } = new Stack<PooledObjectIndex>();
 
   // ================== Methods
-
   void Start()
   {
     // Player number, position, rotation handled by MultiplayerManager on spawn
@@ -103,6 +102,15 @@ public class Movement : MonoBehaviour
   {
     // Prevent player control in certain situations
     updateIsOnGround();
+
+    if (GameStateManager.Instance.getState() != GameState.gamePlay){
+    _currentMove = _rigidbody.velocity;
+    _currentMove.x = 0;
+    _currentMove.z = 0;
+    _rigidbody.velocity = _currentMove;
+     return;
+     }
+
     if (IsCharging || !IsOnGround) return;
 
     // Attempt to shoot
