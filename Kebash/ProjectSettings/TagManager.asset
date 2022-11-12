@@ -16,10 +16,10 @@ TagManager:
   - UI
   - Player
   - Charger
-  - Damager
+  - ChargeDamagerCollider
   - Food
   - FallTrigger
-  - 
+  - FoodPickerCollider
   - 
   - 
   - 

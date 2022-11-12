@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5395020840253142176}
   - component: {fileID: 2624464628289418084}
   - component: {fileID: 1986590344817956226}
-  - component: {fileID: 5930526670155001899}
   m_Layer: 9
   m_Name: food mesh
   m_TagString: food
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5930526670155001899
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6586389839790754487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6723736742880330824
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +161,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6723736742880330824}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -213,7 +199,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6512361291972673409, guid: aa985da0f3b7cdc42bedfa458a705b84, type: 3}
       propertyPath: m_Name
-      value: pickup sparkle
+      value: sparkle
       objectReference: {fileID: 0}
     - target: {fileID: 6512361291972673532, guid: aa985da0f3b7cdc42bedfa458a705b84, type: 3}
       propertyPath: InitialModule.rotation3D
@@ -394,7 +380,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1160872506655371213, guid: 3c9c2fd9bbe6eab478b6774d1a4be080, type: 3}
       propertyPath: m_Name
-      value: food drop
+      value: dropImpact
       objectReference: {fileID: 0}
     - target: {fileID: 1160872506655371213, guid: 3c9c2fd9bbe6eab478b6774d1a4be080, type: 3}
       propertyPath: m_IsActive

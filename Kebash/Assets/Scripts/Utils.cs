@@ -14,8 +14,10 @@ static class Utils
     return new Vector2(v.x, v.z);
   }
 
-  public static int PlayerLayer  = LayerMask.NameToLayer("Player");
-  public static int ChargerLayer = LayerMask.NameToLayer("Charger");
-  public static int DamagerLayer = LayerMask.NameToLayer("Damager");
+  public static int PlayerLayer      = LayerMask.NameToLayer("Player");
+  public static int ChargerLayer     = LayerMask.NameToLayer("Charger");
+  public static int DamagerLayer     = LayerMask.NameToLayer("ChargeDamagerCollider");
+  public static int FoodLayer        = LayerMask.NameToLayer("Food");
   public static int FallTriggerLayer = LayerMask.NameToLayer("FallTrigger");
+  public static int PickerLayer      = LayerMask.NameToLayer("FoodPickerCollider");
 }
