@@ -7,7 +7,7 @@ public class FoodShootBase : MonoBehaviour
 
     float _bulletSpeed = 20f;
 
-    float _bulletTimer = 1.5f;
+    float _bulletTimer = 5f;
 
     public Rigidbody _bulletBody;
     public Transform _bulletTransform;
