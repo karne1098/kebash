@@ -41,10 +41,10 @@ public class Movement : MonoBehaviour
   private Vector3 _idealTurn   = Vector3.zero;
   private Vector3 _currentMove = Vector3.zero;
   private Vector3 _currentTurn = Vector3.zero;
-  private float _moveSpeed             = 4f;
+  private float _moveSpeed             = 5f;
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
-  private float _strafeSpeedMultiplier = 1f;
+  private float _strafeSpeedMultiplier = 0.75f;
     private bool _moveCheck = false;
 
   // Charging

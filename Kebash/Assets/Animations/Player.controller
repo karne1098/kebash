@@ -57,7 +57,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -6155767638056460908, guid: 2e45299d3dd864abcbbdb6c96a3bcffe, type: 3}
+    m_Motion: {fileID: -7551964380084998518, guid: 3a0688e3ebe834d75b8fd135124119eb, type: 3}
     m_Threshold: 0.125
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -65,23 +65,23 @@ BlendTree:
     m_DirectBlendParameter: InputX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 6510611469727554508, guid: 2e45299d3dd864abcbbdb6c96a3bcffe, type: 3}
+    m_Motion: {fileID: -18534242436601310, guid: 3a0688e3ebe834d75b8fd135124119eb, type: 3}
     m_Threshold: 0.30729166
     m_Position: {x: -1, y: 0}
-    m_TimeScale: -1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: InputX
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: -5718518337219091510, guid: 2e45299d3dd864abcbbdb6c96a3bcffe, type: 3}
-    m_Threshold: 0.4895833
-    m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: InputX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 6510611469727554508, guid: 2e45299d3dd864abcbbdb6c96a3bcffe, type: 3}
+    m_Motion: {fileID: -8856283390429189166, guid: 3a0688e3ebe834d75b8fd135124119eb, type: 3}
+    m_Threshold: 0.4895833
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 0.5
+    m_CycleOffset: 0
+    m_DirectBlendParameter: InputX
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -18534242436601310, guid: 3a0688e3ebe834d75b8fd135124119eb, type: 3}
     m_Threshold: 0.671875
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -89,7 +89,7 @@ BlendTree:
     m_DirectBlendParameter: InputX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 9113458219614054187, guid: 2e45299d3dd864abcbbdb6c96a3bcffe, type: 3}
+    m_Motion: {fileID: -8856283390429189166, guid: 3a0688e3ebe834d75b8fd135124119eb, type: 3}
     m_Threshold: 0.8541666
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -117,19 +117,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InputY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Charging
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
