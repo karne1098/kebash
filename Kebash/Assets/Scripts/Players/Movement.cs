@@ -328,8 +328,8 @@ public class Movement : MonoBehaviour
       case 2: { bulletType = _onionPrefab; break;}
       case 3: { bulletType = _tomatoPrefab; break;}
       case 4: { bulletType = _mushroomPrefab; break;}
-      case 5: { bulletType = _pepperPrefab; break;}
-      case 6: { bulletType = _eggplantPrefab; break;}
+      case 5: { bulletType = _eggplantPrefab; break;}
+      case 6: { bulletType = _pepperPrefab; break;}
       default: { break;}
     }    
     GameObject foodBullet = Instantiate(bulletType, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
