@@ -17,9 +17,7 @@ public class FoodCollision : MonoBehaviour
 
   void OnTriggerEnter(Collider other)
   { 
-    // Collided with incoming damager
     if (other.gameObject.CompareTag("Player")) {
-      // TODO: damager can be charging player, or food projectile. Must disambiguate.
         bool foodWasTaken = 
           other.transform.parent.gameObject.GetComponent<Movement>()
           .AddFood(this.gameObject.GetComponent<FoodData>().Num);
