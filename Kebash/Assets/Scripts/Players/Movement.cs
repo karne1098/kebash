@@ -152,6 +152,11 @@ public class Movement : MonoBehaviour
     // Got hit by other player's damager collider OR got hit by food
     if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && IsOnGround)
     {
+
+      if (other.gameObject.tag == "Player")
+            {
+                other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
+            }
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
       if(!(KebabStack.Count == 0)) {
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
@@ -177,6 +182,7 @@ public class Movement : MonoBehaviour
   {
     // Can't add food if full
     if (KebabStack.Count == _maxFood) return false;
+    _stabParticles.Play();
 
     Debug.Log("Player " + PlayerNumber + " added food. (Pooled object index: " + (int) index + ")"); 
 
