@@ -100,7 +100,8 @@ PrefabInstance:
       propertyPath: _sparkleEffect
       value: 
       objectReference: {fileID: 5827611576663174474}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 951850826387806688, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
 --- !u!4 &7770991409614914243 stripped
 Transform:

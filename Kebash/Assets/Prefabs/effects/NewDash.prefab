@@ -50,7 +50,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -867,8 +867,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 12
-      minScalar: 8
+      scalar: 16
+      minScalar: 12
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4988,7 +4988,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -9818,7 +9818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: SubModule.enabled
@@ -9847,6 +9847,34 @@ PrefabInstance:
     - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 57825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -1.521721
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inSlope
+      value: 0.14149648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -1.521721
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inWeight
+      value: 0.37365136
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outSlope
+      value: 0.14149648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.21562324
       objectReference: {fileID: 0}
     - target: {fileID: 1075627720005645471, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: m_CastShadows
@@ -9966,6 +9994,30 @@ PrefabInstance:
     - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -1.521721
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inSlope
+      value: 0.14149648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -1.521721
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inWeight
+      value: 0.37365136
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outSlope
+      value: 0.14149648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075627720005645470, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.21562324
       objectReference: {fileID: 0}
     - target: {fileID: 1075627720005645471, guid: c8999956ae51f2d4c841b3109820d765, type: 3}
       propertyPath: m_CastShadows
