@@ -50,11 +50,11 @@ public class Movement : MonoBehaviour
   // Charging
   private float _stamina;
   private float _minChargeDuration;
-  private float _maxStamina        = 100f;
+  public float _maxStamina        = 100f;
   private float _minChargeCost     = 10f;  // Minimum stamina cost associated with one charge
   private float _minStaminaToStart = 20f;  // Minimum stamina needed to start a charge
   private float _staminaCostRate   = 100f;
-  private float _staminaRegenRate  = 20f;
+  public float _staminaRegenRate  = 20f;
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 12f;
