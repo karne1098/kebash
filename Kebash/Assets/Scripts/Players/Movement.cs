@@ -319,15 +319,7 @@ public class Movement : MonoBehaviour
       a.gameObject.SetActive(false);
     }
 
-    // Spawn foodBullet and give it velocity
-    //DEPRECATED
     Transform tip = _foodSliceTransforms.Last();    //todo: change location
-    /*                  
-    GameObject foodBullet = Instantiate(_foodBulletPrefab, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
-    foodBullet.GetComponent<Rigidbody>().velocity = tip.forward * _foodBulletSpeed;     // (mid priority) TODO: this should be handled by the bullet
-    */
-    //Spawn foodBullet and call its new script
-    //WIP
     GameObject bulletType = _foodBulletPrefab;
     int nnum = (int) num;
     switch (nnum)
