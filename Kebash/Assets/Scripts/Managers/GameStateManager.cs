@@ -91,4 +91,9 @@ public class GameStateManager : MonoBehaviour
     yield return new WaitForSeconds(3.5f);
     GameStateManager.Instance.UpdateGameState(GameState.GamePlay);
   }
+
+  public void Unpause()
+    {
+        UpdateGameState(GameState.GamePlay);
+    }
 }
