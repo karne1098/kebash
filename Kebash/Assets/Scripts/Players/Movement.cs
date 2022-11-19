@@ -412,15 +412,17 @@ public class Movement : MonoBehaviour
         Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
         a.gameObject.SetActive(false);
       }
-      Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
     }
     Debug.Log("Player " + PlayerNumber + "has died!");
-    yield return new WaitForSeconds(_fallRespawnWaitDuration);
-
+    DeathCountManager.Instance.incrementDeath(PlayerNumber);
     Debug.Log("Player " + PlayerNumber + "is repawning...");
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
+    _rigidbody.useGravity = false;
+    yield return new WaitForSeconds(_fallRespawnWaitDuration);
+    _rigidbody.useGravity = true;
+
 
     // Restore stamina
     _stamina = _maxStamina;
