@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
     public float timeValue = 60; 
     public TextMeshProUGUI timeTextTMP;
-    public GameObject gameOverTextObject;
+    //public GameObject gameOverTextObject;
     private bool gameStarted = false;
     public Color newColor;
 
@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour
         else // no time left
         {
           timeValue = 0; // locks to 0
-          gameOverTextObject.SetActive(true);
+          //gameOverTextObject.SetActive(true);
           GameStateManager.Instance.UpdateGameState(GameState.GameOver);
         }     
       }
