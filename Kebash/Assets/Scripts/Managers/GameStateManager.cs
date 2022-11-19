@@ -31,6 +31,10 @@ public class GameStateManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
+  }
+
+  void Start()
+  {
     GameStateManager.Instance.UpdateGameState(GameState.Menu);
   }
   
