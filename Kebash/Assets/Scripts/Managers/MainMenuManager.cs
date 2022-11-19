@@ -20,15 +20,15 @@ public class MainMenuManager : MonoBehaviour
 
   public void QuitGame()
   {
-    AudioManager.Instance.Play("vineBoom");
+    AudioManager.Instance.Play("vineBoom", 0);
     Debug.Log("Quitting game!");
     Application.Quit();
   }
 
   private IEnumerator startGame()
   {
-    AudioManager.Instance.Stop("bgMusic");
-    AudioManager.Instance.Play("intro");
+    AudioManager.Instance.Stop("bgMusic", 0);
+    AudioManager.Instance.Play("intro", 0);
 
     _buttonModels.SetActive(false);
     _invisibleButtons.SetActive(false);
