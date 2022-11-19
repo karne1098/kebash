@@ -3395,6 +3395,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 138359782, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: _itemsToPool.Array.data[2].objectToPool
+      value: 
+      objectReference: {fileID: 620528312952018816, guid: e5207403b78d95344b7de714159083bf, type: 3}
+    - target: {fileID: 138359782, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: _itemsToPool.Array.data[4].objectToPool
       value: 
       objectReference: {fileID: 7453268337248687978, guid: 76a5eced98ab3e34caf08c0160e3be59, type: 3}
