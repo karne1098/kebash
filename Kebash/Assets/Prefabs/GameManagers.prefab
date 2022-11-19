@@ -348,7 +348,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  charaSounds:
   - name: walk
     clip: {fileID: 8300000, guid: 0e636cd948150c24c92979fc14000d18, type: 3}
     volume: 1
@@ -365,7 +364,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5d59ac6a92bbea149ba1852404b6a439, type: 3}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
 --- !u!1 &108931562905185370
 GameObject:

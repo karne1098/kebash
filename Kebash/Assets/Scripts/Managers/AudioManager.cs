@@ -11,15 +11,7 @@ public class AudioManager : MonoBehaviour
   
   public List<Sound> sounds;
 
-  public List<Sound> charaSounds;
-
-
   public Dictionary<string, Sound> soundDict = new Dictionary<string, Sound>();
-   
-  public Dictionary<string, Sound> p = new Dictionary<string, Sound>();
-
-  public Dictionary<string, Sound>[] soundDicts = new Dictionary<string, Sound>[5];
-
 
   // ================== Methods
 
@@ -32,52 +24,34 @@ public class AudioManager : MonoBehaviour
       soundDict.Add(s.name, s);
     }
 
-    foreach (Sound s in charaSounds)
-    {
-      p.Add(s.name, s);
-    }
     foreach (KeyValuePair<string, Sound> s in soundDict)
-      {
-        s.Value.source = gameObject.AddComponent<AudioSource>();
-        s.Value.source.clip = s.Value.clip;
+    {
+      s.Value.source = gameObject.AddComponent<AudioSource>();
+      s.Value.source.clip = s.Value.clip;
 
-        s.Value.source.volume = s.Value.volume;
-        s.Value.source.pitch = s.Value.pitch;
-        s.Value.source.loop = s.Value.loop;
-      }
-    foreach (KeyValuePair<string, Sound> s in p)
-      {
-        s.Value.source = gameObject.AddComponent<AudioSource>();
-        s.Value.source.clip = s.Value.clip;
-
-        s.Value.source.volume = s.Value.volume;
-        s.Value.source.pitch = s.Value.pitch;
-        s.Value.source.loop = s.Value.loop;
-      }
-    soundDicts[0] = soundDict;
-    for(int i = 1; i<soundDicts.Length; i++){
-      soundDicts[i] = p;
+      s.Value.source.volume = s.Value.volume;
+      s.Value.source.pitch = s.Value.pitch;
+      s.Value.source.loop = s.Value.loop;
     }
-  
   }
 
-    public void Play(string name, int playID)
+    public void Play(string name)
     {
-        Sound s = soundDicts[playID][name];
+        Sound s = soundDict[name];
         if (!s.source.isPlaying)
         {
             s.source.Play();
         }
     }
-    public void Pause(string name, int playID)
+    public void Pause(string name)
   {
-    Sound s = soundDicts[playID][name];
+    Sound s = soundDict[name];
     s.source.Pause();
   }
 
-  public void Stop(string name, int playID)
+  public void Stop(string name)
   {
-    Sound s = soundDicts[playID][name];
+    Sound s = soundDict[name];
     s.source.Stop();
   }
 }
