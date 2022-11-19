@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
   {
     if (GameStateManager.Instance.State == GameState.Countdown)
     {
-      _timerTextTMP.color = new Color(0, 0, 0, 255 * 0.4);
+      _timerTextTMP.color = new Color(0, 0, 0, 0.4f);
     }
 
     if (GameStateManager.Instance.State != GameState.GamePlay) return;
