@@ -71,6 +71,8 @@ public class Movement : MonoBehaviour
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
+  public int TimesDied { get { return _timesDied; } }
+
   public int  PlayerNumber { get; set; }         = -1;
   public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 100, 0);
   public bool IsCharging   { get; private set; } = false;

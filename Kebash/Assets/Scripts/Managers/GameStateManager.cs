@@ -23,7 +23,7 @@ public class GameStateManager : MonoBehaviour
 
   // ================== Accessors
   
-  public GameState State { get; private set; } = GameState.Menu;
+  public GameState State { get; private set; } = GameState.GamePlay;
 
   // ================== Methods
   
