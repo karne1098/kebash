@@ -74,7 +74,7 @@ public class AudioManager : MonoBehaviour
     Sound s = soundDicts[playID][name];
     if (!s.source.isPlaying)
     {
-        s.source.Play();
+      s.source.Play();
     }
   }
 

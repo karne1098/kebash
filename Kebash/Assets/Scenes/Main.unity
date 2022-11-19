@@ -3169,6 +3169,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6349653655723217760, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: charaSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
+    - target: {fileID: 6349653655723217760, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: charaSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 088b08b6449436546a777d5f4a3bcfab, type: 3}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
       value: GameManagers

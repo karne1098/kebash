@@ -6,50 +6,51 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 60; 
-    public TextMeshProUGUI timeTextTMP;
-    //public GameObject gameOverTextObject;
-    private bool gameStarted = false;
-    public Color newColor;
+  [SerializeField] private TextMeshProUGUI _timerTextTMP;
 
-    // ================== Methods
-    
-    void Update()
+  private float _timeValue = 60;
+
+  private bool _timerStarted = false;
+
+  // ================== Methods
+  
+  void Awake() 
+  {
+    _timerTextTMP.color = new Color(0, 0, 0, 0);
+  }
+
+  void Update()
+  {
+    if (GameStateManager.Instance.State == GameState.Countdown)
     {
-      if (GameStateManager.Instance.State == GameState.GamePlay)
-      {
-        if (!gameStarted) 
-        {
-          timeTextTMP.color = Color.Lerp(timeTextTMP.color, newColor, 1000f * Time.deltaTime);
-          gameStarted = true;
-        }
-        
-        if (timeValue > 0) 
-        {
-          timeValue -= Time.deltaTime;
-        }
-        else // no time left
-        {
-          timeValue = 0; // locks to 0
-          //gameOverTextObject.SetActive(true);
-          GameStateManager.Instance.UpdateGameState(GameState.GameOver);
-        }     
-      }
-      DisplayTime(timeValue);
+      _timerTextTMP.color = new Color(0, 0, 0, 255 * 0.4);
     }
 
-    void DisplayTime(float timeToDisplay)
+    if (GameStateManager.Instance.State != GameState.GamePlay) return;
+    
+    if (_timeValue > 0) 
     {
-      if (timeToDisplay < 0)
-      {
-        Debug.Log("done");
-        timeToDisplay = 0;   
-      }
+      _timeValue -= Time.deltaTime;
+    }
+    else // no time left
+    {
+      _timeValue = 0;
+      GameStateManager.Instance.UpdateGameState(GameState.GameOver);
+    }
 
-      //calculating minutes and seconds values
-      float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-      float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+    displayTime(_timeValue);
+  }
 
-      timeTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }    
+  // ================== Helpers
+
+  private void displayTime(float timeToDisplay)
+  {
+    timeToDisplay = Mathf.Max(0, timeToDisplay);
+
+    // Calculating minutes and seconds
+    int minutes = Mathf.FloorToInt(timeToDisplay / 60);
+    int seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+    _timerTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+  }    
 }

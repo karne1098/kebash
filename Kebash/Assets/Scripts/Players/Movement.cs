@@ -234,23 +234,22 @@ public class Movement : MonoBehaviour
 
   private void move()
   {
+    Debug.Log("trying to move");
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
     if (_currentMove.magnitude > 0.02f)
     {
       if (!_walkParticles.isPlaying)
-       {
-                _walkParticles.Play();
-       }
-        
-       AudioManager.Instance.Play("walk", PlayerNumber + 1);
-          
+      {
+        _walkParticles.Play();
+      }
+      AudioManager.Instance.Play("walk", PlayerNumber + 1);
     }
     else
     {
-    _walkParticles.Stop();
-    AudioManager.Instance.Stop("walk", PlayerNumber + 1);
-     }
+      _walkParticles.Stop();
+      AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+    }
 
     _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
