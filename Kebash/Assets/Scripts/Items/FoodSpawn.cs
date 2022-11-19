@@ -20,6 +20,11 @@ public class FoodSpawn : MonoBehaviour
  
   // ================== Methods
 
+  void Awake()
+  {
+    Instance = this;
+  }
+  
   void Start()
   {
     StartCoroutine(SpawnFood());
@@ -57,7 +62,7 @@ public class FoodSpawn : MonoBehaviour
     }
   }
 
-  void OnGameStart()
+  public void StartSpawning()
   {
     gameStarted = true;
   }

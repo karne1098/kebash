@@ -37,5 +37,6 @@ public class MainMenuManager : MonoBehaviour
     yield return new WaitForSeconds(4.5f);
 
     GameStateManager.Instance.UpdateGameState(GameState.Countdown);
+    FoodSpawn.Instance.StartSpawning();
   }
 }
