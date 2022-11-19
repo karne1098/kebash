@@ -158,6 +158,7 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
+
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 
       StartCoroutine(waitToTeleport(RespawnPosition, true));
@@ -237,13 +238,13 @@ public class Movement : MonoBehaviour
                 _walkParticles.Play();
        }
         
-       AudioManager.Instance.Play("walk", 0);
+       AudioManager.Instance.Play("walk", PlayerNumber + 1);
           
     }
     else
     {
     _walkParticles.Stop();
-    AudioManager.Instance.Stop("walk", 0);
+    AudioManager.Instance.Stop("walk", PlayerNumber + 1);
      }
 
     _currentMove = Vector3.Lerp(
@@ -311,8 +312,8 @@ public class Movement : MonoBehaviour
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
     _dashParticles.Play();
     _animator.SetBool("Charging", true);
-    AudioManager.Instance.Stop("walk", 0);
-    AudioManager.Instance.Play("dash", 0);
+    AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+    AudioManager.Instance.Play("dash", PlayerNumber + 1);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -331,10 +332,10 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(false);
     _dashParticles.Stop();
     _animator.SetBool("Charging", false);
-    AudioManager.Instance.Stop("dash", 0);
+    AudioManager.Instance.Stop("dash", PlayerNumber + 1);
     if (_stamina <= 0)
     {
-        AudioManager.Instance.Play("tired", 0);
+        AudioManager.Instance.Play("tired", PlayerNumber + 1);
     }
 
     // Allow regen after some time

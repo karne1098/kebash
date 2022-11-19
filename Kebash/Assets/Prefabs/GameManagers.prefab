@@ -326,7 +326,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: gameMusic
     clip: {fileID: 8300000, guid: 6e37cc49971254f01b26a88f07008228, type: 3}
-    volume: 1
+    volume: 0
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -350,20 +350,20 @@ MonoBehaviour:
     source: {fileID: 0}
   charaSounds:
   - name: walk
-    clip: {fileID: 8300000, guid: 0e636cd948150c24c92979fc14000d18, type: 3}
+    clip: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: dash
-    clip: {fileID: 8300000, guid: 7fd0dd59d0398d541bc25ad2207fe9fa, type: 3}
+    clip: {fileID: 8300000, guid: 088b08b6449436546a777d5f4a3bcfab, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: tired
     clip: {fileID: 8300000, guid: 5d59ac6a92bbea149ba1852404b6a439, type: 3}
-    volume: 1
+    volume: 0.432
     pitch: 1
     loop: 0
     source: {fileID: 0}
