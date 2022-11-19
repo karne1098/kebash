@@ -4,26 +4,15 @@ using UnityEngine;
 
 public class ButtonAnim : MonoBehaviour
 {
-  public Transform modelSize;
-
-  float scaleChange = 0.4f;
-
-  Vector3 scaleBig;
-  Vector3 scaleSmall;
+  private Vector3 _hoverDisplacement = new Vector3(0, 0.5f, 0);
   
-  void Start()
-  {
-    scaleBig   = new Vector3(0f, scaleChange,       0f);
-    scaleSmall = new Vector3(0f, scaleChange * -1f, 0f);
-  }
-
   public void GetBig()
   {
-    modelSize.position += scaleBig;
+    transform.position += _hoverDisplacement;
   }
 
   public void GetSmall()
   {
-    modelSize.position += scaleSmall;
+    transform.position -= _hoverDisplacement;
   }
 }
