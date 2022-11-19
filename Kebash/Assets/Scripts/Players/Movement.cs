@@ -230,16 +230,21 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-    if ((_moveCheck && (_idealMove == Vector3.zero)) || (_rigidbody.position.y != 0.525f))
+    if (_currentMove.magnitude > 0.02f)
     {
-        _moveCheck = false;
-        _walkParticles.Stop();
+      if (!_walkParticles.isPlaying)
+       {
+                _walkParticles.Play();
+       }
+        
+       AudioManager.Instance.Play("walk", 0);
+          
     }
-    else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
+    else
     {
-        _moveCheck = true;
-        _walkParticles.Play();
-    }
+    _walkParticles.Stop();
+    AudioManager.Instance.Stop("walk", 0);
+     }
 
     _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
@@ -306,6 +311,8 @@ public class Movement : MonoBehaviour
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
     _dashParticles.Play();
     _animator.SetBool("Charging", true);
+    AudioManager.Instance.Stop("walk", 0);
+    AudioManager.Instance.Play("dash", 0);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -324,6 +331,11 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(false);
     _dashParticles.Stop();
     _animator.SetBool("Charging", false);
+    AudioManager.Instance.Stop("dash", 0);
+    if (_stamina <= 0)
+    {
+        AudioManager.Instance.Play("tired", 0);
+    }
 
     // Allow regen after some time
     yield return new WaitForSeconds(_regenDelay);

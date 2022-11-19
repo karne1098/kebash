@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum GameState : int
 {
+  NullState,
   Menu,
   Spawning,
   Countdown,
@@ -23,13 +24,18 @@ public class GameStateManager : MonoBehaviour
 
   // ================== Accessors
   
-  public GameState State { get; private set; } = GameState.GamePlay;
+  public GameState State { get; private set; } = GameState.NullState;
 
   // ================== Methods
   
   void Awake()
   {
     Instance = this;
+  }
+
+  void Start()
+  {
+    GameStateManager.Instance.UpdateGameState(GameState.Menu);
   }
   
   public void UpdateGameState(GameState newState)
@@ -39,11 +45,12 @@ public class GameStateManager : MonoBehaviour
 
     State = newState;
 
-    switch (newState)
-    {
+    switch (newState) {
+      case GameState.NullState: { break; }
       case GameState.Menu:
       {
-        AudioManager.Instance.Play("bgMusic"); 
+        Debug.Log("moved to menu state");
+        AudioManager.Instance.Play("bgMusic", 0); 
         break;
       }
       case GameState.Spawning:
@@ -52,27 +59,31 @@ public class GameStateManager : MonoBehaviour
       }
       case GameState.Countdown:
       {
+        Debug.Log("moved to countdown state");
         StartCoroutine("countdown");
         break;
       }
       case GameState.GamePlay:
       {
+        Debug.Log("moved to gamrplay state");
         Time.timeScale = 1;
-        AudioManager.Instance.Play("gameMusic");
+        AudioManager.Instance.Play("gameMusic", 0);
+        AudioManager.Instance.Play("sizzle", 0);
         break;
       }
       case GameState.GamePaused:
       {
         _pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0;
-        AudioManager.Instance.Pause("gameMusic");
+        AudioManager.Instance.Pause("gameMusic", 0);
         break;
       }
       case GameState.GameOver:
       {
         _gameOverCanvas.SetActive(true);
-        AudioManager.Instance.Stop("gameMusic");
-        AudioManager.Instance.Play("tacoBell");
+        AudioManager.Instance.Stop("gameMusic", 0);
+        AudioManager.Instance.Stop("sizzle", 0);
+        AudioManager.Instance.Play("tacoBell", 0);
         break;
       }
     }
@@ -80,8 +91,18 @@ public class GameStateManager : MonoBehaviour
 
   private IEnumerator countdown()
   {
-    AudioManager.Instance.Play("countdown");
+    AudioManager.Instance.Play("countdown", 0);
     yield return new WaitForSeconds(3.5f);
     GameStateManager.Instance.UpdateGameState(GameState.GamePlay);
   }
+
+  public void Unpause()
+    {
+        UpdateGameState(GameState.GamePlay);
+    }
+
+    public void GoToMenu()
+    {
+        UpdateGameState(GameState.Menu);
+    }
 }
