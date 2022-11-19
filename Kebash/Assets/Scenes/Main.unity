@@ -698,10 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -726,7 +726,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1177,8 +1177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 0, y: 45}
+  m_SizeDelta: {x: 550, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941448209
 MonoBehaviour:
@@ -1209,18 +1209,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 941448209}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1867159741}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetBig
@@ -1237,18 +1225,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 941448209}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1867159741}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetSmall
@@ -1330,7 +1306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2991,8 +2967,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: -43}
-  m_SizeDelta: {x: 175, y: 60}
+  m_AnchoredPosition: {x: 255, y: -90}
+  m_SizeDelta: {x: 380, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846647254
 MonoBehaviour:
@@ -3011,18 +2987,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1846647255}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1248721113}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetBig
@@ -3039,18 +3003,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1846647255}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1248721113}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetSmall
@@ -3144,7 +3096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3486,8 +3438,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115, y: -43}
-  m_SizeDelta: {x: 175, y: 60}
+  m_AnchoredPosition: {x: -255, y: -90}
+  m_SizeDelta: {x: 380, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1975523614
 MonoBehaviour:
@@ -3506,18 +3458,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1975523615}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1244463693}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetBig
@@ -3534,18 +3474,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1975523615}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1244463693}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetSmall
@@ -3639,7 +3567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3702,8 +3630,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 85}
-  m_SizeDelta: {x: 375, y: 75}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109110841
 MonoBehaviour:
@@ -3734,18 +3662,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2109110841}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 833778585}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetBig
@@ -3762,18 +3678,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2109110841}
-          m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: RescaleOnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 833778585}
           m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
           m_MethodName: GetSmall
@@ -3842,18 +3746,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: BroadcastMessage
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: OnGameStart
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2109110844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3867,7 +3759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3899,29 +3791,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1137131654}
     m_Modifications:
-    - target: {fileID: 600145685572907435, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_Name
-      value: QuitButtonModel
-      objectReference: {fileID: 0}
-    - target: {fileID: 770306349657225179, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_Name
-      value: KebashButtonModel
-      objectReference: {fileID: 0}
     - target: {fileID: 4024998853170458314, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_Name
       value: ButtonModels
-      objectReference: {fileID: 0}
-    - target: {fileID: 4514119267359978091, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4514119267359978091, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4514119267359978091, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 5318137817474139639, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_RootOrder
@@ -3967,26 +3839,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6041112765171355942, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_Name
-      value: HowToPlayButtonModel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643873466111386821, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6643873466111386821, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8067015034792054004, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8367809192929405189, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_Name
-      value: CreditsButtonModel
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
 --- !u!1001 &7703677706696889805
@@ -4004,6 +3856,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6349653655723217760, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: charaSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
+    - target: {fileID: 6349653655723217760, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: charaSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 088b08b6449436546a777d5f4a3bcfab, type: 3}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
       value: GameManagers

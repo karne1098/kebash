@@ -195,8 +195,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 27.5, y: 1, z: 17.5}
-  m_Children:
-  - {fileID: 3998799994580548027}
+  m_Children: []
   m_Father: {fileID: 4799847498144578126}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,7 +325,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: gameMusic
     clip: {fileID: 8300000, guid: 6e37cc49971254f01b26a88f07008228, type: 3}
-    volume: 1
+    volume: 0
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -350,19 +349,55 @@ MonoBehaviour:
     source: {fileID: 0}
   charaSounds:
   - name: walk
-    clip: {fileID: 8300000, guid: 0e636cd948150c24c92979fc14000d18, type: 3}
+    clip: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: dash
-    clip: {fileID: 8300000, guid: 7fd0dd59d0398d541bc25ad2207fe9fa, type: 3}
+    clip: {fileID: 8300000, guid: 088b08b6449436546a777d5f4a3bcfab, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: tired
     clip: {fileID: 8300000, guid: 5d59ac6a92bbea149ba1852404b6a439, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: falling
+    clip: {fileID: 8300000, guid: 6f35fce1f9925ad4fbd825cec90f3604, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: damaged
+    clip: {fileID: 8300000, guid: 2dacc8b8c2e728e468501172aa5f14c5, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: die
+    clip: {fileID: 8300000, guid: 500d31fb2dfcdf24d9904db29ae01cea, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: pickup
+    clip: {fileID: 8300000, guid: ff20274905a6eb341be26244cd123146, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shoot
+    clip: {fileID: 8300000, guid: 1a2616f8ff8ba11488c46d8482432604, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: nocharge
+    clip: {fileID: 8300000, guid: 1452f72b43d94cb42a65f421fff48eae, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -969,9 +1004,8 @@ GameObject:
   - component: {fileID: 2034255511035091640}
   - component: {fileID: 1994105912361260358}
   - component: {fileID: 6032097797027296616}
-  - component: {fileID: 3200088538541442732}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,8 +1067,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 0
-  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1093,21 +1127,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3200088538541442732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4716662839146069879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb641d4af87f47cfbd41b39491cd30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeValue: 60
-  timeTextTMP: {fileID: 6032097797027296616}
-  newColor: {r: 0, g: 0, b: 0, a: 0.25490198}
 --- !u!1 &5074083630472682792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,8 +1831,9 @@ GameObject:
   - component: {fileID: 841519472637465419}
   - component: {fileID: 3866145876259187550}
   - component: {fileID: 3630567583551712247}
+  - component: {fileID: 4055504111575234253}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1828,15 +1848,15 @@ RectTransform:
   m_GameObject: {fileID: 5380318145909136928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.036363635, y: 1, z: 0.057142857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2034255511035091640}
-  m_Father: {fileID: 1384270322}
-  m_RootOrder: 0
+  m_Father: {fileID: 4799847498144578126}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.51}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &841519472637465419
@@ -1900,6 +1920,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4055504111575234253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5380318145909136928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb641d4af87f47cfbd41b39491cd30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerTextTMP: {fileID: 6032097797027296616}
 --- !u!1 &5730567134959669570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2393,7 @@ Transform:
   - {fileID: 827085541}
   - {fileID: 2667501385096667157}
   - {fileID: 7881949656154354142}
+  - {fileID: 3998799994580548027}
   m_Father: {fileID: 7703677705268590127}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

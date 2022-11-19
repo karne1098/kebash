@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a0688e3ebe834d75b8fd135124119eb
+guid: 0b92d59e2a90b46f88a61b80df77e356
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -10,8 +10,17 @@ ModelImporter:
       74: -1347804043719694104
     second: ChargeDash
   - first:
+      74: 3086181046117580273
+    second: Armature|Bwards
+  - first:
+      74: 5607727450279090002
+    second: Armature|Charge
+  - first:
       74: -8856283390429189166
     second: 'Armature|Idle '
+  - first:
+      74: -2184875562636996675
+    second: Armature|knock b
   - first:
       74: 3200891523119540173
     second: Armature|na
@@ -19,12 +28,46 @@ ModelImporter:
       74: -7551964380084998518
     second: Armature|Run
   - first:
+      74: -3767682975942640364
+    second: Armature|Run.001
+  - first:
+      74: -5061418788872050228
+    second: Armature|Run.002
+  - first:
       74: -18534242436601310
     second: Armature|Strafe.L
   - first:
+      74: 6510611469727554508
+    second: Armature|Strafe.R
+  - first:
       74: -4779212398625334856
     second: Armature|Tpose
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MBbody
+    second: {fileID: 2800000, guid: dd7649846f3e04a8d96da32f520da73f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MBbody sauce
+    second: {fileID: 2800000, guid: 7b1a6ba64c53743c79b780ac2d0ade2b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MBfeet
+    second: {fileID: 2800000, guid: 918cfd9b05202435c903aa58fb729b77, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MBleg
+    second: {fileID: 2800000, guid: 4555bc470fd4047c9adc7819e1df4864, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MBskewer
+    second: {fileID: 2800000, guid: 170f9254af8ba4d9e8e1d1e6d1d1bca0, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -53,6 +96,64 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
+      name: Armature|Bwards
+      takeName: Armature|Bwards
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Charge
+      takeName: Armature|Charge
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: 'Armature|Idle '
       takeName: 'Armature|Idle '
       internalID: 0
@@ -65,6 +166,35 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|knock b
+      takeName: Armature|knock b
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -140,6 +270,35 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Armature|Strafe.R
+      takeName: Armature|Strafe.R
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Armature|Tpose
       takeName: Armature|Tpose
       internalID: 0
@@ -151,7 +310,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

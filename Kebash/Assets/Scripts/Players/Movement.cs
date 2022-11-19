@@ -139,6 +139,7 @@ public class Movement : MonoBehaviour
     if (_inputData.Charge && _stamina <= _minStaminaToStart)
     {
       _staminaBar.shake();
+      AudioManager.Instance.Play("nocharge", PlayerNumber + 1);
       Debug.Log("Not enough stamina to charge");
     }
 
@@ -158,6 +159,7 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
+      AudioManager.Instance.Play("falling", PlayerNumber + 1);
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 
       StartCoroutine(deathTeleport(RespawnPosition, true));
@@ -172,10 +174,12 @@ public class Movement : MonoBehaviour
         other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
       }
 
+      
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
 
       if (KebabStack.Count != 0)
       {
+        AudioManager.Instance.Play("damaged", PlayerNumber + 1);
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
         // Disable all children
@@ -189,6 +193,7 @@ public class Movement : MonoBehaviour
       }
       else
       {
+        AudioManager.Instance.Play("die", PlayerNumber + 1);
         Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
         StartCoroutine(deathTeleport(RespawnPosition, true));
         _timesDied += 1;
@@ -206,6 +211,7 @@ public class Movement : MonoBehaviour
     if (KebabStack.Count == _maxFood) return false;
     _stabParticles.Play();
 
+    AudioManager.Instance.Play("pickup", PlayerNumber + 1);
     Debug.Log("Player " + PlayerNumber + " added food. (Pooled object index: " + (int) index + ")"); 
 
     // Activate the correct position's correct child
@@ -228,23 +234,22 @@ public class Movement : MonoBehaviour
 
   private void move()
   {
+    Debug.Log("trying to move");
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
     if (_currentMove.magnitude > 0.02f)
     {
       if (!_walkParticles.isPlaying)
-       {
-                _walkParticles.Play();
-       }
-        
-       AudioManager.Instance.Play("walk", 0);
-          
+      {
+        _walkParticles.Play();
+      }
+      AudioManager.Instance.Play("walk", PlayerNumber + 1);
     }
     else
     {
-    _walkParticles.Stop();
-    AudioManager.Instance.Stop("walk", 0);
-     }
+      _walkParticles.Stop();
+      AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+    }
 
     _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
@@ -311,8 +316,8 @@ public class Movement : MonoBehaviour
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
     _dashParticles.Play();
     _animator.SetBool("Charging", true);
-    AudioManager.Instance.Stop("walk", 0);
-    AudioManager.Instance.Play("dash", 0);
+    AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+    AudioManager.Instance.Play("dash", PlayerNumber + 1);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -331,10 +336,10 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(false);
     _dashParticles.Stop();
     _animator.SetBool("Charging", false);
-    AudioManager.Instance.Stop("dash", 0);
+    AudioManager.Instance.Stop("dash", PlayerNumber + 1);
     if (_stamina <= 0)
     {
-        AudioManager.Instance.Play("tired", 0);
+        AudioManager.Instance.Play("tired", PlayerNumber + 1);
     }
 
     // Allow regen after some time
@@ -346,6 +351,9 @@ public class Movement : MonoBehaviour
   {
     // Can't shoot if no food
     if (KebabStack.Count == 0) yield break;
+
+    //Plays shooting effect
+    AudioManager.Instance.Play("shoot", PlayerNumber + 1);
 
     _isOnShootCoolDown = true;
 
