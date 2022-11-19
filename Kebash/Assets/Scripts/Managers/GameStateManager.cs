@@ -31,6 +31,10 @@ public class GameStateManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
+  }
+
+  void Start()
+  {
     GameStateManager.Instance.UpdateGameState(GameState.Menu);
   }
   
@@ -91,4 +95,14 @@ public class GameStateManager : MonoBehaviour
     yield return new WaitForSeconds(3.5f);
     GameStateManager.Instance.UpdateGameState(GameState.GamePlay);
   }
+
+  public void Unpause()
+    {
+        UpdateGameState(GameState.GamePlay);
+    }
+
+    public void GoToMenu()
+    {
+        UpdateGameState(GameState.Menu);
+    }
 }
