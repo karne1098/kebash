@@ -325,7 +325,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: gameMusic
     clip: {fileID: 8300000, guid: 6e37cc49971254f01b26a88f07008228, type: 3}
-    volume: 0
+    volume: 0.701
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -347,10 +347,16 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: end
+    clip: {fileID: 8300000, guid: 1432510e3f7ea334aaa2e5388e7e3445, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   charaSounds:
   - name: walk
     clip: {fileID: 8300000, guid: 3ccf5e028279cd3488697c7732296559, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}

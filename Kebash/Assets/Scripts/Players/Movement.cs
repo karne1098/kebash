@@ -159,6 +159,8 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
+      AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+      AudioManager.Instance.Stop("dash", PlayerNumber + 1);
       AudioManager.Instance.Play("falling", PlayerNumber + 1);
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 

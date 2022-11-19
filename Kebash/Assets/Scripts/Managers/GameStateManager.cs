@@ -83,7 +83,7 @@ public class GameStateManager : MonoBehaviour
         _gameOverCanvas.SetActive(true);
         AudioManager.Instance.Stop("gameMusic", 0);
         AudioManager.Instance.Stop("sizzle", 0);
-        AudioManager.Instance.Play("tacoBell", 0);
+        AudioManager.Instance.Play("end", 0);
         break;
       }
     }
