@@ -35,13 +35,15 @@ public class AudioManager : MonoBehaviour
     }
   }
 
-  public void Play(string name)
-  {
-    Sound s = soundDict[name];
-    s.source.Play();
-  }
-
-  public void Pause(string name)
+    public void Play(string name)
+    {
+        Sound s = soundDict[name];
+        if (!s.source.isPlaying)
+        {
+            s.source.Play();
+        }
+    }
+    public void Pause(string name)
   {
     Sound s = soundDict[name];
     s.source.Pause();
@@ -53,3 +55,5 @@ public class AudioManager : MonoBehaviour
     s.source.Stop();
   }
 }
+
+

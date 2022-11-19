@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum GameState : int
 {
+  NullState,
   Menu,
   Spawning,
   Countdown,
@@ -23,13 +24,14 @@ public class GameStateManager : MonoBehaviour
 
   // ================== Accessors
   
-  public GameState State { get; private set; } = GameState.Menu;
+  public GameState State { get; private set; } = GameState.NullState;
 
   // ================== Methods
   
   void Awake()
   {
     Instance = this;
+    GameStateManager.Instance.UpdateGameState(GameState.Menu);
   }
   
   public void UpdateGameState(GameState newState)
@@ -39,10 +41,11 @@ public class GameStateManager : MonoBehaviour
 
     State = newState;
 
-    switch (newState)
-    {
+    switch (newState) {
+      case GameState.NullState: { break; }
       case GameState.Menu:
       {
+        Debug.Log("moved to menu state");
         AudioManager.Instance.Play("bgMusic"); 
         break;
       }
@@ -52,13 +55,16 @@ public class GameStateManager : MonoBehaviour
       }
       case GameState.Countdown:
       {
+        Debug.Log("moved to countdown state");
         StartCoroutine("countdown");
         break;
       }
       case GameState.GamePlay:
       {
+        Debug.Log("moved to gamrplay state");
         Time.timeScale = 1;
         AudioManager.Instance.Play("gameMusic");
+        AudioManager.Instance.Play("sizzle");
         break;
       }
       case GameState.GamePaused:
@@ -72,6 +78,7 @@ public class GameStateManager : MonoBehaviour
       {
         _gameOverCanvas.SetActive(true);
         AudioManager.Instance.Stop("gameMusic");
+        AudioManager.Instance.Stop("sizzle");
         AudioManager.Instance.Play("tacoBell");
         break;
       }
