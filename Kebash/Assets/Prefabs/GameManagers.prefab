@@ -349,7 +349,7 @@ MonoBehaviour:
     source: {fileID: 0}
   charaSounds:
   - name: walk
-    clip: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
+    clip: {fileID: 8300000, guid: 3ccf5e028279cd3488697c7732296559, type: 3}
     volume: 1
     pitch: 1
     loop: 1
