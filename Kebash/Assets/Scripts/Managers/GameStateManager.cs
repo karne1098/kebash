@@ -19,6 +19,7 @@ public class GameStateManager : MonoBehaviour
 {
   public static GameStateManager Instance;
 
+
   [SerializeField] private GameObject _pauseMenuCanvas;
   [SerializeField] private GameObject _gameOverCanvas;
 
@@ -89,6 +90,10 @@ public class GameStateManager : MonoBehaviour
     }
   }
 
+  public GameState GetState(){
+    return State;
+  }
+
   private IEnumerator countdown()
   {
     AudioManager.Instance.Play("countdown", 0);
@@ -104,5 +109,7 @@ public class GameStateManager : MonoBehaviour
     public void GoToMenu()
     {
         UpdateGameState(GameState.Menu);
+        MainMenuManager.Instance.ResetToMenu();
+        MultiplayerManager.Instance.ReinitializeAllPlayers();
     }
 }
