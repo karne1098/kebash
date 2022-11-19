@@ -13,6 +13,10 @@ public class MainMenuManager : MonoBehaviour
   [SerializeField] private GameObject _invisibleButtons;
   [SerializeField] private GameObject _instructionsCreditsOverlays;
 
+  void Awake(){
+    Instance = this;
+  }
+
   public void PlayGame()
   {
     StartCoroutine("startGame");
@@ -36,7 +40,16 @@ public class MainMenuManager : MonoBehaviour
 
     yield return new WaitForSeconds(4.5f);
 
-    GameStateManager.Instance.UpdateGameState(GameState.Countdown);
+    GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
     FoodSpawn.Instance.StartSpawning();
+  }
+
+  public void ResetToMenu()
+  {
+    _buttonModels.SetActive(true);
+    _invisibleButtons.SetActive(true);
+    _instructionsCreditsOverlays.SetActive(true);
+    AudioManager.Instance.Stop("end", 0);
+
   }
 }

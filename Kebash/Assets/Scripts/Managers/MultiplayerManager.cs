@@ -104,7 +104,7 @@ public class MultiplayerManager : MonoBehaviour
     Movement playerScript = playerInput.gameObject.GetComponent<Movement>();
     PlayerScripts.Add(playerScript);
 
-    reinitializeAllPlayers();
+    ReinitializeAllPlayers();
 
     Debug.Log("Player has joined.");
   }
@@ -114,14 +114,12 @@ public class MultiplayerManager : MonoBehaviour
     Movement playerScript = playerInput.gameObject.GetComponent<Movement>();
     PlayerScripts.Remove(playerScript);
     
-    reinitializeAllPlayers();
+    ReinitializeAllPlayers();
 
     Debug.Log("Player has left.");
   }
 
-  // ================== Helpers
-
-  private void reinitializeAllPlayers()
+  public void ReinitializeAllPlayers()
   {
     for (int i = 0; i < PlayerCount; ++i)
     {
