@@ -3,7 +3,12 @@ guid: aaaeb25e5c50d41599f5c1cf42fd0b43
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tomatoSlice
+    second: {fileID: 2800000, guid: f5f4e44cdd8d82142b3e7cc9fe9ef66c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

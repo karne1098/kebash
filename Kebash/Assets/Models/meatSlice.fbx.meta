@@ -3,7 +3,12 @@ guid: 50be68c87658740d08eee0027c8cb001
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: meatSlice
+    second: {fileID: 2800000, guid: 90283142b2b905d4bb2597dd3ed85a15, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

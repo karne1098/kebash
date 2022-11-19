@@ -3,7 +3,12 @@ guid: 93f2c4d015bd24eacb036904a0f3d1c3
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: eggplantSlice
+    second: {fileID: 2800000, guid: 7bbc09e7f956ac94aac58cfbf213c69d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
