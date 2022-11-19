@@ -41,23 +41,23 @@ public class Movement : MonoBehaviour
   private Vector3 _idealTurn   = Vector3.zero;
   private Vector3 _currentMove = Vector3.zero;
   private Vector3 _currentTurn = Vector3.zero;
-  private float _moveSpeed             = 5f;
+  private float _moveSpeed             = 7f;
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
-  private float _strafeSpeedMultiplier = 0.75f;
-    private bool _moveCheck = false;
+  private float _strafeSpeedMultiplier = 0.5f;
+  private bool _moveCheck = false;
 
   // Charging
   private float _stamina;
   private float _minChargeDuration;
-  public float _maxStamina        = 100f;
+  public float  _maxStamina        = 100f;
   private float _minChargeCost     = 10f;  // Minimum stamina cost associated with one charge
   private float _minStaminaToStart = 20f;  // Minimum stamina needed to start a charge
   private float _staminaCostRate   = 100f;
-  public float _staminaRegenRate  = 20f;
+  public float  _staminaRegenRate  = 20f;
   private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
-  private float _chargeSpeed = 12f;
+  private float _chargeSpeed = 14f;
 
   // Shooting
   private float _shootCoolDown = 1f;
@@ -300,8 +300,12 @@ public class Movement : MonoBehaviour
 
   private float getAngleDependentSpeed()
   {
+    float dot = Vector3.Dot(_idealMove, _currentTurn);
+
+    if (dot < 0) return _strafeSpeedMultiplier * _moveSpeed;
+
     float speedMultiplier = Mathf.Lerp(
-      Mathf.Pow(Vector3.Dot(_idealMove, _currentTurn), 2),
+      Mathf.Pow(dot, 2),
       1,
       _strafeSpeedMultiplier);
 
