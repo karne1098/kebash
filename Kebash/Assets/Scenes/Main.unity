@@ -494,6 +494,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825140297}
   m_CullTransparentMesh: 1
+--- !u!114 &833778585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180865603182040308, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+  m_PrefabInstance: {fileID: 1678645593486255439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e282cd1e5a5178a4690ab07329f20882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889537648
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +795,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1867159741}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetBig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -791,6 +814,18 @@ MonoBehaviour:
         - m_Target: {fileID: 941448209}
           m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
           m_MethodName: RescaleOnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1867159741}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetSmall
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1510,6 +1545,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131555807}
   m_CullTransparentMesh: 1
+--- !u!114 &1244463693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 455056512899172937, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+  m_PrefabInstance: {fileID: 1678645593486255439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e282cd1e5a5178a4690ab07329f20882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1248721113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3868635430857947675, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+  m_PrefabInstance: {fileID: 1678645593486255439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e282cd1e5a5178a4690ab07329f20882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1450199594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4024998853170458314, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
@@ -2256,6 +2313,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1248721113}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetBig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2263,6 +2332,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1846647255}
           m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
           m_MethodName: RescaleOnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1248721113}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetSmall
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2378,6 +2459,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846647252}
   m_CullTransparentMesh: 1
+--- !u!114 &1867159741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 188372986550538757, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+  m_PrefabInstance: {fileID: 1678645593486255439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e282cd1e5a5178a4690ab07329f20882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1941641688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2674,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1244463693}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetBig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2589,6 +2693,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1975523615}
           m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
           m_MethodName: RescaleOnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1244463693}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetSmall
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2847,6 +2963,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 833778585}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetBig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2854,6 +2982,18 @@ MonoBehaviour:
         - m_Target: {fileID: 2109110841}
           m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
           m_MethodName: RescaleOnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 833778585}
+          m_TargetAssemblyTypeName: ButtonAnim, Assembly-CSharp
+          m_MethodName: GetSmall
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3145,17 +3285,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1207253016565460332, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1207253016565460332, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4
+    - target: {fileID: 2180865603182040308, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: scaleChange
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4024998853170458314, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_Name
       value: MenuModels
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514119267359978091, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514119267359978091, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.33
       objectReference: {fileID: 0}
     - target: {fileID: 5318137817474139639, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_RootOrder
@@ -3201,13 +3345,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7007755615330799648, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+    - target: {fileID: 6377688370515969817, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1.21
       objectReference: {fileID: 0}
-    - target: {fileID: 7007755615330799648, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+    - target: {fileID: 6377688370515969817, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377688370515969817, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -2.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643873466111386821, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772518084252568063, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772518084252568063, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772518084252568063, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549248452068669896, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067015034792054004, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e4c3b2235d9ad4499d049279c5c11e9, type: 3}
