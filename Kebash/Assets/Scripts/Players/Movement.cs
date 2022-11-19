@@ -160,7 +160,7 @@ public class Movement : MonoBehaviour
     {
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 
-      StartCoroutine(waitToTeleport(RespawnPosition, true));
+      StartCoroutine(deathTeleport(RespawnPosition, true));
       return;
     }
 
@@ -395,18 +395,10 @@ public class Movement : MonoBehaviour
     Debug.Log("Player " + PlayerNumber + " is no longer invulnerable!");
   }
 
-  private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
+  private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
   {
-    yield return new WaitForSeconds(_fallRespawnWaitDuration);
-
-    // Start falling from the sky
-    _rigidbody.position = respawnPosition; 
-    _rigidbody.velocity = Vector3.zero;
-
-    // Take one unit of damage
-    if(!(KebabStack.Count == 0)) {
-      KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
-
+    while(KebabStack.Count > 0) {
+      KebabStack.Pop();
       // Disable all children
       for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
         Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
@@ -414,22 +406,13 @@ public class Movement : MonoBehaviour
       }
       Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
     }
+    Debug.Log("Player " + PlayerNumber + "has died!");
+    yield return new WaitForSeconds(_fallRespawnWaitDuration);
 
-    // Restore stamina
-    _stamina = _maxStamina;
-
-    // Start invulnerability
-    startInvulnerability(_fallInvDuration);
-  }
-
-  private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
-  {
+    Debug.Log("Player " + PlayerNumber + "is repawning...");
     // Start falling from the sky
-    for(int i = 0; i < 3; i++){
-      _rigidbody.position = respawnPosition; 
-      _rigidbody.velocity = Vector3.zero;
-      yield return new WaitForSeconds(0.2f);
-    }
+    _rigidbody.position = respawnPosition; 
+    _rigidbody.velocity = Vector3.zero;
 
     // Restore stamina
     _stamina = _maxStamina;
