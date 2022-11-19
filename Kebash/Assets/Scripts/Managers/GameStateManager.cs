@@ -100,4 +100,9 @@ public class GameStateManager : MonoBehaviour
     {
         UpdateGameState(GameState.GamePlay);
     }
+
+    public void GoToMenu()
+    {
+        UpdateGameState(GameState.Menu);
+    }
 }
