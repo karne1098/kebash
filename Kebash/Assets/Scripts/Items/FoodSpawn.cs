@@ -57,8 +57,8 @@ public class FoodSpawn : MonoBehaviour
     }
   }
 
-  void OnGameStart() {
+  void OnGameStart()
+  {
     gameStarted = true;
-    Debug.Log(gameStarted);
   }
 }
