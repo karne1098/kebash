@@ -10,47 +10,39 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timeTextTMP;
     public GameObject gameOverTextObject;
     private bool gameStarted = false;
-    public Color newColor;
 
-    void Start() 
-    {
-        gameOverTextObject.SetActive(false);
-    }
-
-    // Update is called once per frame
+    // ================== Methods
+    
     void Update()
     {
-        if (GameStateManager.Instance.State == GameState.GamePlay) {
-            timeTextTMP.color = Color.Lerp(timeTextTMP.color, newColor, 1000f * Time.deltaTime);
-            if(timeValue > 0) 
-            {
-                timeValue -= Time.deltaTime;
-            }
-            else //no time left
-            {
-                timeValue = 0; //locks to 0
-                gameOverTextObject.SetActive(true);
-                GameStateManager.Instance.UpdateGameState(GameState.GameOver);
-            }     
+      if (GameStateManager.Instance.State == GameState.GamePlay)
+      {
+        if (timeValue > 0) 
+        {
+          timeValue -= Time.deltaTime;
         }
-        DisplayTime(timeValue);
-        
+        else // no time left
+        {
+          timeValue = 0; // locks to 0
+          gameOverTextObject.SetActive(true);
+          GameStateManager.Instance.UpdateGameState(GameState.GameOver);
+        }     
+      }
+      DisplayTime(timeValue);
     }
 
     void DisplayTime(float timeToDisplay)
     {
-        if(timeToDisplay < 0)
-        {
-            Debug.Log("done");
-            timeToDisplay = 0;   
-        }
+      if (timeToDisplay < 0)
+      {
+        Debug.Log("done");
+        timeToDisplay = 0;   
+      }
 
-        //calculating minutes and seconds values
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+      //calculating minutes and seconds values
+      float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+      float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-    
+      timeTextTMP.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }    
 }

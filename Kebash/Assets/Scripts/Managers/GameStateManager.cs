@@ -9,6 +9,7 @@ public enum GameState : int
   Spawning,
   Countdown,
   GamePlay,
+  GamePaused,
   GameOver
 }
 
@@ -16,6 +17,9 @@ public enum GameState : int
 public class GameStateManager : MonoBehaviour
 {
   public static GameStateManager Instance;
+
+  [SerializeField] private GameObject _pauseMenuCanvas;
+  [SerializeField] private GameObject _gameOverCanvas;
 
   // ================== Accessors
   
@@ -30,9 +34,13 @@ public class GameStateManager : MonoBehaviour
   
   public void UpdateGameState(GameState newState)
   {    
+    _pauseMenuCanvas.SetActive(false);
+    _gameOverCanvas.SetActive(false);
+
     State = newState;
 
-    switch (newState) {
+    switch (newState)
+    {
       case GameState.Menu:
       {
         AudioManager.Instance.Play("bgMusic"); 
@@ -49,11 +57,20 @@ public class GameStateManager : MonoBehaviour
       }
       case GameState.GamePlay:
       {
+        Time.timeScale = 1;
         AudioManager.Instance.Play("gameMusic");
+        break;
+      }
+      case GameState.GamePaused:
+      {
+        _pauseMenuCanvas.SetActive(true);
+        Time.timeScale = 0;
+        AudioManager.Instance.Pause("gameMusic");
         break;
       }
       case GameState.GameOver:
       {
+        _gameOverCanvas.SetActive(true);
         AudioManager.Instance.Stop("gameMusic");
         AudioManager.Instance.Play("tacoBell");
         break;
