@@ -61,7 +61,7 @@ MonoBehaviour:
     initialAmount: 0
   - objectToPool: {fileID: 5668247638708286773, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
     initialAmount: 4
-  - objectToPool: {fileID: 6840405092708570064, guid: e5207403b78d95344b7de714159083bf, type: 3}
+  - objectToPool: {fileID: 620528312952018816, guid: e5207403b78d95344b7de714159083bf, type: 3}
     initialAmount: 4
   - objectToPool: {fileID: 1791067281726271845, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
     initialAmount: 4
@@ -341,6 +341,30 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: sizzle
+    clip: {fileID: 8300000, guid: e130cee93ccc7ad44a5c88cd3a27ab35, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: walk
+    clip: {fileID: 8300000, guid: 0e636cd948150c24c92979fc14000d18, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: dash
+    clip: {fileID: 8300000, guid: 7fd0dd59d0398d541bc25ad2207fe9fa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: tired
+    clip: {fileID: 8300000, guid: 5d59ac6a92bbea149ba1852404b6a439, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!1 &108931562905185370
 GameObject:
