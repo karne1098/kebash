@@ -367,6 +367,42 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: falling
+    clip: {fileID: 8300000, guid: 6f35fce1f9925ad4fbd825cec90f3604, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: damaged
+    clip: {fileID: 8300000, guid: 2dacc8b8c2e728e468501172aa5f14c5, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: die
+    clip: {fileID: 8300000, guid: 500d31fb2dfcdf24d9904db29ae01cea, type: 3}
+    volume: 0.432
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: pickup
+    clip: {fileID: 8300000, guid: ff20274905a6eb341be26244cd123146, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shoot
+    clip: {fileID: 8300000, guid: 1a2616f8ff8ba11488c46d8482432604, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: nocharge
+    clip: {fileID: 8300000, guid: 1452f72b43d94cb42a65f421fff48eae, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &581683709308194691
 GameObject:
   m_ObjectHideFlags: 0

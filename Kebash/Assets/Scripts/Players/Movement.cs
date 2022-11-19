@@ -139,6 +139,7 @@ public class Movement : MonoBehaviour
     if (_inputData.Charge && _stamina <= _minStaminaToStart)
     {
       _staminaBar.shake();
+      AudioManager.Instance.Play("nocharge", PlayerNumber + 1);
       Debug.Log("Not enough stamina to charge");
     }
 
@@ -158,7 +159,7 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
-
+      AudioManager.Instance.Play("falling", PlayerNumber + 1);
       Debug.Log("Player " + PlayerNumber + " has fallen!");
 
       StartCoroutine(waitToTeleport(RespawnPosition, true));
@@ -173,10 +174,12 @@ public class Movement : MonoBehaviour
         other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
       }
 
+      
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
 
       if (KebabStack.Count != 0)
       {
+        AudioManager.Instance.Play("damaged", PlayerNumber + 1);
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
         // Disable all children
@@ -190,6 +193,7 @@ public class Movement : MonoBehaviour
       }
       else
       {
+        AudioManager.Instance.Play("die", PlayerNumber + 1);
         Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
         StartCoroutine(deathTeleport(RespawnPosition, true));
         _timesDied += 1;
@@ -207,6 +211,7 @@ public class Movement : MonoBehaviour
     if (KebabStack.Count == _maxFood) return false;
     _stabParticles.Play();
 
+    AudioManager.Instance.Play("pickup", PlayerNumber + 1);
     Debug.Log("Player " + PlayerNumber + " added food. (Pooled object index: " + (int) index + ")"); 
 
     // Activate the correct position's correct child
@@ -347,6 +352,9 @@ public class Movement : MonoBehaviour
   {
     // Can't shoot if no food
     if (KebabStack.Count == 0) yield break;
+
+    //Plays shooting effect
+    AudioManager.Instance.Play("shoot", PlayerNumber + 1);
 
     _isOnShootCoolDown = true;
 
