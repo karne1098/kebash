@@ -94,6 +94,14 @@ public class Movement : MonoBehaviour
     _minChargeDuration = _minChargeCost / _staminaCostRate;
     _currentMove = _rigidbody.velocity;
     _currentTurn = _rigidbody.rotation * Vector3.forward;
+
+    //disabling fully stacked kabob error
+    for(int j = 0; j < 3; j++){
+      for (int i = 0; i < _foodSliceTransforms[j].transform.childCount; ++i) {
+        Transform a = _foodSliceTransforms[j].transform.GetChild(i);
+        a.gameObject.SetActive(false);
+      }
+    }
   }
 
   void FixedUpdate()
