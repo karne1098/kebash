@@ -3554,6 +3554,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 138359780, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 138359782, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: _itemsToPool.Array.size
       value: 7
@@ -3592,15 +3596,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469462907534941423, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1376395952230174709, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3200088538541442732, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: timeValue
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799847498144578126, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6199832320368586769, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -3640,7 +3648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7289095998060677141, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
@@ -3693,6 +3701,14 @@ PrefabInstance:
     - target: {fileID: 7703677705268590127, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7703677706034480454, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881949656154354142, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7889703695470515869, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: _cameraManager
