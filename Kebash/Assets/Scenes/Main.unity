@@ -4352,6 +4352,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 138359782, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: _itemsToPool.Array.data[2].objectToPool
+      value: 
+      objectReference: {fileID: 620528312952018816, guid: e5207403b78d95344b7de714159083bf, type: 3}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
       value: GameManagers

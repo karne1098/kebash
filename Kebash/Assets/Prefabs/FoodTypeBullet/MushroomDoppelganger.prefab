@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 3863349811242874536}
   - component: {fileID: 9055654856331601732}
   - component: {fileID: 5536732986786010329}
-  - component: {fileID: 9113142894645665016}
   m_Layer: 8
-  m_Name: MushroomBullet
+  m_Name: MushroomDoppelganger
   m_TagString: Damager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,21 +119,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.029165445
   m_Center: {x: 2.328307e-10, y: 0, z: 0.0016728751}
---- !u!114 &9113142894645665016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6817019447756913882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c059946dd7192f7419dcbbd1bddc39e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseShot: {fileID: 7823303589609289405}
-  mushroomBody: {fileID: 9055654856331601732}
-  bulletPrefab: {fileID: 6817019447756913882, guid: 5de7ecd233640e4498cc3ad4112accee, type: 3}
 --- !u!1001 &8554717205470607669
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7823303589609289405}
   - component: {fileID: 9209080340067487240}
   - component: {fileID: 9055654856331601732}
+  - component: {fileID: 8720493305224708611}
   m_Layer: 8
   m_Name: LambBullet
   m_TagString: Damager
@@ -77,6 +78,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8720493305224708611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817019447756913882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b44c95dfad48d4a81c33e493beb462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5159711451095507470
 PrefabInstance:
   m_ObjectHideFlags: 0
