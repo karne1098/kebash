@@ -26,6 +26,6 @@ public class MainMenuScript : MonoBehaviour
         AudioManager.Instance.Play("intro");
         yield return new WaitForSeconds(4.5f);
         toHide.SetActive(false);
-        GameStateManager.Instance.UpdateGameState(GameState.countDown);
+        GameStateManager.Instance.UpdateGameState(GameState.Countdown);
     }
 }

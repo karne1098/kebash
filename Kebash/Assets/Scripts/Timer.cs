@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameStateManager.Instance.getState() == GameState.gamePlay) {
+        if (GameStateManager.Instance.State == GameState.GamePlay) {
             if(timeValue > 0) 
             {
                 timeValue -= Time.deltaTime;
@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour
             {
                 timeValue = 0; //locks to 0
                 gameOverTextObject.SetActive(true);
-                GameStateManager.Instance.UpdateGameState(GameState.gameOver);
+                GameStateManager.Instance.UpdateGameState(GameState.GameOver);
             }     
         }
         DisplayTime(timeValue);

@@ -8,9 +8,13 @@ public class MultiplayerManager : MonoBehaviour
 {
   public static MultiplayerManager Instance;
 
-    public CameraManager _cameraManager;
+  private float _spawnYOffset = 20;
 
-  public int CurrentPlayerCount { get; internal set; } = 0;
+  // ================== Accessors
+
+  public List<Movement> PlayerScripts { get; private set; } = new List<Movement>();
+
+  public int PlayerCount { get { return PlayerScripts.Count; } }
 
   // ================== Methods
 
@@ -19,24 +23,119 @@ public class MultiplayerManager : MonoBehaviour
     Instance = this;
   }
 
-  public Vector3 GetPlayerPosition() {
-    return new Vector3(Random.Range(-10, 10), 20, Random.Range(-5, 5));
+  public Vector3 GetAveragePlayerPosition()
+  {
+    Vector3 averagePosition = Vector3.zero;
+
+    if (PlayerCount == 0) return averagePosition;
+
+    for (int i = 0; i < PlayerCount; ++i)
+    {
+      averagePosition += GetPlayerPosition(i);
+    }
+
+    return averagePosition / PlayerCount;
   }
 
-  public void OnPlayerJoined(PlayerInput playerInput) {
-    CurrentPlayerCount++;
-    Debug.Log("Player " + CurrentPlayerCount + " joined!");
+  // Same, but bounded to screen space
+  public Vector3 GetAveragePlayerPositionForCamera()
+  {
+    Vector3 averagePosition = Vector3.zero;
 
-    Movement movement = playerInput.gameObject.GetComponent<Movement>();
-    movement.PlayerNumber = CurrentPlayerCount;
-    Vector3 position = GetPlayerPosition();
-    movement.RespawnPosition       = position;
-    playerInput.transform.position = position;
+    if (PlayerCount == 0) return averagePosition;
 
-        _cameraManager.AddPlayer(playerInput.gameObject);
+    for (int i = 0; i < PlayerCount; ++i)
+    {
+      Vector3 clampedPosition = GetPlayerPosition(i);
+      clampedPosition.x = Mathf.Clamp(clampedPosition.x, -13.75f, 13.75f);
+      clampedPosition.z = Mathf.Clamp(clampedPosition.z,  -8.75f,  8.75f);
+      averagePosition += clampedPosition;
+    }
+
+    return averagePosition / PlayerCount;
+  }
+
+  public Vector3 GetPlayerPosition(int playerIndex)
+  {
+    if (playerIndex > PlayerCount) throw new System.Exception("No such player");
+
+    return PlayerScripts[playerIndex].gameObject.transform.position;
+  }
+
+  public Vector3 GetPlayerSpawnPosition(int playerIndex)
+  {
+    switch (PlayerCount)
+    {
+      case 0: { return new Vector3(0, _spawnYOffset, 0); }
+      case 1: { return new Vector3(0, _spawnYOffset, 0); }
+      case 2:
+      {
+        switch (playerIndex)
+        {
+          case 0:  { return new Vector3(-10, _spawnYOffset,  6); }
+          default: { return new Vector3( 10, _spawnYOffset, -6); }
+        }
+      }
+      case 3:
+      {
+        switch (playerIndex)
+        {
+          case 0:  { return new Vector3( 0,  _spawnYOffset,  6); }
+          case 1:  { return new Vector3(-10, _spawnYOffset, -6); }
+          default: { return new Vector3( 10, _spawnYOffset, -6); }
+        }
+      }
+      case 4:
+      {
+        switch (playerIndex)
+        {
+          case 0:  { return new Vector3(-10, _spawnYOffset,  6); }
+          case 1:  { return new Vector3(-10, _spawnYOffset, -6); }
+          case 2:  { return new Vector3( 10, _spawnYOffset,  6); }
+          default: { return new Vector3( 10, _spawnYOffset, -6); }
+        }
+      }
+    }
+    throw new System.Exception("Unexpected number of players");
+  }
+
+  public void OnPlayerJoined(PlayerInput playerInput)
+  {
+    Movement playerScript = playerInput.gameObject.GetComponent<Movement>();
+    PlayerScripts.Add(playerScript);
+
+    reinitializeAllPlayers();
+
+    Debug.Log("Player has joined.");
   }
   
-  public void OnPlayerLeft() {
-    Debug.Log("MultiplayerManager: OnPlayerLeft() not supported!");
+  public void OnPlayerLeft(PlayerInput playerInput)
+  {
+    Movement playerScript = playerInput.gameObject.GetComponent<Movement>();
+    PlayerScripts.Remove(playerScript);
+    
+    reinitializeAllPlayers();
+
+    Debug.Log("Player has left.");
+  }
+
+  // ================== Helpers
+
+  private void reinitializeAllPlayers()
+  {
+    for (int i = 0; i < PlayerCount; ++i)
+    {
+      Movement playerScript = PlayerScripts[i];
+
+      playerScript.PlayerNumber = i;
+
+      Vector3 spawnPosition = GetPlayerSpawnPosition(i);
+      playerScript.RespawnPosition = spawnPosition;
+
+      if (GameStateManager.Instance.State == GameState.Menu)
+      {
+        playerScript.gameObject.transform.position = spawnPosition;
+      }
+    }
   }
 }

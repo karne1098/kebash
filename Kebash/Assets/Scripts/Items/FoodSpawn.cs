@@ -62,6 +62,3 @@ public class FoodSpawn : MonoBehaviour
     Debug.Log(gameStarted);
   }
 }
-
-
-

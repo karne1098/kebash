@@ -66,8 +66,6 @@ public class Movement : MonoBehaviour
   // Falling
   private float _fallRespawnWaitDuration = 3; // Delay after falling before teleporting back to top
   private float _fallInvDuration = 2;         // How long the player is invulnerable after teleporting back up
-  
-
 
   // ================== Accessors
 
@@ -100,17 +98,16 @@ public class Movement : MonoBehaviour
 
   void FixedUpdate()
   {
-    // Prevent player control in certain situations
     updateIsOnGround();
+    
+    // Handle movement in different states
+    if (GameStateManager.Instance.State == GameState.Menu) {
+      _rigidbody.velocity = Vector3.zero;
+      return;
+    }
+    if (GameStateManager.Instance.State != GameState.GamePlay) return;
 
-    if (GameStateManager.Instance.getState() != GameState.gamePlay){
-    _currentMove = _rigidbody.velocity;
-    _currentMove.x = 0;
-    _currentMove.z = 0;
-    _rigidbody.velocity = _currentMove;
-     return;
-     }
-
+    // Prevent player control in certain situations
     if (IsCharging || !IsOnGround) return;
 
     // Attempt to shoot
@@ -160,26 +157,33 @@ public class Movement : MonoBehaviour
     // Got hit by other player's damager collider OR got hit by food
     if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && IsOnGround)
     {
-
       if (other.gameObject.tag == "Player")
-            {
-                other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
-            }
+      {
+        other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
+      }
+
       Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
-      if(!(KebabStack.Count == 0)) {
+
+      if (KebabStack.Count != 0)
+      {
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+
         // Disable all children
-        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i)
+        {
           Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
           a.gameObject.SetActive(false);
         }
+
         Debug.Log("Player " + PlayerNumber + "Has been hit and has this much health: " + KebabStack.Count);
       }
-      else{
+      else
+      {
         Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
         StartCoroutine(deathTeleport(RespawnPosition, true));
         _timesDied += 1;
       }
+
       startInvulnerability(_hitInvDuration);
       return;
     }
@@ -216,26 +220,24 @@ public class Movement : MonoBehaviour
   {
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
-        if ((_moveCheck && (_idealMove == Vector3.zero)) || (_rigidbody.position.y != 0.525f))
-        {
-            _moveCheck = false;
-            _walkParticles.Stop();
-        }
-        else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
-        {
-            _moveCheck = true;
-            _walkParticles.Play();
-        }
+    if ((_moveCheck && (_idealMove == Vector3.zero)) || (_rigidbody.position.y != 0.525f))
+    {
+        _moveCheck = false;
+        _walkParticles.Stop();
+    }
+    else if ((_moveCheck == false) && (_idealMove != Vector3.zero))
+    {
+        _moveCheck = true;
+        _walkParticles.Play();
+    }
 
-        _currentMove = Vector3.Lerp(
+    _currentMove = Vector3.Lerp(
       _rigidbody.velocity,
       getAngleDependentSpeed() * _idealMove,
       _moveLerpRate);
 
     _currentMove.y = _rigidbody.velocity.y; // Avoid changing rigidbody's Y velocity
     _rigidbody.velocity = _currentMove;
-
-
   }
 
   private void turn()
@@ -325,7 +327,7 @@ public class Movement : MonoBehaviour
 
     _isOnShootCoolDown = true;
 
-    PooledObjectIndex num = KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+    PooledObjectIndex foodType = KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
     // Disable all children
     for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
@@ -333,23 +335,23 @@ public class Movement : MonoBehaviour
       a.gameObject.SetActive(false);
     }
 
-    Transform tip = _foodSliceTransforms.Last();    //todo: change location
+    Transform tip = _foodSliceTransforms.Last(); //todo: change location
     GameObject bulletType = _foodBulletPrefab;
-    int nnum = (int) num;
-    switch (nnum)
+    switch (foodType)
     {
-      case 1:{ bulletType = _lambPrefab; break;}
-      case 2: { bulletType = _onionPrefab; break;}
-      case 3: { bulletType = _tomatoPrefab; break;}
-      case 4: { bulletType = _mushroomPrefab; break;}
-      case 5: { bulletType = _eggplantPrefab; break;}
-      case 6: { bulletType = _pepperPrefab; break;}
-      default: { break;}
+      case PooledObjectIndex.Null:     { throw new System.Exception();        }
+      case PooledObjectIndex.Lamb:     { bulletType = _lambPrefab;     break; }
+      case PooledObjectIndex.Onion:    { bulletType = _onionPrefab;    break; }
+      case PooledObjectIndex.Tomato:   { bulletType = _tomatoPrefab;   break; }
+      case PooledObjectIndex.Mushroom: { bulletType = _mushroomPrefab; break; }
+      case PooledObjectIndex.Pepper:   { bulletType = _eggplantPrefab; break; }
+      case PooledObjectIndex.Eggplant: { bulletType = _pepperPrefab;   break; }
     }    
+    
     GameObject foodBullet = Instantiate(bulletType, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
-        foodBullet.GetComponent<FoodShootBase>().StartShot(tip);
-        // Wait for cooldown
-        yield return new WaitForSeconds(_shootCoolDown);
+    foodBullet.GetComponent<FoodShootBase>().StartShot(tip);
+    // Wait for cooldown
+    yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
   }
 
@@ -374,19 +376,23 @@ public class Movement : MonoBehaviour
   private IEnumerator waitToTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
+
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
+
     // Take one unit of damage
     if(!(KebabStack.Count == 0)) {
-        KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
-        // Disable all children
-        for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
-          Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
-          a.gameObject.SetActive(false);
-        }
-        Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
+      KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
+
+      // Disable all children
+      for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
+        Transform a = _foodSliceTransforms[KebabStack.Count].transform.GetChild(i);
+        a.gameObject.SetActive(false);
+      }
+      Debug.Log("Player " + PlayerNumber + "had one health removed by falling and now has: " + KebabStack.Count);
     }
+
     // Restore stamina
     _stamina = _maxStamina;
 
@@ -394,7 +400,7 @@ public class Movement : MonoBehaviour
     startInvulnerability(_fallInvDuration);
   }
 
-    private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
+  private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
   {
     // Start falling from the sky
     for(int i = 0; i < 3; i++){
