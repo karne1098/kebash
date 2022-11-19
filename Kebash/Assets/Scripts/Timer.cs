@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timeTextTMP;
     public GameObject gameOverTextObject;
     private bool gameStarted = false;
+    public Color newColor;
 
     // ================== Methods
     
@@ -17,6 +18,12 @@ public class Timer : MonoBehaviour
     {
       if (GameStateManager.Instance.State == GameState.GamePlay)
       {
+        if (!gameStarted) 
+        {
+          timeTextTMP.color = Color.Lerp(timeTextTMP.color, newColor, 1000f * Time.deltaTime);
+          gameStarted = true;
+        }
+        
         if (timeValue > 0) 
         {
           timeValue -= Time.deltaTime;
