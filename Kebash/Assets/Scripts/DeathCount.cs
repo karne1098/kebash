@@ -34,11 +34,18 @@ public class DeathCount : MonoBehaviour
         int PlayerCount = MultiplayerManager.Instance.PlayerCount;
         List<Movement> playerList = MultiplayerManager.Instance.PlayerScripts;
 
-        for(int i = 0; i < PlayerCount; i++) 
+        for(int i = 0; i < 4; i++) 
         {
-            deathCounts[i].gameObject.SetActive(true);
-            //deathCounts[i].text = string.Format("{0}", playerList[i].TimesDied);
-            Debug.Log(playerList[i].TimesDied);
+            if(i >= playerList.Count)
+            {
+                deathCounts[i].gameObject.SetActive(false);
+            }
+            else{
+                deathCounts[i].gameObject.SetActive(true);
+            }
+            
+            deathCounts[i].text = string.Format("{0}", playerList[i].TimesDied);
+            //Debug.Log(playerList[i].TimesDied);
             //deathCounts[i].text = playerList[i].TimesDied.ToString;
             //deathCounts[i].setText(playerList[i].TimesDied.ToString);
         }
