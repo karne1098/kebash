@@ -62,7 +62,6 @@ public class ButtonAnim : MonoBehaviour
   {
     while ((transform.position - targetPosition).sqrMagnitude > 0.01f)
     {
-      if (isDepressing) { Debug.Log("Lerping!"); }
       transform.position = Vector3.Lerp(
         transform.position,
         targetPosition,

@@ -72,7 +72,8 @@ public class StaminaBar : MonoBehaviour
 
   public void shake()
   {
-    if (_shaking == false){
+    if (_shaking == false)
+    {
       StopCoroutine("shakeStamina");
       StartCoroutine("shakeStamina");
     }
@@ -86,7 +87,7 @@ public class StaminaBar : MonoBehaviour
       _shaking = true;
     }
 
-     yield return new WaitForSeconds(_shakeDuration);
+    yield return new WaitForSeconds(_shakeDuration);
 
     //Stop shaking
     _shaking = false;
@@ -94,32 +95,3 @@ public class StaminaBar : MonoBehaviour
     _fill.color = originalColor;
   }
 }
-
-/*
-if (_shaking)
-{
-  Vector3 newPos = _sliderBarTransform.position + Random.insideUnitSphere * _shakeAmount;
-  newPos.y = _sliderBarTransform.position.y;
-  newPos.z = _sliderBarTransform.position.z;
-  _sliderBarTransform.position = newPos;
-  _staminaFill.color = Color.red;
-}
-
-private IEnumerator shakeStamina()
-{
-  //Start shaking
-  Vector3 originalPos = _sliderBarTransform.position;
-  Color originalColor = _staminaFill.color;
-  if(_shaking == false)
-  {
-    _shaking = true;
-  }
-
-  yield return new WaitForSeconds(_shakeDuration);
-
-  //Stop shaking
-  _shaking = false;
-  _sliderBarTransform.position = originalPos;
-  _staminaFill.color = originalColor;
-}
-*/

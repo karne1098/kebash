@@ -30,7 +30,6 @@ public class MainMenuManager : MonoBehaviour
   public void QuitGame()
   {
     AudioManager.Instance.Play("vineBoom");
-    Debug.Log("Quitting game!");
     Application.Quit();
   }
 
@@ -65,7 +64,6 @@ public class MainMenuManager : MonoBehaviour
   {
     foreach (ButtonAnim x in _buttonModels.GetComponentsInChildren<ButtonAnim>())
     {
-      Debug.Log("Hello!");
       x.Depress();
     }
   }
@@ -74,7 +72,6 @@ public class MainMenuManager : MonoBehaviour
   {
     foreach (ButtonAnim x in _buttonModels.GetComponentsInChildren<ButtonAnim>())
     {
-      Debug.Log("Hello!");
       x.Reset();
     }
   }
