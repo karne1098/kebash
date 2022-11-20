@@ -20,7 +20,6 @@ public class CameraManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
-
     _initialCameraPosition = CameraTransform.position;
   }
 

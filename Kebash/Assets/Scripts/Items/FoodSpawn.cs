@@ -37,7 +37,6 @@ public class FoodSpawn : MonoBehaviour
       if (GameStateManager.Instance.State == GameState.GamePlay) {
         // Select a random food item
         PooledObjectIndex foodIndex = (PooledObjectIndex) Random.Range(1, 7);
-        foodIndex = PooledObjectIndex.Mushroom;
 
         // Decide on a spawn location
         float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0

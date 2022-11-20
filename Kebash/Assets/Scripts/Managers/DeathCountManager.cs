@@ -17,6 +17,28 @@ public class DeathCountManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
+    ResetForMain();
+  }
+  
+  void Update()
+  {
+    disableAllText();
+    for (int i = 0; i < deathCounts.Length; ++i)
+    {
+      if (i < MultiplayerManager.Instance.PlayerCount)
+      {
+        TextMeshProUGUI textElement = getScorePositionFromIndex(i);
+        textElement.enabled = true;
+        if (GameStateManager.Instance.State == GameState.Menu)
+        {
+          textElement.text = "Player " + (i + 1).ToString() + " Joined!";
+        }
+        else
+        {
+          textElement.text = deathCounts[i].ToString();
+        }
+      }
+    }
   }
 
   public void incrementDeath(int playerNumber)
@@ -25,47 +47,35 @@ public class DeathCountManager : MonoBehaviour
     deathCounts[playerNumber] += 1;
   }
 
-  TextMeshProUGUI getScorePositionFromIndex(int playerNumber)
+  public void ResetForMain()
   {
-    Vector3 vec = MultiplayerManager.Instance.GetPlayerSpawnPosition(playerNumber);
-    if (vec[0] <= 0)
+    for (int i = 0; i < deathCounts.Length; ++i)
     {
-      if (vec[2] >= 0)
-      {
-        return topLeft;
-      }
-      return bottomLeft;
-    }
-    else
-    {
-      if (vec[2] >= 0)
-      {
-        return topRight;
-      }
-      return bottomRight;
+      deathCounts[i] = 0;
     }
   }
 
-  void DisableAllText()
+  // ================== Helpers
+
+  private TextMeshProUGUI getScorePositionFromIndex(int playerNumber)
+  {
+    Vector3 vec = MultiplayerManager.Instance.GetPlayerSpawnPosition(playerNumber);
+
+    if (vec[0] <= 0)
+    {
+      return vec[2] >= 0 ? topLeft : bottomLeft;
+    }
+    else
+    {
+      return vec[2] >= 0 ? topRight : bottomRight;
+    }
+  }
+
+  private void disableAllText()
   {
     topLeft.enabled     = false;
     topRight.enabled    = false;
     bottomLeft.enabled  = false;
     bottomRight.enabled = false;
-  }
-
-  void Update() {
-    DisableAllText();
-    for (int i = 0; i < deathCounts.Length; i++) {
-      if (i < MultiplayerManager.Instance.PlayerCount) {
-        TextMeshProUGUI textElement = getScorePositionFromIndex(i);
-        textElement.enabled = true;
-        if (GameStateManager.Instance.State == GameState.Menu) {
-          textElement.text = "Player " + (i + 1).ToString() + " Joined!";
-        } else {
-          textElement.text = deathCounts[i].ToString();
-        }
-      }
-    }
   }
 }

@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
   [SerializeField] private TextMeshProUGUI _timerTextTMP;
   public static Timer Instance;
 
-  public float _timeValue = 60;
+  public float _timeValue = 5;
 
   // ================== Methods
   

@@ -53,9 +53,11 @@ public class GameStateManager : MonoBehaviour
       {
         Debug.Log("Moved to menu state.");
 
-        Timer.Instance.ResetForMain();
-        CameraManager.Instance.ResetForMain();
-        MainMenuManager.Instance.ResetForMain();
+        Timer            .Instance.ResetForMain();
+        CameraManager    .Instance.ResetForMain();
+        DeathCountManager.Instance.ResetForMain();
+        MainMenuManager  .Instance.ResetForMain();
+        
         MultiplayerManager.Instance.ReinitializeAllPlayers();
         MultiplayerManager.Instance.PlayerInputManager.EnableJoining();
 
