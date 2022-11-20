@@ -77,6 +77,7 @@ public class Movement : MonoBehaviour
   public Stack<PooledObjectIndex> KebabStack   { get; private set; } = new Stack<PooledObjectIndex>();
 
   // ================== Methods
+  
   void Start()
   {
     // Player number, position, rotation handled by MultiplayerManager on spawn
@@ -107,17 +108,30 @@ public class Movement : MonoBehaviour
   {
     updateIsOnGround();
     
-    // Handle movement in different states
+    // Force respawn position during menu state
     if (GameStateManager.Instance.State == GameState.Menu)
     {
       _rigidbody.position = RespawnPosition;
       _rigidbody.velocity = Vector3.zero;
       _rigidbody.useGravity = false;
+      _animator.SetBool("Charging", false);
+      _animator.SetFloat("InputY", 0);
+      _animator.SetFloat("InputX", 0);
       return;
     }
     else
     {
       _rigidbody.useGravity = true;
+    }
+
+    // Prevent horizontal movement during game over state
+    if (GameStateManager.Instance.State == GameState.GameOver)
+    {
+      _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+      _animator.SetBool("Charging", false);
+      _animator.SetFloat("InputY", 0);
+      _animator.SetFloat("InputX", 0);
+      return;
     }
 
     // Prevent player control in certain situations

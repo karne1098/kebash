@@ -53,12 +53,16 @@ public class ButtonAnim : MonoBehaviour
 
   public void ResetForMain()
   {
-    transform.position = _initialPosition;
+    transform.position = _donePosition;
+    
+    _preventAllOtherCoroutines = true;
+    StopAllCoroutines();
+    StartCoroutine(lerpTowards(_initialPosition, true));
   }
 
   // ================== Helpers
 
-  private IEnumerator lerpTowards(Vector3 targetPosition, bool isDepressing = false)
+  private IEnumerator lerpTowards(Vector3 targetPosition, bool mustResetPreventer = false)
   {
     while ((transform.position - targetPosition).sqrMagnitude > 0.01f)
     {
@@ -70,6 +74,6 @@ public class ButtonAnim : MonoBehaviour
       yield return null;
     }
 
-    if (isDepressing) { _preventAllOtherCoroutines = false; }
+    if (mustResetPreventer) { _preventAllOtherCoroutines = false; }
   }
 }
