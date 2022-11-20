@@ -143,7 +143,6 @@ public class Movement : MonoBehaviour
     {
       _staminaBar.shake();
       AudioManager.Instance.Play("nocharge", PlayerIndex + 1);
-      Debug.Log("Not enough stamina to charge");
     }
 
     move();
@@ -204,7 +203,7 @@ public class Movement : MonoBehaviour
           a.gameObject.SetActive(false);
         }
 
-        Debug.Log("Player " + PlayerIndex + "Has been hit and has this much health: " + KebabStack.Count);
+        Debug.Log("Player " + PlayerIndex + " has been hit and has this much health: " + KebabStack.Count);
       }
       else
       {
@@ -257,7 +256,6 @@ public class Movement : MonoBehaviour
 
   private void move()
   {
-    Debug.Log("trying to move");
     _idealMove = Utils.V2ToV3(_inputData.Move);
 
     if (_currentMove.magnitude > 0.02f)
@@ -442,9 +440,9 @@ public class Movement : MonoBehaviour
       }
     }
 
-    Debug.Log("Player " + PlayerIndex + "has died!");
+    Debug.Log("Player " + PlayerIndex + " has died!");
     DeathCountManager.Instance.IncrementDeath(PlayerIndex);
-    Debug.Log("Player " + PlayerIndex + "is respawning...");
+    Debug.Log("Player " + PlayerIndex + " is respawning...");
 
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
