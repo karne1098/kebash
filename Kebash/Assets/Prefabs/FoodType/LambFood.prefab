@@ -9763,7 +9763,7 @@ GameObject:
   - component: {fileID: 7068395155985594649}
   m_Layer: 9
   m_Name: LambFood
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

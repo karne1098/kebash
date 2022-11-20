@@ -57,6 +57,7 @@ public class GameStateManager : MonoBehaviour
         CameraManager    .Instance.ResetForMain();
         DeathCountManager.Instance.ResetForMain();
         MainMenuManager  .Instance.ResetForMain();
+        FoodSpawn        .Instance.ResetForMain();
         
         MultiplayerManager.Instance.ReinitializeAllPlayers();
         MultiplayerManager.Instance.PlayerInputManager.EnableJoining();

@@ -31,6 +31,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomFood
       objectReference: {fileID: 0}
+    - target: {fileID: 6723736742880330824, guid: fbba3e1e1c421524388a823973b30489, type: 3}
+      propertyPath: m_TagString
+      value: food
+      objectReference: {fileID: 0}
     - target: {fileID: 7528216763935266139, guid: fbba3e1e1c421524388a823973b30489, type: 3}
       propertyPath: m_RootOrder
       value: 0

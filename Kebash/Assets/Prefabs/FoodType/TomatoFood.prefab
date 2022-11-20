@@ -4820,7 +4820,7 @@ GameObject:
   - component: {fileID: 3775552470326312265}
   m_Layer: 9
   m_Name: TomatoFood
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,6 +22,15 @@ public class FoodSpawn : MonoBehaviour
   {
     Instance = this;
   }
+
+  public void ResetForMain(){
+      GameObject[] guys = GameObject.FindGameObjectsWithTag("food");
+      foreach (GameObject snack in guys)
+        {
+          snack.SetActive(false);
+          snack.transform.position = new Vector3(0, 15, 0);
+        }
+  }
   
   void Start()
   {
