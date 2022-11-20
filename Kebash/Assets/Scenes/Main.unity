@@ -414,38 +414,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 464010351, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 464010353, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_text
-      value: This is dummy text! It is intentionally really long!
-      objectReference: {fileID: 0}
-    - target: {fileID: 638385631, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 638385633, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_text
-      value: This is dummy text! It is intentionally really long!
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220859540, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_text
-      value: This is dummy text! It is intentionally really long!
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220859542, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912495328, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912495330, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
-      propertyPath: m_text
-      value: This is dummy text! It is intentionally really long!
-      objectReference: {fileID: 0}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
       value: GameManagers
