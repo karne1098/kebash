@@ -8,7 +8,7 @@ public class MultiplayerManager : MonoBehaviour
 {
   public static MultiplayerManager Instance;
 
-  private float _spawnYOffset = 20;
+  private float _spawnYOffset = 30;
 
   // ================== Accessors
 
