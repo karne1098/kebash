@@ -24,7 +24,24 @@ public class DeathCountManager : MonoBehaviour
   
   void Update()
   {
-    disableAllText();
+    if(MultiplayerManager.Instance.PlayerCount < 4){
+      bottomRight.enabled = true;
+      bottomRight.text = "Press any key to join.";
+      Debug.Log("Should be pinging for 3");
+      if(MultiplayerManager.Instance.PlayerCount < 3){
+        bottomLeft.enabled = true;
+        bottomLeft.text = "Press any key to join.";
+        if(MultiplayerManager.Instance.PlayerCount < 2){
+          topRight.enabled = true;
+          topRight.text = "Press any key to join.";
+          if(MultiplayerManager.Instance.PlayerCount < 1){
+            topLeft.enabled = true;
+            topLeft.text = "Press any key to join.";
+          }
+        }
+      }
+    }
+    //disableAllText();
     for (int i = 0; i < deathCounts.Length; ++i)
     {
       if (i < MultiplayerManager.Instance.PlayerCount)

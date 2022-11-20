@@ -414,6 +414,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 107812969042062965, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -102.626
+      objectReference: {fileID: 0}
     - target: {fileID: 7703677705268590124, guid: 3a628176f140d4c41b80cac348ed50ab, type: 3}
       propertyPath: m_Name
       value: GameManagers
