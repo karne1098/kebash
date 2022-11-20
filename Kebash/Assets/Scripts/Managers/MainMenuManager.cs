@@ -22,6 +22,8 @@ public class MainMenuManager : MonoBehaviour
 
   public void PlayGame()
   {
+    if (MultiplayerManager.Instance.PlayerCount == 0) return;
+
     StartCoroutine("startGame");
   }
 
@@ -32,6 +34,14 @@ public class MainMenuManager : MonoBehaviour
     Application.Quit();
   }
 
+  public void ResetToMenu()
+  {
+    resetButtonModels();
+    _invisibleButtons.SetActive(true);
+    _instructionsCreditsOverlays.SetActive(true);
+    AudioManager.Instance.Stop("end");
+  }
+
   // ================== Helpers
 
   private IEnumerator startGame()
@@ -39,7 +49,7 @@ public class MainMenuManager : MonoBehaviour
     AudioManager.Instance.Stop("bgMusic");
     AudioManager.Instance.Play("intro");
 
-    // _buttonModels.SetActive(false);
+    depressButtonModels();
     _invisibleButtons.SetActive(false);
     _instructionsCreditsOverlays.SetActive(false);
 
@@ -51,12 +61,21 @@ public class MainMenuManager : MonoBehaviour
     // GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
   }
 
-  public void ResetToMenu()
+  private void depressButtonModels()
   {
-    _buttonModels.SetActive(true);
-    _invisibleButtons.SetActive(true);
-    _instructionsCreditsOverlays.SetActive(true);
-    AudioManager.Instance.Stop("end");
+    foreach (ButtonAnim x in _buttonModels.GetComponentsInChildren<ButtonAnim>())
+    {
+      Debug.Log("Hello!");
+      x.Depress();
+    }
+  }
 
+  private void resetButtonModels()
+  {
+    foreach (ButtonAnim x in _buttonModels.GetComponentsInChildren<ButtonAnim>())
+    {
+      Debug.Log("Hello!");
+      x.Reset();
+    }
   }
 }

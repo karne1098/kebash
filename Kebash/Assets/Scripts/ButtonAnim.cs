@@ -12,8 +12,9 @@ public class ButtonAnim : MonoBehaviour
   [SerializeField] private Vector3 _doneDisplacement;
   private Vector3 _donePosition;
 
-
   private float _buttonLerpRate = 0.2f;
+
+  private bool _preventAllOtherCoroutines = false;
   
   // ================== Methods
   
@@ -26,33 +27,42 @@ public class ButtonAnim : MonoBehaviour
 
   void OnEnable() 
   {
-    transform.position = _initialPosition;
-  }
-
-  public void Click()
-  {
-    StopAllCoroutines();
-    StartCoroutine(lerpTowards(_donePosition));
+    Reset();
   }
 
   public void PointerEnter()
   {
+    if (_preventAllOtherCoroutines) return;
     StopAllCoroutines();
     StartCoroutine(lerpTowards(_hoverPosition));
   }
 
   public void PointerExit()
   {
+    if (_preventAllOtherCoroutines) return;
     StopAllCoroutines();
     StartCoroutine(lerpTowards(_initialPosition));
   }
 
+  public void Depress()
+  {
+    _preventAllOtherCoroutines = true;
+    StopAllCoroutines();
+    StartCoroutine(lerpTowards(_donePosition, true));
+  }
+
+  public void Reset()
+  {
+    transform.position = _initialPosition;
+  }
+
   // ================== Helpers
 
-  private IEnumerator lerpTowards(Vector3 targetPosition)
+  private IEnumerator lerpTowards(Vector3 targetPosition, bool isDepressing = false)
   {
-    while ((transform.position - targetPosition).sqrMagnitude > Mathf.Epsilon)
+    while ((transform.position - targetPosition).sqrMagnitude > 0.01f)
     {
+      if (isDepressing) { Debug.Log("Lerping!"); }
       transform.position = Vector3.Lerp(
         transform.position,
         targetPosition,
@@ -60,6 +70,7 @@ public class ButtonAnim : MonoBehaviour
       
       yield return null;
     }
-    
+
+    if (isDepressing) { _preventAllOtherCoroutines = false; }
   }
 }

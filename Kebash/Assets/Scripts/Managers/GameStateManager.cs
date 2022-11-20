@@ -33,10 +33,6 @@ public class GameStateManager : MonoBehaviour
     Instance = this;
   }
 
-  void Reset(){
-
-  }
-
   void Start()
   {
     GameStateManager.Instance.UpdateGameState(GameState.Menu);
