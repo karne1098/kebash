@@ -93,6 +93,7 @@ public class GameStateManager : MonoBehaviour
         _pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0;
         AudioManager.Instance.Pause("gameMusic");
+        AudioManager.Instance.Pause("sizzle");
         break;
       }
       case GameState.GameOver:
