@@ -11,10 +11,10 @@ public class MeatShoot : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 _currentForce = fleshBody.velocity;
-        fleshBody.velocity = new Vector3(_currentForce.x * .8f, _currentForce.y, _currentForce.z * .8f);
+        fleshBody.velocity = new Vector3(_currentForce.x * .8f, 0.0f, _currentForce.z * .8f);
         if(large < 6){
             float a = flesh.transform.localScale.x;
-            flesh.transform.localScale = new Vector3(1.4f * a, flesh.transform.localScale.y, flesh.transform.localScale.z);
+            flesh.transform.localScale = new Vector3(1.4f * a, flesh.transform.localScale.y * 1.2f, flesh.transform.localScale.z);
             large += 1;
         }
         

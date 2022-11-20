@@ -15,8 +15,8 @@ public class MushroomShoot : MonoBehaviour
             GameObject bullet = Instantiate<GameObject>(bulletPrefab);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20f;
-            float maxSpread = 15f;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 10f;
+            float maxSpread = 8f;
             //bullet.GetComponent<FoodShootBase>().StartShot(bullet.transform);
             Vector3 dir = transform.forward + new Vector3(Random.Range(-maxSpread,maxSpread), 0, Random.Range(-maxSpread,maxSpread));
             bullet.GetComponent<Rigidbody>().AddForce(dir * 20f);
@@ -27,7 +27,7 @@ public class MushroomShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateBullet(bulletPrefab, 4);
+        CreateBullet(bulletPrefab, 2);
     }
  
 
