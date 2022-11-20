@@ -9,22 +9,25 @@ public class MushroomShoot : MonoBehaviour
     public GameObject bulletPrefab;
 
 
-    private void CreateBullet(GameObject bulletPrefab, float angleOffset = 0f)
+    private void CreateBullet(GameObject bulletPrefab, int spread)
     {
-        GameObject bullet = Instantiate<GameObject>(bulletPrefab);
-        bullet.transform.position = transform.position;
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20f;
-        bullet.GetComponent<FoodShootBase>().StartShot(bullet.transform);
-        bullet.GetComponent<Rigidbody>().AddForce(Quaternion.AngleAxis(angleOffset, Vector3.forward) * transform.right * 100.0f);
+        for(int i = 0; i <= spread; i++) {
+            GameObject bullet = Instantiate<GameObject>(bulletPrefab);
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20f;
+            float maxSpread = 15f;
+            //bullet.GetComponent<FoodShootBase>().StartShot(bullet.transform);
+            Vector3 dir = transform.forward + new Vector3(Random.Range(-maxSpread,maxSpread), 0, Random.Range(-maxSpread,maxSpread));
+            bullet.GetComponent<Rigidbody>().AddForce(dir * 20f);
+            //bullet.GetComponent<Rigidbody>().AddForce(Quaternion.AngleAxis(angleOffset, Vector3.forward) * transform.right * 400.0f);
+        }
    }
 
     // Start is called before the first frame update
     void Start()
     {
-        CreateBullet(bulletPrefab, -30f);
-        CreateBullet(bulletPrefab, -15f);
-        CreateBullet(bulletPrefab, 15f);
-        CreateBullet(bulletPrefab, 30f);
+        CreateBullet(bulletPrefab, 4);
     }
  
 
