@@ -27,9 +27,8 @@ public class MainMenuManager : MonoBehaviour
     StartCoroutine("startGame");
   }
 
-  public void QuitGame()
+  public void Quit()
   {
-    AudioManager.Instance.Play("vineBoom");
     Application.Quit();
   }
 

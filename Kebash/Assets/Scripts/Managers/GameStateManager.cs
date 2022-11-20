@@ -35,7 +35,7 @@ public class GameStateManager : MonoBehaviour
 
   void Start()
   {
-    GameStateManager.Instance.UpdateGameState(GameState.Menu);
+    GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
   }
   
   public void UpdateGameState(GameState newState)
@@ -117,6 +117,11 @@ public class GameStateManager : MonoBehaviour
   public void GoToMenu()
   {
     UpdateGameState(GameState.Menu);
+  }
+
+  public void Quit()
+  {
+    Application.Quit();
   }
 
   // ================== Helpers
