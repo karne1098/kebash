@@ -35,4 +35,9 @@ public class PlayerInputScript : MonoBehaviour
     if (context.started)       { InputData.Shoot = true; }
     else if (context.canceled) { InputData.Shoot = false; }
   }
+
+  public void onPause(InputAction.CallbackContext context)
+  {
+    if (context.started) { GameStateManager.Instance.TogglePause(); }
+  }
 }

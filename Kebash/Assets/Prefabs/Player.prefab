@@ -502,6 +502,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 382cd0a4-1474-45a3-acfa-e39f67c9679a
     m_ActionName: Player/Shoot[/Keyboard/m,/DualShock4GamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7426877618512967869}
+        m_TargetAssemblyTypeName: PlayerInputScript, Assembly-CSharp
+        m_MethodName: onPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3a2acb11-92e1-4e31-a26f-6fd66579f0ff
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

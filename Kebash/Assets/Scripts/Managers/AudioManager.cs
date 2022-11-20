@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
 
   // ================== Methods
 
-  void Awake ()
+  void Awake()
   {
     Instance = this;
 
@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
       _playerSoundDicts.Add(makePlayerSoundDict());
     }
   }
-  
+
   public void Play(string name, int playerIndex = -1)
   {
     Sound s = getSound(name, playerIndex);

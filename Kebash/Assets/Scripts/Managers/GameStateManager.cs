@@ -115,6 +115,27 @@ public class GameStateManager : MonoBehaviour
     UpdateGameState(GameState.GamePlay);
   }
 
+  public void TogglePause()
+  {
+    switch (State)
+    {
+      case GameState.GamePaused: 
+      {
+        State = GameState.GamePlay;
+        return;
+      }
+      case GameState.GamePlay: 
+      {
+        State = GameState.GamePaused;
+        return;
+      }
+      default:
+      {
+        return;
+      }
+    }
+  }
+
   public void GoToMenu()
   {
     UpdateGameState(GameState.Menu);

@@ -70,8 +70,8 @@ public class MultiplayerManager : MonoBehaviour
         switch (playerIndex)
         {
           case 0:  { return new Vector3( 0,  _spawnYOffset,  6); }
-          case 1:  { return new Vector3(-10, _spawnYOffset, -6); }
-          default: { return new Vector3( 10, _spawnYOffset, -6); }
+          case 1:  { return new Vector3(-10, _spawnYOffset, -3); }
+          default: { return new Vector3( 10, _spawnYOffset, -3); }
         }
       }
       case 4:
@@ -96,6 +96,8 @@ public class MultiplayerManager : MonoBehaviour
     ReinitializeAllPlayers();
 
     Debug.Log("Player has joined.");
+
+    if (PlayerCount == 4) PlayerInputManager.DisableJoining();
   }
   
   public void OnPlayerLeft(PlayerInput playerInput)
