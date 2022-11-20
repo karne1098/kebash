@@ -19,6 +19,10 @@ public class GameStateManager : MonoBehaviour
 {
   public static GameStateManager Instance;
 
+  [SerializeField] private GameObject _imageCount3;
+  [SerializeField] private GameObject _imageCount2;
+  [SerializeField] private GameObject _imageCount1;
+  [SerializeField] private GameObject _imageFight;
   [SerializeField] private GameObject _pauseMenuCanvas;
   [SerializeField] private GameObject _gameOverCanvas;
 
@@ -33,6 +37,11 @@ public class GameStateManager : MonoBehaviour
   void Awake()
   {
     Instance = this;
+
+    _imageCount3.SetActive(false);
+    _imageCount2.SetActive(false);
+    _imageCount1.SetActive(false);
+    _imageFight .SetActive(false);
   }
 
   void Start()
@@ -70,6 +79,7 @@ public class GameStateManager : MonoBehaviour
       case GameState.Spawning:
       {
         Debug.Log("Moved to spawning state.");
+        StartCoroutine("spawning");
         break;
       }
       case GameState.Countdown:
@@ -161,11 +171,37 @@ public class GameStateManager : MonoBehaviour
     yield return new WaitForSecondsRealtime(0.5f);
     _preventTogglePause = false;
   }
+  
+  private IEnumerator spawning()
+  {
+    AudioManager.Instance.Stop("bgMusic");
+    AudioManager.Instance.Play("intro");
+    yield return new WaitForSeconds(4.5f);
+    
+    UpdateGameState(GameState.Countdown);
+  }
 
   private IEnumerator countdown()
   {
     AudioManager.Instance.Play("countdown");
-    yield return new WaitForSeconds(3.5f);
-    GameStateManager.Instance.UpdateGameState(GameState.GamePlay);
+
+    _imageCount3.SetActive(true);
+
+    yield return new WaitForSeconds(1);
+    _imageCount3.SetActive(false);
+    _imageCount2.SetActive(true);
+
+    yield return new WaitForSeconds(1);
+    _imageCount2.SetActive(false);
+    _imageCount1.SetActive(true);
+
+    yield return new WaitForSeconds(1);
+    _imageCount1.SetActive(false);
+    _imageFight.SetActive(true);
+
+    yield return new WaitForSeconds(1f);
+    _imageFight.SetActive(false);
+    
+    UpdateGameState(GameState.GamePlay);
   }
 }

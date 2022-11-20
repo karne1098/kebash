@@ -28,14 +28,10 @@ public class Timer : MonoBehaviour
 
   void Update()
   {
-    if (GameStateManager.Instance.State == GameState.Countdown)
-    {
-      float newAlpha = Mathf.Lerp(_timerTextTMP.color.a, 0.4f, 0.05f);
-      _timerTextTMP.color = new Color(0, 0, 0, newAlpha);
-      displayTime(_timeValue);
-    }
-
     if (GameStateManager.Instance.State != GameState.GamePlay) return;
+
+    float newAlpha = Mathf.Lerp(_timerTextTMP.color.a, 0.4f, 0.05f);
+    _timerTextTMP.color = new Color(0, 0, 0, newAlpha);
     
     if (_timeValue > 0) 
     {

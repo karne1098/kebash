@@ -24,7 +24,11 @@ public class MainMenuManager : MonoBehaviour
   {
     if (MultiplayerManager.Instance.PlayerCount == 0) return;
 
-    StartCoroutine("startGame");
+    depressButtonModels();
+    _invisibleButtons.SetActive(false);
+    _instructionsCreditsOverlays.SetActive(false);
+
+    GameStateManager.Instance.UpdateGameState(GameState.Spawning);
   }
 
   public void Quit()
@@ -41,23 +45,6 @@ public class MainMenuManager : MonoBehaviour
   }
 
   // ================== Helpers
-
-  private IEnumerator startGame()
-  {
-    AudioManager.Instance.Stop("bgMusic");
-    AudioManager.Instance.Play("intro");
-
-    depressButtonModels();
-    _invisibleButtons.SetActive(false);
-    _instructionsCreditsOverlays.SetActive(false);
-
-    yield return new WaitForSeconds(4.5f);
-
-    GameStateManager.Instance.UpdateGameState(GameState.Countdown);
-
-    // yield return new WaitForSeconds(10f);
-    // GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
-  }
 
   private void depressButtonModels()
   {
