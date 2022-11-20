@@ -9,7 +9,8 @@ public class Timer : MonoBehaviour
   [SerializeField] private TextMeshProUGUI _timerTextTMP;
   public static Timer Instance;
 
-  public float _timeValue = 5;
+  private float _maxTimeValue = 10; // Do not change this! It is tied to the music
+  private float _timeValue;
 
   // ================== Methods
   
@@ -22,14 +23,16 @@ public class Timer : MonoBehaviour
   public void ResetForMain()
   {
     _timerTextTMP.color = new Color(0, 0, 0, 0);
-    _timeValue = 60;
+    _timeValue = _maxTimeValue;
   }
 
   void Update()
   {
     if (GameStateManager.Instance.State == GameState.Countdown)
     {
-      _timerTextTMP.color = new Color(0, 0, 0, 0.4f);
+      float newAlpha = Mathf.Lerp(_timerTextTMP.color.a, 0.4f, 0.05f);
+      _timerTextTMP.color = new Color(0, 0, 0, newAlpha);
+      displayTime(_timeValue);
     }
 
     if (GameStateManager.Instance.State != GameState.GamePlay) return;
