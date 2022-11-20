@@ -63,7 +63,9 @@ public class GameStateManager : MonoBehaviour
       case GameState.Menu:
       {
         Debug.Log("Moved to menu state.");
-
+        
+        AudioManager.Instance.Stop("end");
+        
         Timer            .Instance.ResetForMain();
         CameraManager    .Instance.ResetForMain();
         DeathCountManager.Instance.ResetForMain();

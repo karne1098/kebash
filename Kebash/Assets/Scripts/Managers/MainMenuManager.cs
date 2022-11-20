@@ -10,8 +10,10 @@ public class MainMenuManager : MonoBehaviour
   public static MainMenuManager Instance;
 
   [SerializeField] private GameObject _buttonModels;
-  [SerializeField] private GameObject _invisibleButtons;
-  [SerializeField] private GameObject _instructionsCreditsOverlays;
+  [SerializeField] private GameObject _invisibleButtonsCanvas;
+  [SerializeField] private GameObject _instructions1Canvas;
+  [SerializeField] private GameObject _instructions2Canvas;
+  [SerializeField] private GameObject _creditsCanvas;
 
   // ================== Methods
 
@@ -25,8 +27,11 @@ public class MainMenuManager : MonoBehaviour
     if (MultiplayerManager.Instance.PlayerCount == 0) return;
 
     depressButtonModels();
-    _invisibleButtons.SetActive(false);
-    _instructionsCreditsOverlays.SetActive(false);
+
+    _invisibleButtonsCanvas.SetActive(false);
+    _instructions1Canvas.SetActive(false);
+    _instructions2Canvas.SetActive(false);
+    _creditsCanvas.SetActive(false);
 
     GameStateManager.Instance.UpdateGameState(GameState.Spawning);
   }
@@ -39,9 +44,11 @@ public class MainMenuManager : MonoBehaviour
   public void ResetForMain()
   {
     resetButtonModels();
-    _invisibleButtons.SetActive(true);
-    _instructionsCreditsOverlays.SetActive(true);
-    AudioManager.Instance.Stop("end");
+
+    _invisibleButtonsCanvas.SetActive(true);
+    _instructions1Canvas.SetActive(false);
+    _instructions2Canvas.SetActive(false);
+    _creditsCanvas.SetActive(false);
   }
 
   // ================== Helpers
