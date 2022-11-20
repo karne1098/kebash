@@ -27,7 +27,7 @@ public class MainMenuManager : MonoBehaviour
 
   public void QuitGame()
   {
-    AudioManager.Instance.Play("vineBoom", 0);
+    AudioManager.Instance.Play("vineBoom");
     Debug.Log("Quitting game!");
     Application.Quit();
   }
@@ -36,8 +36,8 @@ public class MainMenuManager : MonoBehaviour
 
   private IEnumerator startGame()
   {
-    AudioManager.Instance.Stop("bgMusic", 0);
-    AudioManager.Instance.Play("intro", 0);
+    AudioManager.Instance.Stop("bgMusic");
+    AudioManager.Instance.Play("intro");
 
     // _buttonModels.SetActive(false);
     _invisibleButtons.SetActive(false);
@@ -46,7 +46,6 @@ public class MainMenuManager : MonoBehaviour
     yield return new WaitForSeconds(4.5f);
 
     GameStateManager.Instance.UpdateGameState(GameState.Countdown);
-    FoodSpawn.Instance.StartSpawning();
 
     // yield return new WaitForSeconds(10f);
     // GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
@@ -57,7 +56,7 @@ public class MainMenuManager : MonoBehaviour
     _buttonModels.SetActive(true);
     _invisibleButtons.SetActive(true);
     _instructionsCreditsOverlays.SetActive(true);
-    AudioManager.Instance.Stop("end", 0);
+    AudioManager.Instance.Stop("end");
 
   }
 }

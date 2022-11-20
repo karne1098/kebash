@@ -56,8 +56,15 @@ public class GameStateManager : MonoBehaviour
       case GameState.Menu:
       {
         Debug.Log("Moved to menu state.");
+
+        MainMenuManager.Instance.ResetToMenu();
+
+        CameraManager.Instance.ResetToInitialPosition();
+
+        MultiplayerManager.Instance.ReinitializeAllPlayers();
         MultiplayerManager.Instance.PlayerInputManager.EnableJoining();
-        AudioManager.Instance.Play("bgMusic", 0); 
+
+        AudioManager.Instance.Play("bgMusic"); 
         break;
       }
       case GameState.Spawning:
@@ -76,8 +83,8 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Moved to game play state.");
         Time.timeScale = 1;
         Timer.Instance.Reset();
-        AudioManager.Instance.Play("gameMusic", 0);
-        AudioManager.Instance.Play("sizzle", 0);
+        AudioManager.Instance.Play("gameMusic");
+        AudioManager.Instance.Play("sizzle");
         break;
       }
       case GameState.GamePaused:
@@ -85,16 +92,16 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Moved to game pause state.");
         _pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0;
-        AudioManager.Instance.Pause("gameMusic", 0);
+        AudioManager.Instance.Pause("gameMusic");
         break;
       }
       case GameState.GameOver:
       {
         Debug.Log("Moved to game over state.");
         _gameOverCanvas.SetActive(true);
-        AudioManager.Instance.Stop("gameMusic", 0);
-        AudioManager.Instance.Stop("sizzle", 0);
-        AudioManager.Instance.Play("end", 0);
+        AudioManager.Instance.Stop("gameMusic");
+        AudioManager.Instance.Stop("sizzle");
+        AudioManager.Instance.Play("end");
         break;
       }
     }
@@ -113,16 +120,13 @@ public class GameStateManager : MonoBehaviour
   public void GoToMenu()
   {
     UpdateGameState(GameState.Menu);
-    MainMenuManager.Instance.ResetToMenu();
-    MultiplayerManager.Instance.ReinitializeAllPlayers();
-    CameraManager.Instance.ResetToInitialPosition();
   }
 
   // ================== Helpers
 
   private IEnumerator countdown()
   {
-    AudioManager.Instance.Play("countdown", 0);
+    AudioManager.Instance.Play("countdown");
     yield return new WaitForSeconds(3.5f);
     GameStateManager.Instance.UpdateGameState(GameState.GamePlay);
   }
