@@ -163,17 +163,17 @@ MonoBehaviour:
   - objectToPool: {fileID: 0}
     initialAmount: 0
   - objectToPool: {fileID: 5668247638708286773, guid: a931dc67677218a4b92069e05f8ac371, type: 3}
-    initialAmount: 4
+    initialAmount: 3
   - objectToPool: {fileID: 620528312952018816, guid: e5207403b78d95344b7de714159083bf, type: 3}
-    initialAmount: 4
+    initialAmount: 3
   - objectToPool: {fileID: 1791067281726271845, guid: b6fddc174cf2df941bd2f423479e44bd, type: 3}
-    initialAmount: 4
+    initialAmount: 3
   - objectToPool: {fileID: 7453268337248687978, guid: 76a5eced98ab3e34caf08c0160e3be59, type: 3}
-    initialAmount: 4
+    initialAmount: 3
   - objectToPool: {fileID: 6033951868839966980, guid: c13fd569f9623814683770018a850f14, type: 3}
-    initialAmount: 4
+    initialAmount: 3
   - objectToPool: {fileID: 7102110165029408566, guid: 3b3b5a25e0868df4c9a5de12bf6798e0, type: 3}
-    initialAmount: 4
+    initialAmount: 3
 --- !u!1 &464010350
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ MonoBehaviour:
   sounds:
   - name: intro
     clip: {fileID: 8300000, guid: 08914faa8c27f4fee9ecc06760d5d555, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -1006,13 +1006,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: bgMusic
     clip: {fileID: 8300000, guid: 1e506739eb2aa654a925f707c73db01b, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: gameMusic
     clip: {fileID: 8300000, guid: 6e37cc49971254f01b26a88f07008228, type: 3}
-    volume: 0.701
+    volume: 0.4206
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -1030,68 +1030,68 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: sizzle
     clip: {fileID: 8300000, guid: e130cee93ccc7ad44a5c88cd3a27ab35, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: end
     clip: {fileID: 8300000, guid: 1432510e3f7ea334aaa2e5388e7e3445, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   charaSounds:
   - name: walk
     clip: {fileID: 8300000, guid: c20baafa91a805b43b585f1639061b1c, type: 3}
-    volume: 0.5
+    volume: 0.35
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: dash
     clip: {fileID: 8300000, guid: 088b08b6449436546a777d5f4a3bcfab, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: tired
     clip: {fileID: 8300000, guid: 5d59ac6a92bbea149ba1852404b6a439, type: 3}
-    volume: 0.432
+    volume: 0.2592
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: falling
     clip: {fileID: 8300000, guid: 6f35fce1f9925ad4fbd825cec90f3604, type: 3}
-    volume: 0.432
+    volume: 0.3024
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: damaged
     clip: {fileID: 8300000, guid: 2dacc8b8c2e728e468501172aa5f14c5, type: 3}
-    volume: 0.432
+    volume: 0.2592
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: die
     clip: {fileID: 8300000, guid: 500d31fb2dfcdf24d9904db29ae01cea, type: 3}
-    volume: 0.432
+    volume: 0.2592
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: pickup
     clip: {fileID: 8300000, guid: ff20274905a6eb341be26244cd123146, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: shoot
     clip: {fileID: 8300000, guid: 1a2616f8ff8ba11488c46d8482432604, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: nocharge
     clip: {fileID: 8300000, guid: 03ef720a58d91ba4197bc91d56da310e, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -2912,7 +2912,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5755616659643905897}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

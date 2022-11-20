@@ -23,13 +23,14 @@ public class FoodSpawn : MonoBehaviour
     Instance = this;
   }
 
-  public void ResetForMain(){
-      GameObject[] guys = GameObject.FindGameObjectsWithTag("food");
-      foreach (GameObject snack in guys)
-        {
-          snack.SetActive(false);
-          snack.transform.position = new Vector3(0, 15, 0);
-        }
+  public void ResetForMain()
+  {
+    GameObject[] guys = GameObject.FindGameObjectsWithTag("food");
+    foreach (GameObject snack in guys)
+    {
+      snack.SetActive(false);
+      snack.transform.position = new Vector3(0, 15, 0);
+    }
   }
   
   void Start()
@@ -43,9 +44,10 @@ public class FoodSpawn : MonoBehaviour
   {
     while(true)
     {
-      if (GameStateManager.Instance.State == GameState.GamePlay) {
+      if (GameStateManager.Instance.State == GameState.GamePlay)
+      {
         // Select a random food item
-        PooledObjectIndex foodIndex = (PooledObjectIndex) Random.Range(1, 3);
+        PooledObjectIndex foodIndex = (PooledObjectIndex) Random.Range(1, 7);
 
         // Decide on a spawn location
         float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0
@@ -65,7 +67,9 @@ public class FoodSpawn : MonoBehaviour
         float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
 
         yield return new WaitForSeconds(timeToNextSpawn);
-      } else {
+      }
+      else
+      {
         yield return new WaitForSeconds(1);
       }
     }
