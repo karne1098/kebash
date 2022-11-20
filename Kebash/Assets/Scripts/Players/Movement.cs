@@ -28,7 +28,8 @@ public class Movement : MonoBehaviour
   private float _foodBulletSpeed = 20;
   [SerializeField] private List<Transform> _foodSliceTransforms;
   [SerializeField] private GameObject _foodBulletPrefab;
-  //All Food Prefabs
+
+  // Food Bullet Prefabs
   [SerializeField] private GameObject _lambPrefab;
   [SerializeField] private GameObject _onionPrefab;
   [SerializeField] private GameObject _tomatoPrefab;
@@ -54,8 +55,8 @@ public class Movement : MonoBehaviour
   private float _minChargeCost     = 10f;  // Minimum stamina cost associated with one charge
   private float _minStaminaToStart = 20f;  // Minimum stamina needed to start a charge
   private float _staminaCostRate   = 100f;
-  public float  _staminaRegenRate  = 20f;
-  private float _regenDelay        = 0.2f; // Delay after charging ends before regen begins
+  public float  _staminaRegenRate  = 40f;
+  private float _regenDelay        = 0.15f; // Delay after charging ends before regen begins
   private bool  _canRegen    = true;
   private float _chargeSpeed = 14f;
 
@@ -111,14 +112,20 @@ public class Movement : MonoBehaviour
     updateIsOnGround();
     
     // Handle movement in different states
-    if (GameStateManager.Instance.State == GameState.Menu) {
+    if (GameStateManager.Instance.State == GameState.Menu)
+    {
+      _rigidbody.position = RespawnPosition;
       _rigidbody.velocity = Vector3.zero;
+      _rigidbody.useGravity = false;
       return;
     }
-    if (GameStateManager.Instance.State != GameState.GamePlay) return;
+    else
+    {
+      _rigidbody.useGravity = true;
+    }
 
     // Prevent player control in certain situations
-    if (IsCharging || !IsOnGround) return;
+    if (IsCharging || !IsOnGround || GameStateManager.Instance.State != GameState.GamePlay) return;
 
     // Attempt to shoot
     if (_inputData.Shoot && !_isOnShootCoolDown)
@@ -422,13 +429,13 @@ public class Movement : MonoBehaviour
     Debug.Log("Player " + PlayerNumber + "has died!");
     DeathCountManager.Instance.incrementDeath(PlayerNumber);
     Debug.Log("Player " + PlayerNumber + "is repawning...");
+
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
     _rigidbody.velocity = Vector3.zero;
     _rigidbody.useGravity = false;
     yield return new WaitForSeconds(_fallRespawnWaitDuration);
     _rigidbody.useGravity = true;
-
 
     // Restore stamina
     _stamina = _maxStamina;

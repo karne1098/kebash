@@ -12,6 +12,8 @@ public class MultiplayerManager : MonoBehaviour
 
   // ================== Accessors
 
+  public PlayerInputManager PlayerInputManager { get; private set; }
+
   public List<Movement> PlayerScripts { get; private set; } = new List<Movement>();
 
   public int PlayerCount { get { return PlayerScripts.Count; } }
@@ -21,25 +23,12 @@ public class MultiplayerManager : MonoBehaviour
   void Awake()
   { 
     Instance = this;
+    PlayerInputManager = gameObject.GetComponent<PlayerInputManager>();
   }
 
-  public Vector3 GetAveragePlayerPosition()
-  {
-    Vector3 averagePosition = Vector3.zero;
-
-    if (PlayerCount == 0) return averagePosition;
-
-    for (int i = 0; i < PlayerCount; ++i)
-    {
-      averagePosition += GetPlayerPosition(i);
-    }
-
-    return averagePosition / PlayerCount;
-  }
-
-  // Same, but bounded to screen space
   public Vector3 GetAveragePlayerPositionForCamera()
   {
+    // Player contributions are bounded to screen space
     Vector3 averagePosition = Vector3.zero;
 
     if (PlayerCount == 0) return averagePosition;
