@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
   private bool  _isOnShootCoolDown = false;
 
   // Falling
-  private float _fallRespawnWaitDuration = 3; // Delay after falling before teleporting back to top
+  private float _fallRespawnWaitDuration = 1; // Delay after dying before falling back down
   private float _fallInvDuration = 2;         // How long the player is invulnerable after teleporting back up
 
   // ================== Accessors
@@ -113,6 +113,8 @@ public class Movement : MonoBehaviour
       _animator.SetBool("Charging", false);
       _animator.SetFloat("InputY", 0);
       _animator.SetFloat("InputX", 0);
+      _walkParticles.Stop();
+      AudioManager.Instance.Stop("walk", PlayerIndex);
       return;
     }
 

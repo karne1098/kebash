@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
   [SerializeField] private TextMeshProUGUI _timerTextTMP;
   public static Timer Instance;
 
-  private float _maxTimeValue = 10; // Do not change this! It is tied to the music
+  private float _maxTimeValue = 60; // Do not change this! It is tied to the music
   private float _timeValue;
 
   // ================== Methods
