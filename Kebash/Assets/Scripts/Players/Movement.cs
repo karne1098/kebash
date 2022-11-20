@@ -25,7 +25,6 @@ public class Movement : MonoBehaviour
 
   // Food Stuff
   private int _maxFood = 3;
-  private float _foodBulletSpeed = 20;
   [SerializeField] private List<Transform> _foodSliceTransforms;
   [SerializeField] private GameObject _foodBulletPrefab;
 
@@ -46,7 +45,6 @@ public class Movement : MonoBehaviour
   private float _moveLerpRate          = 0.2f;
   private float _turnSlerpRate         = 0.08f;
   private float _strafeSpeedMultiplier = 0.5f;
-  private bool _moveCheck = false;
 
   // Charging
   private float _stamina;

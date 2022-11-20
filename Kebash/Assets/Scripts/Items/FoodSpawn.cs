@@ -7,8 +7,6 @@ public class FoodSpawn : MonoBehaviour
 {
 	public static FoodSpawn Instance;
 
-  private bool gameStarted = false;
-
   // Upper and lower bound for how long between food spawns (TODO: tweak)
   private float _maxTimeSpawn = 5f;
   private float _minTimeSpawn = 2f;
@@ -63,10 +61,5 @@ public class FoodSpawn : MonoBehaviour
         yield return new WaitForSeconds(1);
       }
     }
-  }
-
-  public void StartSpawning()
-  {
-    gameStarted = true;
   }
 }
