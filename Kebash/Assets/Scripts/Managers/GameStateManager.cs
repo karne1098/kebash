@@ -176,7 +176,15 @@ public class GameStateManager : MonoBehaviour
   {
     AudioManager.Instance.Stop("bgMusic");
     AudioManager.Instance.Play("intro");
-    yield return new WaitForSeconds(4.5f);
+
+    int count = MultiplayerManager.Instance.PlayerCount;
+    for (int i = 0; i < count; ++i)
+    {
+      MultiplayerManager.Instance.PlayerScripts[i].Rigidbody.useGravity = true;
+      yield return new WaitForSeconds(3f / count);
+    }
+
+    yield return new WaitForSeconds(1.5f);
     
     UpdateGameState(GameState.Countdown);
   }

@@ -71,37 +71,23 @@ public class Movement : MonoBehaviour
 
   public int PlayerIndex { get; set; } = -1;
 
-  public Vector3  RespawnPosition { get; set; } = new Vector3(0, 100, 0);
-  public bool IsCharging   { get; private set; } = false;
-  public bool IsOnGround   { get; private set; } = false;
-  public Stack<PooledObjectIndex> KebabStack   { get; private set; } = new Stack<PooledObjectIndex>();
+  public Rigidbody Rigidbody { get { return _rigidbody; } }
+
+  public Vector3 RespawnPosition { get; set; } = new Vector3(0, 100, 0);
+  public bool IsCharging { get; private set; } = false;
+  public bool IsOnGround { get; private set; } = false;
+  public Stack<PooledObjectIndex> KebabStack { get; private set; } = new Stack<PooledObjectIndex>();
 
   // ================== Methods
   
+  void Awake()
+  {
+    _inputData = GetComponent<PlayerInputScript>().InputData;
+  }
+
   void Start()
   {
-    // Player number, position, rotation handled by MultiplayerManager on spawn
-    _rigidbody.rotation = Quaternion.LookRotation(Vector3.forward); // FIXME: this should be handled elsewhere
-
-    // Basic player data
-    _inputData = GetComponent<PlayerInputScript>().InputData;
-
-    // Stuff to do with child game objects
-    _damagerObject.SetActive(false);
-
-    // Initialize some private stuff
-    _stamina = _maxStamina;
-    _minChargeDuration = _minChargeCost / _staminaCostRate;
-    _currentMove = _rigidbody.velocity;
-    _currentTurn = _rigidbody.rotation * Vector3.forward;
-
-    //disabling fully stacked kabob error
-    for(int j = 0; j < 3; j++){
-      for (int i = 0; i < _foodSliceTransforms[j].transform.childCount; ++i) {
-        Transform a = _foodSliceTransforms[j].transform.GetChild(i);
-        a.gameObject.SetActive(false);
-      }
-    }
+    ResetForMain();
   }
 
   void FixedUpdate()
@@ -118,10 +104,6 @@ public class Movement : MonoBehaviour
       _animator.SetFloat("InputY", 0);
       _animator.SetFloat("InputX", 0);
       return;
-    }
-    else
-    {
-      _rigidbody.useGravity = true;
     }
 
     // Prevent horizontal movement during game over state
@@ -156,7 +138,7 @@ public class Movement : MonoBehaviour
     if (_inputData.Charge && _stamina <= _minStaminaToStart)
     {
       _staminaBar.shake();
-      AudioManager.Instance.Play("nocharge", PlayerIndex + 1);
+      AudioManager.Instance.Play("nocharge", PlayerIndex);
     }
 
     move();
@@ -175,9 +157,9 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
-      AudioManager.Instance.Stop("walk", PlayerIndex + 1);
-      AudioManager.Instance.Stop("dash", PlayerIndex + 1);
-      AudioManager.Instance.Play("falling", PlayerIndex + 1);
+      AudioManager.Instance.Stop("walk", PlayerIndex);
+      AudioManager.Instance.Stop("dash", PlayerIndex);
+      AudioManager.Instance.Play("falling", PlayerIndex);
       Debug.Log("Player " + PlayerIndex + " has fallen!");
 
       StartCoroutine(deathTeleport(RespawnPosition, true));
@@ -207,7 +189,7 @@ public class Movement : MonoBehaviour
       {
         // Lost 1 hp
 
-        AudioManager.Instance.Play("damaged", PlayerIndex + 1);
+        AudioManager.Instance.Play("damaged", PlayerIndex);
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
         // Disable all children
@@ -222,7 +204,7 @@ public class Movement : MonoBehaviour
       else
       {
         // Died
-        AudioManager.Instance.Play("die", PlayerIndex + 1);
+        AudioManager.Instance.Play("die", PlayerIndex);
         StartCoroutine(deathTeleport(RespawnPosition, true));
         if (perpetratorIndex != -1 && perpetratorIndex != PlayerIndex)
         {
@@ -242,7 +224,7 @@ public class Movement : MonoBehaviour
     if (KebabStack.Count == _maxFood) return false;
     _stabParticles.Play();
 
-    AudioManager.Instance.Play("pickup", PlayerIndex + 1);
+    AudioManager.Instance.Play("pickup", PlayerIndex);
     Debug.Log("Player " + PlayerIndex + " added food. (Pooled object index: " + (int) index + ")"); 
 
     // Activate the correct position's correct child
@@ -258,6 +240,27 @@ public class Movement : MonoBehaviour
   public void PlayStab()
   {
     _stabParticles.Play();
+  }
+
+  public void ResetForMain()
+  {
+    // Player index was handled by MultiplayerManager
+    
+    // Position, rotation
+    transform.position = RespawnPosition;
+    Vector3 temp = new Vector3(RespawnPosition.x, 0, RespawnPosition.z);
+    transform.rotation = Quaternion.LookRotation(-temp.normalized, Vector3.up);
+
+    // Stuff to do with child game objects
+    _damagerObject.SetActive(false);
+
+    // Initialize some private stuff
+    _stamina = _maxStamina;
+    _minChargeDuration = _minChargeCost / _staminaCostRate;
+    _currentMove = _rigidbody.velocity;
+    _currentTurn = _rigidbody.rotation * Vector3.forward;
+
+    emptyKebab();
   }
 
   // ================== Helpers
@@ -278,12 +281,12 @@ public class Movement : MonoBehaviour
       {
         _walkParticles.Play();
       }
-      AudioManager.Instance.Play("walk", PlayerIndex + 1);
+      AudioManager.Instance.Play("walk", PlayerIndex);
     }
     else
     {
       _walkParticles.Stop();
-      AudioManager.Instance.Stop("walk", PlayerIndex + 1);
+      AudioManager.Instance.Stop("walk", PlayerIndex);
     }
 
     _currentMove = Vector3.Lerp(
@@ -355,8 +358,8 @@ public class Movement : MonoBehaviour
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
     _dashParticles.Play();
     _animator.SetBool("Charging", true);
-    AudioManager.Instance.Stop("walk", PlayerIndex + 1);
-    AudioManager.Instance.Play("dash", PlayerIndex + 1);
+    AudioManager.Instance.Stop("walk", PlayerIndex);
+    AudioManager.Instance.Play("dash", PlayerIndex);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -375,10 +378,10 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(false);
     _dashParticles.Stop();
     _animator.SetBool("Charging", false);
-    AudioManager.Instance.Stop("dash", PlayerIndex + 1);
+    AudioManager.Instance.Stop("dash", PlayerIndex);
     if (_stamina <= 0)
     {
-        AudioManager.Instance.Play("tired", PlayerIndex + 1);
+        AudioManager.Instance.Play("tired", PlayerIndex);
     }
 
     // Allow regen after some time
@@ -391,8 +394,8 @@ public class Movement : MonoBehaviour
     // Can't shoot if no food
     if (KebabStack.Count == 0) yield break;
 
-    //Plays shooting effect
-    AudioManager.Instance.Play("shoot", PlayerIndex + 1);
+    // Play shooting effect
+    AudioManager.Instance.Play("shoot", PlayerIndex);
 
     _isOnShootCoolDown = true;
 
@@ -422,6 +425,19 @@ public class Movement : MonoBehaviour
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
+  }
+
+  private void emptyKebab()
+  {
+    KebabStack = new Stack<PooledObjectIndex>();
+    for (int j = 0; j < 3; ++j)
+    {
+      for (int i = 0; i < _foodSliceTransforms[j].transform.childCount; ++i)
+      {
+        Transform a = _foodSliceTransforms[j].transform.GetChild(i);
+        a.gameObject.SetActive(false);
+      }
+    }
   }
 
   private void startInvulnerability(float time)

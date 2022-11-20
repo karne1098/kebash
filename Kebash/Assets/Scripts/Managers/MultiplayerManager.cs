@@ -8,7 +8,7 @@ public class MultiplayerManager : MonoBehaviour
 {
   public static MultiplayerManager Instance;
 
-  private float _spawnYOffset = 30;
+  private float _spawnYOffset = 25;
 
   // ================== Accessors
 
@@ -123,7 +123,7 @@ public class MultiplayerManager : MonoBehaviour
 
       if (GameStateManager.Instance.State == GameState.Menu)
       {
-        playerScript.gameObject.transform.position = spawnPosition;
+        playerScript.ResetForMain();
       }
     }
   }
