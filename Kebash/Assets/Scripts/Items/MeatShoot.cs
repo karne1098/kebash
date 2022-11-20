@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class MeatShoot : MonoBehaviour
 {
-  public int large = 0;
-  public GameObject flesh;
-  public Rigidbody fleshBody;
+  private Rigidbody _rigidBody;
+  
+  private int _large = 0;
+
+  void Awake()
+  {
+    _rigidBody = gameObject.GetComponent<Rigidbody>();
+  }
 
   void FixedUpdate()
   {
-    Vector3 _currentForce = fleshBody.velocity;
-    fleshBody.velocity = new Vector3(_currentForce.x * .8f, 0.0f, _currentForce.z * .8f);
-    if (large < 6)
+    _rigidBody.velocity = new Vector3(
+      _rigidBody.velocity.x * .8f,
+      0,
+      _rigidBody.velocity.z * .8f);
+
+    if (_large < 6)
     {
-      float a = flesh.transform.localScale.x;
-      flesh.transform.localScale = new Vector3(1.4f * a, flesh.transform.localScale.y * 1.2f, flesh.transform.localScale.z);
-      large += 1;
+      _large += 1;
+
+      transform.localScale = new Vector3(
+        transform.localScale.x * 1.4f,
+        transform.localScale.y,
+        transform.localScale.z * 1.2f);
     } 
   }
 }

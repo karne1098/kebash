@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 661351074211033148}
   - component: {fileID: 7823303589609289405}
-  - component: {fileID: 9209080340067487240}
   - component: {fileID: 9055654856331601732}
-  - component: {fileID: 1726944952725743322}
+  - component: {fileID: 8703410920155981214}
   m_Layer: 8
   m_Name: TomatoBullet
   m_TagString: Damager
@@ -49,19 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletBody: {fileID: 9055654856331601732}
   _bulletTransform: {fileID: 661351074211033148}
---- !u!65 &9209080340067487240
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6817019447756913882}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9055654856331601732
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78,19 +64,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1726944952725743322
-MonoBehaviour:
+--- !u!135 &8703410920155981214
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6817019447756913882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64adba387f8ceda4ab4e0bce8c1259a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  launchVelocity: 100
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6841276723487097241
 PrefabInstance:
   m_ObjectHideFlags: 0
