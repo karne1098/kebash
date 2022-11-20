@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
   [SerializeField] private TextMeshProUGUI _timerTextTMP;
+  public static Timer Instance;
 
-  private float _timeValue = 60;
+
+  public float _timeValue = 60;
 
   private bool _timerStarted = false;
 
@@ -17,6 +19,12 @@ public class Timer : MonoBehaviour
   void Awake() 
   {
     _timerTextTMP.color = new Color(0, 0, 0, 0);
+    Instance = this;
+
+  }
+
+  public void Reset(){
+    _timeValue = 60;
   }
 
   void Update()

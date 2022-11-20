@@ -34,6 +34,10 @@ public class GameStateManager : MonoBehaviour
     Instance = this;
   }
 
+  void Reset(){
+
+  }
+
   void Start()
   {
     GameStateManager.Instance.UpdateGameState(GameState.Menu);
@@ -68,6 +72,7 @@ public class GameStateManager : MonoBehaviour
       {
         Debug.Log("moved to gamrplay state");
         Time.timeScale = 1;
+        Timer.Instance.Reset();
         AudioManager.Instance.Play("gameMusic", 0);
         AudioManager.Instance.Play("sizzle", 0);
         break;

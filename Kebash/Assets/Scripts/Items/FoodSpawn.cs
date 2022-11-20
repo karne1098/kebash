@@ -36,7 +36,7 @@ public class FoodSpawn : MonoBehaviour
   {
     while(true)
     {
-      if (gameStarted) {
+      if (GameStateManager.Instance.State == GameState.GamePlay) {
         // Select a random food item
         PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 7);
         foodIndex = PooledObjectIndex.Mushroom;
