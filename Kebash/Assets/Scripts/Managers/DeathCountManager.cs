@@ -24,24 +24,28 @@ public class DeathCountManager : MonoBehaviour
   
   void Update()
   {
-    if(MultiplayerManager.Instance.PlayerCount < 4){
-      bottomRight.enabled = true;
-      bottomRight.text = "Press any key to join.";
-      Debug.Log("Should be pinging for 3");
-      if(MultiplayerManager.Instance.PlayerCount < 3){
-        bottomLeft.enabled = true;
-        bottomLeft.text = "Press any key to join.";
-        if(MultiplayerManager.Instance.PlayerCount < 2){
-          topRight.enabled = true;
-          topRight.text = "Press any key to join.";
-          if(MultiplayerManager.Instance.PlayerCount < 1){
-            topLeft.enabled = true;
-            topLeft.text = "Press any key to join.";
+    if(GameStateManager.Instance.State == GameState.Menu) {
+    //yep. lazy last minute code. don't think about her too hard. let the if statement just hang out. let it wash through you
+      if(MultiplayerManager.Instance.PlayerCount < 4){
+        bottomRight.enabled = true;
+        bottomRight.text = "Join with a gamepad!";
+        if(MultiplayerManager.Instance.PlayerCount < 3){
+          bottomLeft.enabled = true;
+          bottomLeft.text = "Join with a gamepad!";
+          if(MultiplayerManager.Instance.PlayerCount < 2){
+            topRight.enabled = true;
+            topRight.text = "Join with a gamepad!";
+            if(MultiplayerManager.Instance.PlayerCount < 1){
+              topLeft.enabled = true;
+              topLeft.text = "Join with a gamepad!";
+            }
           }
         }
       }
     }
-    //disableAllText();
+    else{
+      disableAllText();
+    }
     for (int i = 0; i < deathCounts.Length; ++i)
     {
       if (i < MultiplayerManager.Instance.PlayerCount)
