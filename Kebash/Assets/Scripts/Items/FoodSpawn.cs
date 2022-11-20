@@ -38,7 +38,7 @@ public class FoodSpawn : MonoBehaviour
     {
       if (GameStateManager.Instance.State == GameState.GamePlay) {
         // Select a random food item
-        PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 7);
+        PooledObjectIndex foodIndex = (PooledObjectIndex) Random.Range(1, 7);
         foodIndex = PooledObjectIndex.Mushroom;
 
         // Decide on a spawn location
@@ -54,8 +54,10 @@ public class FoodSpawn : MonoBehaviour
         foodObject.transform.position = spawnLocation;
         foodObject.SetActive(true);
         foodObject.GetComponent<FoodData>().Num = foodIndex;
+
         // Wait to spawn next food item
         float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
+
         yield return new WaitForSeconds(timeToNextSpawn);
       } else {
         yield return new WaitForSeconds(1);

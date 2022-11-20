@@ -86,10 +86,7 @@ public class AudioManager : MonoBehaviour
 
   public void Stop(string name, int playID)
   {
-    Debug.Log(name);
-    Debug.Log(playID);
     Sound s = soundDicts[playID][name];
-
     s.source.Stop();
   }
 }
