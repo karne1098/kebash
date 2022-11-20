@@ -35,7 +35,7 @@ public class GameStateManager : MonoBehaviour
 
   void Start()
   {
-    GameStateManager.Instance.UpdateGameState(GameState.GamePaused);
+    GameStateManager.Instance.UpdateGameState(GameState.Menu);
   }
   
   public void UpdateGameState(GameState newState)

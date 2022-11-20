@@ -18,8 +18,6 @@ public class MultiplayerManager : MonoBehaviour
 
   public int PlayerCount { get { return PlayerScripts.Count; } }
 
-  public int MaxPlayerCount { get; } = 4;
-
   // ================== Methods
 
   void Awake()

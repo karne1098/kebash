@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
       s.Value.source.loop   = s.Value.loop;
     }
     
-    for (int i = 0; i < MultiplayerManager.Instance.MaxPlayerCount; ++i)
+    for (int i = 0; i < 4; ++i)
     {
       _playerSoundDicts.Add(makePlayerSoundDict());
     }
