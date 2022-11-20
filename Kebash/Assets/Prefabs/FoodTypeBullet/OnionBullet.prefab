@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1210720101104320030}
   m_Layer: 8
   m_Name: OnionBullet
-  m_TagString: Damager
+  m_TagString: FoodBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

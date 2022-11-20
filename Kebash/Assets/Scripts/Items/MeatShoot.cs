@@ -30,4 +30,12 @@ public class MeatShoot : MonoBehaviour
         transform.localScale.z * 1.2f);
     } 
   }
+  
+  void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.tag == "FoodBullet")
+    {
+      Destroy(other.gameObject);
+    }
+  }
 }

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8720493305224708611}
   - component: {fileID: 9055654856331601732}
   - component: {fileID: 9124744926332032466}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: LambBullet
-  m_TagString: Damager
+  m_TagString: FoodBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5926e9a2c7876074aa62cd2ff8abe196, type: 3}
       propertyPath: m_Name
       value: Lamb
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5926e9a2c7876074aa62cd2ff8abe196, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5926e9a2c7876074aa62cd2ff8abe196, type: 3}

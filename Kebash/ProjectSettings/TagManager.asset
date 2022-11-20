@@ -7,6 +7,7 @@ TagManager:
   - Damager
   - food
   - MenuButton
+  - FoodBullet
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - FallTrigger
   - FoodPickerCollider
   - post processing
-  - 
+  - Meat
   - 
   - 
   - 

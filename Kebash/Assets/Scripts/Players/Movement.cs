@@ -93,7 +93,9 @@ public class Movement : MonoBehaviour
   void FixedUpdate()
   {
     updateIsOnGround();
-    
+
+    updateParticles();
+
     // Force respawn position during menu state
     if (GameStateManager.Instance.State == GameState.Menu)
     {
@@ -113,8 +115,6 @@ public class Movement : MonoBehaviour
       _animator.SetBool("Charging", false);
       _animator.SetFloat("InputY", 0);
       _animator.SetFloat("InputX", 0);
-      _walkParticles.Stop();
-      AudioManager.Instance.Stop("walk", PlayerIndex);
       return;
     }
 
@@ -273,23 +273,30 @@ public class Movement : MonoBehaviour
     IsOnGround =  -0.5 < _rigidbody.position.y && _rigidbody.position.y < 3;
   }
 
-  private void move()
+  private void updateParticles()
   {
-    _idealMove = Utils.V2ToV3(_inputData.Move);
-
-    if (_currentMove.magnitude > 0.02f)
+    if (IsOnGround)
     {
-      if (!_walkParticles.isPlaying)
-      {
-        _walkParticles.Play();
-      }
-      AudioManager.Instance.Play("walk", PlayerIndex);
+      _walkParticles.Play();
     }
     else
     {
       _walkParticles.Stop();
+    }
+    
+    if (_currentMove.sqrMagnitude > 0.02f && IsOnGround)
+    {
+      AudioManager.Instance.Play("walk", PlayerIndex);
+    }
+    else
+    {
       AudioManager.Instance.Stop("walk", PlayerIndex);
     }
+  }
+
+  private void move()
+  {
+    _idealMove = Utils.V2ToV3(_inputData.Move);
 
     _currentMove = Vector3.Lerp(
       _rigidbody.velocity,

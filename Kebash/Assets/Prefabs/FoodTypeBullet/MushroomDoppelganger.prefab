@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5536732986786010329}
   m_Layer: 8
   m_Name: MushroomDoppelganger
-  m_TagString: Damager
+  m_TagString: FoodBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
