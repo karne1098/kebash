@@ -12,7 +12,11 @@ public class PlayerInputData {
 
 public class PlayerInputScript : MonoBehaviour
 {
+  // ================== Accessors
+
   public PlayerInputData InputData { get; private set; } = new PlayerInputData();
+
+  // ================== Methods
 
   public void OnMove(InputAction.CallbackContext context)
   {

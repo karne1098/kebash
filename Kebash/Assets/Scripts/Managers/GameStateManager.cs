@@ -22,6 +22,8 @@ public class GameStateManager : MonoBehaviour
   [SerializeField] private GameObject _pauseMenuCanvas;
   [SerializeField] private GameObject _gameOverCanvas;
 
+  private bool _preventTogglePause = false;
+
   // ================== Accessors
   
   public GameState State { get; private set; } = GameState.NullState;
@@ -88,7 +90,7 @@ public class GameStateManager : MonoBehaviour
       {
         Debug.Log("Moved to game pause state.");
         _pauseMenuCanvas.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         AudioManager.Instance.Pause("gameMusic");
         AudioManager.Instance.Pause("sizzle");
         break;
@@ -117,23 +119,28 @@ public class GameStateManager : MonoBehaviour
 
   public void TogglePause()
   {
+    if (_preventTogglePause) return;
+
     switch (State)
     {
       case GameState.GamePaused: 
       {
-        State = GameState.GamePlay;
-        return;
+        UpdateGameState(GameState.GamePlay);
+        break;
       }
       case GameState.GamePlay: 
       {
-        State = GameState.GamePaused;
-        return;
+        UpdateGameState(GameState.GamePaused);
+        break;
       }
       default:
       {
         return;
       }
     }
+
+    StopCoroutine("preventRepeatedPause");
+    StartCoroutine("preventRepeatedPause");
   }
 
   public void GoToMenu()
@@ -147,6 +154,13 @@ public class GameStateManager : MonoBehaviour
   }
 
   // ================== Helpers
+
+  private IEnumerator preventRepeatedPause()
+  {
+    _preventTogglePause = true;
+    yield return new WaitForSecondsRealtime(0.5f);
+    _preventTogglePause = false;
+  }
 
   private IEnumerator countdown()
   {
