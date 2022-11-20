@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class FoodShootBase : MonoBehaviour
 {
+  private float _bulletSpeed = 20f;
+  private float _bulletTimer = 7f;
 
-    float _bulletSpeed = 20f;
+  public Rigidbody _bulletBody;
+  public Transform _bulletTransform;
 
-    float _bulletTimer = 7f;
+  public int PlayerIndex { get; private set; } = -1;
 
-    public Rigidbody _bulletBody;
-    public Transform _bulletTransform;
-    // Start is called before the first frame update
+  void Start()
+  {
+    StartCoroutine("BulletKill");
+  }
 
-    //foodBullet.GetComponent<FoodShootBase>().StartShot(tip);
-    void Start()
-    {
-        StartCoroutine("BulletKill");
-    }
+  private IEnumerator BulletKill()
+  {
+    yield return new WaitForSeconds(_bulletTimer);
+    Destroy(gameObject);
+  }
 
-    void FixedUpdate()
-    {
-        
-    }
+  public void StartShot(Transform tip, int playerIndex)
+  {
+    _bulletBody.velocity = tip.forward * _bulletSpeed;
+    PlayerIndex = playerIndex;
+  }
 
-    private IEnumerator BulletKill()
-    {
-        yield return new WaitForSeconds(_bulletTimer);
-        Destroy(gameObject);
-    }
-
-    public void StartShot(Transform tip)
-    {
-        _bulletBody.velocity = tip.forward * _bulletSpeed;
-    }
-
-    public Transform GetTransform()
-    {
-        return _bulletTransform;
-    }
+  public Transform GetTransform()
+  {
+    return _bulletTransform;
+  }
 }

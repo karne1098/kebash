@@ -116,7 +116,7 @@ public class MultiplayerManager : MonoBehaviour
     {
       Movement playerScript = PlayerScripts[i];
 
-      playerScript.PlayerNumber = i;
+      playerScript.PlayerIndex = i;
 
       Vector3 spawnPosition = GetPlayerSpawnPosition(i);
       playerScript.RespawnPosition = spawnPosition;

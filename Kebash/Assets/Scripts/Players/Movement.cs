@@ -21,7 +21,6 @@ public class Movement : MonoBehaviour
   private float _hitInvDuration = 1f;
   private IEnumerator _currentInvInstance;
   private int _debugCount = 0;
-  private int _timesDied = 0;
 
   // Food Stuff
   private int _maxFood = 3;
@@ -70,10 +69,9 @@ public class Movement : MonoBehaviour
 
   public float StaminaFraction { get { return _stamina / _maxStamina; } }
 
-  public int TimesDied { get { return _timesDied; } }
+  public int PlayerIndex { get; set; } = -1;
 
-  public int  PlayerNumber { get; set; }         = -1;
-  public Vector3  RespawnPosition { get; set; }         = new Vector3(0, 100, 0);
+  public Vector3  RespawnPosition { get; set; } = new Vector3(0, 100, 0);
   public bool IsCharging   { get; private set; } = false;
   public bool IsOnGround   { get; private set; } = false;
   public Stack<PooledObjectIndex> KebabStack   { get; private set; } = new Stack<PooledObjectIndex>();
@@ -144,7 +142,7 @@ public class Movement : MonoBehaviour
     if (_inputData.Charge && _stamina <= _minStaminaToStart)
     {
       _staminaBar.shake();
-      AudioManager.Instance.Play("nocharge", PlayerNumber + 1);
+      AudioManager.Instance.Play("nocharge", PlayerIndex + 1);
       Debug.Log("Not enough stamina to charge");
     }
 
@@ -164,10 +162,10 @@ public class Movement : MonoBehaviour
     // Fell through fall trigger collider
     if (other.gameObject.layer == Utils.FallTriggerLayer)
     {
-      AudioManager.Instance.Stop("walk", PlayerNumber + 1);
-      AudioManager.Instance.Stop("dash", PlayerNumber + 1);
-      AudioManager.Instance.Play("falling", PlayerNumber + 1);
-      Debug.Log("Player " + PlayerNumber + " has fallen!");
+      AudioManager.Instance.Stop("walk", PlayerIndex + 1);
+      AudioManager.Instance.Stop("dash", PlayerIndex + 1);
+      AudioManager.Instance.Play("falling", PlayerIndex + 1);
+      Debug.Log("Player " + PlayerIndex + " has fallen!");
 
       StartCoroutine(deathTeleport(RespawnPosition, true));
       return;
@@ -176,17 +174,27 @@ public class Movement : MonoBehaviour
     // Got hit by other player's damager collider OR got hit by food
     if (other.gameObject.layer == Utils.DamagerLayer && !_isInvulnerable && IsOnGround)
     {
+      int perpetratorIndex = -1;
+
       if (other.gameObject.tag == "Player")
       {
-        other.transform.parent.gameObject.GetComponent<Movement>().PlayStab();
+        Movement theirScript = other.transform.parent.gameObject.GetComponent<Movement>();
+        perpetratorIndex = theirScript.PlayerIndex;
+        theirScript.PlayStab();
+      }
+      else
+      {
+        FoodShootBase itsScript = other.gameObject.GetComponent<FoodShootBase>();
+        perpetratorIndex = itsScript.PlayerIndex;
       }
 
-      
-      Debug.Log("Player " + PlayerNumber + " hit (debug count: " + _debugCount++ + ")!");
+      Debug.Log("Player " + PlayerIndex + " got hit (debug count: " + _debugCount++ + ")!");
 
       if (KebabStack.Count != 0)
       {
-        AudioManager.Instance.Play("damaged", PlayerNumber + 1);
+        // Lost 1 hp
+
+        AudioManager.Instance.Play("damaged", PlayerIndex + 1);
         KebabStack.Pop(); // Popping first does the "-1" for KebabStack.Count
 
         // Disable all children
@@ -196,14 +204,17 @@ public class Movement : MonoBehaviour
           a.gameObject.SetActive(false);
         }
 
-        Debug.Log("Player " + PlayerNumber + "Has been hit and has this much health: " + KebabStack.Count);
+        Debug.Log("Player " + PlayerIndex + "Has been hit and has this much health: " + KebabStack.Count);
       }
       else
       {
-        AudioManager.Instance.Play("die", PlayerNumber + 1);
-        Debug.Log("Player " + PlayerNumber + "Has died this many times: " + _timesDied + 1);
+        // Died
+        AudioManager.Instance.Play("die", PlayerIndex + 1);
         StartCoroutine(deathTeleport(RespawnPosition, true));
-        _timesDied += 1;
+        if (perpetratorIndex != -1 && perpetratorIndex != PlayerIndex)
+        {
+          DeathCountManager.Instance.IncrementKills(perpetratorIndex);
+        }
       }
 
       startInvulnerability(_hitInvDuration);
@@ -218,8 +229,8 @@ public class Movement : MonoBehaviour
     if (KebabStack.Count == _maxFood) return false;
     _stabParticles.Play();
 
-    AudioManager.Instance.Play("pickup", PlayerNumber + 1);
-    Debug.Log("Player " + PlayerNumber + " added food. (Pooled object index: " + (int) index + ")"); 
+    AudioManager.Instance.Play("pickup", PlayerIndex + 1);
+    Debug.Log("Player " + PlayerIndex + " added food. (Pooled object index: " + (int) index + ")"); 
 
     // Activate the correct position's correct child
     Transform sliceGameObject = _foodSliceTransforms[KebabStack.Count].GetChild((int) index);
@@ -229,6 +240,11 @@ public class Movement : MonoBehaviour
     KebabStack.Push(index);
 
     return true;
+  }
+
+  public void PlayStab()
+  {
+    _stabParticles.Play();
   }
 
   // ================== Helpers
@@ -250,12 +266,12 @@ public class Movement : MonoBehaviour
       {
         _walkParticles.Play();
       }
-      AudioManager.Instance.Play("walk", PlayerNumber + 1);
+      AudioManager.Instance.Play("walk", PlayerIndex + 1);
     }
     else
     {
       _walkParticles.Stop();
-      AudioManager.Instance.Stop("walk", PlayerNumber + 1);
+      AudioManager.Instance.Stop("walk", PlayerIndex + 1);
     }
 
     _currentMove = Vector3.Lerp(
@@ -327,8 +343,8 @@ public class Movement : MonoBehaviour
     _rigidbody.velocity = _currentTurn * _chargeSpeed;
     _dashParticles.Play();
     _animator.SetBool("Charging", true);
-    AudioManager.Instance.Stop("walk", PlayerNumber + 1);
-    AudioManager.Instance.Play("dash", PlayerNumber + 1);
+    AudioManager.Instance.Stop("walk", PlayerIndex + 1);
+    AudioManager.Instance.Play("dash", PlayerIndex + 1);
 
     // Enforce minimum
     _stamina -= _minChargeCost;
@@ -347,10 +363,10 @@ public class Movement : MonoBehaviour
     _damagerObject.SetActive(false);
     _dashParticles.Stop();
     _animator.SetBool("Charging", false);
-    AudioManager.Instance.Stop("dash", PlayerNumber + 1);
+    AudioManager.Instance.Stop("dash", PlayerIndex + 1);
     if (_stamina <= 0)
     {
-        AudioManager.Instance.Play("tired", PlayerNumber + 1);
+        AudioManager.Instance.Play("tired", PlayerIndex + 1);
     }
 
     // Allow regen after some time
@@ -364,7 +380,7 @@ public class Movement : MonoBehaviour
     if (KebabStack.Count == 0) yield break;
 
     //Plays shooting effect
-    AudioManager.Instance.Play("shoot", PlayerNumber + 1);
+    AudioManager.Instance.Play("shoot", PlayerIndex + 1);
 
     _isOnShootCoolDown = true;
 
@@ -390,7 +406,7 @@ public class Movement : MonoBehaviour
     }    
     
     GameObject foodBullet = Instantiate(bulletType, tip.position, tip.rotation); // (low priority) TODO: maybe object pool
-    foodBullet.GetComponent<FoodShootBase>().StartShot(tip);
+    foodBullet.GetComponent<FoodShootBase>().StartShot(tip, PlayerIndex);
     // Wait for cooldown
     yield return new WaitForSeconds(_shootCoolDown);
     _isOnShootCoolDown = false;
@@ -406,17 +422,18 @@ public class Movement : MonoBehaviour
   private IEnumerator invulnerable(float time)
   {
     _isInvulnerable = true;
-    Debug.Log("Player " + PlayerNumber + " has started invulnerability!");
+    Debug.Log("Player " + PlayerIndex + " has started invulnerability!");
 
     yield return new WaitForSeconds(time);
 
     _isInvulnerable = false;
-    Debug.Log("Player " + PlayerNumber + " is no longer invulnerable!");
+    Debug.Log("Player " + PlayerIndex + " is no longer invulnerable!");
   }
 
   private IEnumerator deathTeleport(Vector3 respawnPosition, bool takesDamage)
   {
-    while(KebabStack.Count > 0) {
+    while (KebabStack.Count > 0)
+    {
       KebabStack.Pop();
       // Disable all children
       for (int i = 0; i < _foodSliceTransforms[KebabStack.Count].transform.childCount; ++i) {
@@ -424,9 +441,10 @@ public class Movement : MonoBehaviour
         a.gameObject.SetActive(false);
       }
     }
-    Debug.Log("Player " + PlayerNumber + "has died!");
-    DeathCountManager.Instance.incrementDeath(PlayerNumber);
-    Debug.Log("Player " + PlayerNumber + "is repawning...");
+
+    Debug.Log("Player " + PlayerIndex + "has died!");
+    DeathCountManager.Instance.IncrementDeath(PlayerIndex);
+    Debug.Log("Player " + PlayerIndex + "is respawning...");
 
     // Start falling from the sky
     _rigidbody.position = respawnPosition; 
@@ -440,10 +458,5 @@ public class Movement : MonoBehaviour
 
     // Start invulnerability
     startInvulnerability(_fallInvDuration);
-  }
-
-  public void PlayStab()
-  {
-    _stabParticles.Play();
   }
 }

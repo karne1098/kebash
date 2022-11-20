@@ -8,7 +8,9 @@ public class DeathCountManager : MonoBehaviour
 {
   public static DeathCountManager Instance;
 
+  private int[] killCounts  = new int[4];
   private int[] deathCounts = new int[4];
+
   [SerializeField] private TextMeshProUGUI topLeft;
   [SerializeField] private TextMeshProUGUI topRight;
   [SerializeField] private TextMeshProUGUI bottomLeft;
@@ -35,31 +37,36 @@ public class DeathCountManager : MonoBehaviour
         }
         else
         {
-          textElement.text = deathCounts[i].ToString();
+          textElement.text = killCounts[i].ToString() + " / " + deathCounts[i].ToString();
         }
       }
     }
   }
 
-  public void incrementDeath(int playerNumber)
+  public void IncrementKills(int playerIndex)
   {
-    Debug.Log("Player " + playerNumber + "has died!");
-    deathCounts[playerNumber] += 1;
+    killCounts[playerIndex] += 1;
+  }
+
+  public void IncrementDeath(int playerIndex)
+  {
+    deathCounts[playerIndex] += 1;
   }
 
   public void ResetForMain()
   {
     for (int i = 0; i < deathCounts.Length; ++i)
     {
+      killCounts[i]  = 0;
       deathCounts[i] = 0;
     }
   }
 
   // ================== Helpers
 
-  private TextMeshProUGUI getScorePositionFromIndex(int playerNumber)
+  private TextMeshProUGUI getScorePositionFromIndex(int playerIndex)
   {
-    Vector3 vec = MultiplayerManager.Instance.GetPlayerSpawnPosition(playerNumber);
+    Vector3 vec = MultiplayerManager.Instance.GetPlayerSpawnPosition(playerIndex);
 
     if (vec[0] <= 0)
     {
