@@ -53,10 +53,9 @@ public class GameStateManager : MonoBehaviour
       {
         Debug.Log("Moved to menu state.");
 
-        MainMenuManager.Instance.ResetToMenu();
-
-        CameraManager.Instance.ResetToInitialPosition();
-
+        Timer.Instance.ResetForMain();
+        CameraManager.Instance.ResetForMain();
+        MainMenuManager.Instance.ResetForMain();
         MultiplayerManager.Instance.ReinitializeAllPlayers();
         MultiplayerManager.Instance.PlayerInputManager.EnableJoining();
 
@@ -78,7 +77,6 @@ public class GameStateManager : MonoBehaviour
       {
         Debug.Log("Moved to game play state.");
         Time.timeScale = 1;
-        Timer.Instance.Reset();
         AudioManager.Instance.Play("gameMusic");
         AudioManager.Instance.Play("sizzle");
         break;

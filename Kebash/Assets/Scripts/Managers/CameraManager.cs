@@ -39,7 +39,7 @@ public class CameraManager : MonoBehaviour
       _lerpRate);
   }
 
-  public void ResetToInitialPosition()
+  public void ResetForMain()
   {
     CameraTransform.position = _initialCameraPosition;
   }

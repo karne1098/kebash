@@ -27,7 +27,7 @@ public class ButtonAnim : MonoBehaviour
 
   void OnEnable() 
   {
-    Reset();
+    ResetForMain();
   }
 
   public void PointerEnter()
@@ -51,7 +51,7 @@ public class ButtonAnim : MonoBehaviour
     StartCoroutine(lerpTowards(_donePosition, true));
   }
 
-  public void Reset()
+  public void ResetForMain()
   {
     transform.position = _initialPosition;
   }

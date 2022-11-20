@@ -15,12 +15,13 @@ public class Timer : MonoBehaviour
   
   void Awake() 
   {
-    _timerTextTMP.color = new Color(0, 0, 0, 0);
     Instance = this;
-
+    ResetForMain();
   }
 
-  public void Reset(){
+  public void ResetForMain()
+  {
+    _timerTextTMP.color = new Color(0, 0, 0, 0);
     _timeValue = 60;
   }
 

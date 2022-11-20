@@ -33,7 +33,7 @@ public class MainMenuManager : MonoBehaviour
     Application.Quit();
   }
 
-  public void ResetToMenu()
+  public void ResetForMain()
   {
     resetButtonModels();
     _invisibleButtons.SetActive(true);
@@ -72,7 +72,7 @@ public class MainMenuManager : MonoBehaviour
   {
     foreach (ButtonAnim x in _buttonModels.GetComponentsInChildren<ButtonAnim>())
     {
-      x.Reset();
+      x.ResetForMain();
     }
   }
 }
