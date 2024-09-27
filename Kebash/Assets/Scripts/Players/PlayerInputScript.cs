@@ -12,7 +12,11 @@ public class PlayerInputData {
 
 public class PlayerInputScript : MonoBehaviour
 {
+  // ================== Accessors
+
   public PlayerInputData InputData { get; private set; } = new PlayerInputData();
+
+  // ================== Methods
 
   public void OnMove(InputAction.CallbackContext context)
   {
@@ -34,5 +38,10 @@ public class PlayerInputScript : MonoBehaviour
   {
     if (context.started)       { InputData.Shoot = true; }
     else if (context.canceled) { InputData.Shoot = false; }
+  }
+
+  public void onPause(InputAction.CallbackContext context)
+  {
+    if (context.started) { GameStateManager.Instance.TogglePause(); }
   }
 }

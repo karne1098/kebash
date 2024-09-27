@@ -2,35 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _player1;
-    [SerializeField] private GameObject _player2;
+  public static CameraManager Instance;
 
-    private float _zOffset;
-    private Transform _target;
+  private float _lerpRate = 0.05f;
+  private float _dampingFactor = 2f;
+  private Vector3 _initialCameraPosition;
 
-    void Awake()
-    {
-        _target = Camera.main.transform;
-    }
+  // ================== Accessors
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _zOffset = _target.position.z;
-    }
+  public Transform CameraTransform { get { return Camera.main.transform; } }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Vector3 averagePlayerPosition = 
-            (_player1.transform.position + _player2.transform.position) / 2;
+  // ================== Methods
 
-        _target.position =  new Vector3(
-            averagePlayerPosition.x / 2, 
-            _target.position.y, 
-            averagePlayerPosition.z / 2 + _zOffset);
-    }
+  void Awake()
+  {
+    Instance = this;
+    _initialCameraPosition = CameraTransform.position;
+  }
 
+  void FixedUpdate()
+  {
+    Vector3 averagePos = MultiplayerManager.Instance.GetAveragePlayerPositionForCamera();
+    
+    Vector3 idealCameraPosition = new Vector3(
+      averagePos.x / _dampingFactor, 
+      _initialCameraPosition.y, 
+      averagePos.z / _dampingFactor + _initialCameraPosition.z);
+    
+    CameraTransform.position = Vector3.Lerp(
+      CameraTransform.position,
+      idealCameraPosition,
+      _lerpRate);
+  }
+
+  public void ResetForMain()
+  {
+    CameraTransform.position = _initialCameraPosition;
+  }
 }

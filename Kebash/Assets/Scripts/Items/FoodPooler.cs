@@ -4,10 +4,13 @@ using UnityEngine;
 
 public enum PooledObjectIndex : int
 {
-  Null = 0,
-  Lamb = 1,
-  Onion = 2, 
-  Tomato = 3,
+  Null,
+  Lamb,
+  Onion,
+  Tomato,
+  Mushroom,
+  Pepper,
+  Eggplant,
 }
 
 [System.Serializable]

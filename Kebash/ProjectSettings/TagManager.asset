@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Damager
+  - food
+  - MenuButton
+  - FoodBullet
   layers:
   - Default
   - TransparentFX
@@ -14,12 +17,12 @@ TagManager:
   - UI
   - Player
   - Charger
-  - Damager
+  - ChargeDamagerCollider
   - Food
   - FallTrigger
-  - 
-  - 
-  - 
+  - FoodPickerCollider
+  - post processing
+  - Meat
   - 
   - 
   - 

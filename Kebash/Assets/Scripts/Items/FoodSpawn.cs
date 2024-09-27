@@ -18,6 +18,21 @@ public class FoodSpawn : MonoBehaviour
  
   // ================== Methods
 
+  void Awake()
+  {
+    Instance = this;
+  }
+
+  public void ResetForMain()
+  {
+    GameObject[] guys = GameObject.FindGameObjectsWithTag("food");
+    foreach (GameObject snack in guys)
+    {
+      snack.SetActive(false);
+      snack.transform.position = new Vector3(0, 15, 0);
+    }
+  }
+  
   void Start()
   {
     StartCoroutine(SpawnFood());
@@ -29,28 +44,34 @@ public class FoodSpawn : MonoBehaviour
   {
     while(true)
     {
-      // Select a random food item
-      PooledObjectIndex foodIndex = (PooledObjectIndex)Random.Range(1, 3);
+      if (GameStateManager.Instance.State == GameState.GamePlay)
+      {
+        // Select a random food item
+        PooledObjectIndex foodIndex = (PooledObjectIndex) Random.Range(1, 7);
 
-      // Decide on a spawn location
-      float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0
-      float z = (_zSpawn * 0.5f) - 0.5f;
-      Vector3 spawnLocation = new Vector3(
-        Random.Range(-x, x), 
-        15, 
-        Random.Range(-z, z));
+        // Decide on a spawn location
+        float x = (_xSpawn * 0.5f) - 0.5f; // not spawning RIGHT on the edge and accounting for field originating at 0,0
+        float z = (_zSpawn * 0.5f) - 0.5f;
+        Vector3 spawnLocation = new Vector3(
+          Random.Range(-x, x), 
+          15, 
+          Random.Range(-z, z));
 
-      // Spawn the food object
-      GameObject foodObject = FoodPooler.Instance.GetPooledObject(foodIndex);
-      foodObject.transform.position = spawnLocation;
-      foodObject.SetActive(true);
-      foodObject.GetComponent<FoodData>().Num = foodIndex;
-      // Wait to spawn next food item
-      float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
-      yield return new WaitForSeconds(timeToNextSpawn);
+        // Spawn the food object
+        GameObject foodObject = FoodPooler.Instance.GetPooledObject(foodIndex);
+        foodObject.transform.position = spawnLocation;
+        foodObject.SetActive(true);
+        foodObject.GetComponent<FoodData>().Num = foodIndex;
+
+        // Wait to spawn next food item
+        float timeToNextSpawn = Random.Range(_minTimeSpawn, _maxTimeSpawn);
+
+        yield return new WaitForSeconds(timeToNextSpawn);
+      }
+      else
+      {
+        yield return new WaitForSeconds(1);
+      }
     }
   }
 }
-
-
-

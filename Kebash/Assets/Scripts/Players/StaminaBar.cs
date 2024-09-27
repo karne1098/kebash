@@ -17,6 +17,11 @@ public class StaminaBar : MonoBehaviour
   private float fadeRate = 0.3f;
   private float beforeFade = 1f;
 
+  private bool _shaking = false;
+  private float _shakeDuration = 0.25f;
+  private float _shakeAmount = 5;
+  private float _fillOpacity = 0;
+
   void Start()
   {
     _sliderParentTransform = transform.GetChild(0);
@@ -39,12 +44,54 @@ public class StaminaBar : MonoBehaviour
 
     if (_movement.StaminaFraction == 1f)
     {
-      _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, (fadeRate + beforeFade - (Time.fixedTime - timeSinceFull))/fadeRate);
+      _fillOpacity = (fadeRate + beforeFade - (Time.fixedTime - timeSinceFull))/fadeRate;
     }
     else
     {
-      _fill.color = new Color(_fill.color.r, _fill.color.g, _fill.color.b, 1f);
+      _fillOpacity = 1f;
       timeSinceFull = Time.fixedTime;
     }
+
+    if (_movement.StaminaFraction <= 0.2f)
+    {
+      _fill.color = new Color(1f, 83f/255, 83f/255, _fillOpacity);
+    }
+    else
+    {
+      _fill.color = new Color(46f/85, 1f, 46f/85, _fillOpacity);
+    }
+
+    if (_shaking){
+      Vector3 newPos = _sliderParentTransform.position + Random.insideUnitSphere * _shakeAmount;
+      newPos.y = _sliderParentTransform.position.y;
+      newPos.z = _sliderParentTransform.position.z;
+      _sliderParentTransform.position = newPos;
+      Debug.Log("Shaking!");
+    }
+  }
+
+  public void shake()
+  {
+    if (_shaking == false)
+    {
+      StopCoroutine("shakeStamina");
+      StartCoroutine("shakeStamina");
+    }
+  }
+
+  private IEnumerator shakeStamina(){
+    Color originalColor = _fill.color;
+
+    if (_shaking == false)
+    {
+      _shaking = true;
+    }
+
+    yield return new WaitForSeconds(_shakeDuration);
+
+    //Stop shaking
+    _shaking = false;
+    _sliderParentTransform.position = Camera.main.WorldToScreenPoint(_player.transform.position);
+    _fill.color = originalColor;
   }
 }
